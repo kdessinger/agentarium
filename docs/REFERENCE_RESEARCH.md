@@ -237,6 +237,70 @@ Implication for Agentarium:
 
 This adds a strong **space-station / connected-labs / compartmentalized HQ** metaphor. Keep the source phrase “dungeon” only as research context; do not use it as Agentarium’s product language. Rooms should map to capabilities. Agentarium should include an **Armory / Skill Center** where skills have provenance, permissions, quarantine status, inspection status, and replication/approval flow. This is more important than pure character wandering.
 
+### Video: Fiverr thumbnail / autonomous business labs
+
+Source: `https://www.tiktok.com/t/ZP8GDLEJC/`
+
+Resolved page: `https://www.tiktok.com/@androoagi/video/7629513841348578573`
+
+Creator: `@androoagi` / androoAGI
+
+Local transcript files:
+
+- `research/tiktok/7629513841348578573.vtt`
+- `research/tiktok/7629513841348578573.raw.txt`
+- `research/tiktok/7629513841348578573.md`
+
+Key transcript/Kenn facts:
+
+- AndrooAGI compares existing Fiverr sellers charging for AI-generated YouTube thumbnails.
+- One example price mentioned: `$55`.
+- The seller shown had `19` customers/orders waiting.
+- AndrooAGI assigned/dedicated an AI agent to produce AI-generated YouTube thumbnails.
+- He says the Fiverr service made about `$700` in about two weeks.
+- Kenn clarifies the lab pattern: customer provides information → production agents create thumbnails → QA agents review/finalize → output is sent back to customer for a fee.
+- The same video also references Etsy/Printify, TikTok marketing, supplement/UGC ad generation, 11Labs, and fulfillment/platform credentials.
+
+Implication for Agentarium:
+
+This is the clearest **customer-order lab** pattern so far:
+
+```text
+Customer request/order
+  → intake parser
+  → production agents
+  → QA/review agents
+  → approval/finalization
+  → customer/platform delivery
+  → revenue/order metrics
+  → audit/replay
+```
+
+Agentarium should model labs as repeatable business-process machines, not just rooms. The QA-agent layer is first-class.
+
+## Whop / course evidence
+
+Source: `https://whop.com/biz_G14Fv5QNEzdoMI`
+
+Resolved URL observed: `https://whop.com/joined/biz_G14Fv5QNEzdoMI/`
+
+Local research file:
+
+- `research/whop-ai-agent-academy.md`
+
+Visible page facts:
+
+- Product/community: **AI Agent Academy**
+- Creator shown: Androo
+- Rating shown: 5.0 with 25 reviews
+- Joined count shown: 1,611 joined
+- Description snippet says it teaches building, deploying, and scaling AI agents that automate real business workflows, but also shows `CURRENTLY A WAIT L...`
+- Visible sections include Getting Started, Courses, AI Etsy Factory Guide, Livestreaming, General Chat, Help & Troubleshooting, Agent Ecosystems, Announcements.
+
+Implication for Agentarium:
+
+AndrooAGI is monetizing the know-how through a course/community, apparently still waitlist/unfinished from the visible snippet. The market is early and demand exists, but Agentarium should focus on building the actual operational substrate rather than selling static demos or vague courseware.
+
 ## Immediate takeaways
 
 1. The Gumroad/Bryan product appears downstream from the broader AndrooAGI/OpenClaw-style ecosystem trend and may sell process/framework/static dashboard files rather than a true interactive agent operating environment.

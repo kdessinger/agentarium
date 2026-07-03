@@ -141,9 +141,11 @@ Each lab should map to a real work loop. Labs are not just rooms on a map; they 
 
 Seed lab examples from AndrooAGI/Kenn context:
 
-- **Etsy business lab** — generates Etsy product ideas, researches competitors, creates/listings assets, and publishes to a live Etsy shop through approved/gated automation.
+- **Etsy business lab** — generates Etsy product ideas, researches competitors, creates/listing assets, connects Printify-style fulfillment, and publishes to a live Etsy shop through approved/gated automation.
+- **Fiverr thumbnail lab** — receives customer thumbnail requests, generates AI thumbnail candidates, routes them through QA agents, finalizes approved work, and delivers output back to the customer for a fee.
 - **Music generation lab** — has a dedicated music-generation agent, creates AI-generated music, moves outputs down a conveyor-belt workflow, and publishes finished assets to a YouTube channel.
 - **Research / market intelligence lab** — continuously studies active businesses, competitors, trends, and opportunities, then routes findings to the relevant lab.
+- **Media/marketing lab** — turns product assets into TikTok slideshows, UGC-style ads, YouTube uploads, or other distribution content.
 - **Skill armory** — discovers, quarantines, inspects, replicates, approves, and manages agent skills/capabilities.
 - **Blueprint / systems architecture lab** — turns intake forms into implementation blueprints and routes work to the right downstream lab.
 
