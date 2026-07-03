@@ -145,12 +145,13 @@ Each lab should map to a real work loop. Labs are not just rooms on a map; they 
 
 Seed lab examples from AndrooAGI/Kenn context:
 
-- **Etsy business lab** — generates Etsy product ideas, researches competitors, creates/listing assets, connects Printify-style fulfillment, and publishes to a live Etsy shop through approved/gated automation.
+- **Etsy business lab** — generates Etsy product ideas, researches competitors, creates/listing assets, connects Printify-style fulfillment, publishes to a live Etsy shop through approved/gated automation, and graduates from supervised design feedback to trusted autonomy.
 - **Fiverr thumbnail lab** — receives customer thumbnail requests, generates AI thumbnail candidates, routes them through QA agents, finalizes approved work, and delivers output back to the customer for a fee.
 - **Music generation lab** — has a dedicated music-generation agent, creates AI-generated music, moves outputs down a conveyor-belt workflow, and publishes finished assets to a YouTube channel.
 - **Research / market intelligence lab** — continuously studies active businesses, competitors, trends, and opportunities, then routes findings to the relevant lab.
 - **Media/marketing lab** — turns product assets into TikTok slideshows, UGC-style ads, YouTube uploads, or other distribution content.
 - **Skill armory** — discovers, quarantines, inspects, replicates, approves, and manages agent skills/capabilities.
+- **Training / feedback lab** — captures approve/reject/human-feedback loops that improve agent output before allowing higher autonomy.
 - **Blueprint / systems architecture lab** — turns intake forms into implementation blueprints and routes work to the right downstream lab.
 
 ### Agent XP
@@ -209,6 +210,22 @@ The ecosystem has health indicators:
 - tool errors
 - agent overload
 - approval backlog
+- labs stuck in supervised/training mode
+- external-action risk backlog
+
+### Lab maturity
+
+Labs should not jump from prototype to full autonomy.
+
+Suggested maturity states:
+
+- **draft** — lab exists as a design/spec only
+- **simulated** — mock inputs/outputs, no external actions
+- **supervised** — real work can be generated, but human review is required
+- **training** — approve/reject feedback is actively collected to shape output quality
+- **trusted** — agent can perform bounded routine work with audit logging
+- **autonomous-with-audit** — agent can publish/deliver inside strict permissions and monitoring
+- **suspended** — lab is paused because quality, safety, cost, or platform risk is too high
 
 ## MVP vertical slice
 

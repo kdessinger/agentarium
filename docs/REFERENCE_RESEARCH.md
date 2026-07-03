@@ -350,6 +350,54 @@ This video defines the first concrete station set:
 
 This should drive the MVP more than the earlier generic three-agent plan.
 
+### Video: Autonomous Etsy store / Forge integration
+
+Source: `https://www.tiktok.com/t/ZP8GD2u4P/`
+
+Resolved page: `https://www.tiktok.com/@androoagi/video/7624221990563351839`
+
+Creator: `@androoagi` / androoAGI
+
+Local transcript files:
+
+- `research/tiktok/7624221990563351839.vtt`
+- `research/tiktok/7624221990563351839.md`
+
+Engagement observed:
+
+- Plays: 151,300
+- Likes: 9,556
+- Comments: 213
+- Saves: 5,321
+- Shares: 2,619
+
+Key facts:
+
+- The Etsy store is represented on the spatial canvas as a conveyor belt.
+- The Etsy store can be accessed/managed from a dashboard.
+- Reported store metrics in video: about 40 orders and nearly $2,000 revenue.
+- AndrooAGI recommends roughly three agents for an autonomous Etsy setup.
+- `Nova` researches Etsy products/stores that are performing well and sends findings to `Forge`.
+- `Forge` has access to Printify and Nano Banana Pro / Gemini.
+- Nano Banana Pro/Gemini is used to design products.
+- Etsy seller account and Printify account are required.
+- Printify receives designs on product templates and handles printing/shipping when Etsy orders arrive.
+- Printify API key and Etsy API key connect to the main factory agent.
+- `Forge` creates product photos and sends them to `Pixel`.
+- `Pixel` curates TikTok slideshows and supports media/YouTube work.
+
+Most important new mechanism:
+
+- Early Forge output quality was poor.
+- AndrooAGI built an approve/reject feedback system.
+- Forge showed candidate designs; the human approved or rejected them.
+- This was repeated hundreds of times over 2–3 days.
+- Forge then became trusted enough to create products more autonomously.
+
+Implication for Agentarium:
+
+Add **lab maturity states** and **training feedback loops**. New labs should begin supervised/simulated, collect approve/reject feedback, and only later graduate to trusted/autonomous-with-audit modes. This is not just safety; it is how lab quality improves.
+
 ## Immediate takeaways
 
 1. The Gumroad/Bryan product appears downstream from the broader AndrooAGI/OpenClaw-style ecosystem trend and may sell process/framework/static dashboard files rather than a true interactive agent operating environment.
