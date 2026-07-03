@@ -398,6 +398,52 @@ Implication for Agentarium:
 
 Add **lab maturity states** and **training feedback loops**. New labs should begin supervised/simulated, collect approve/reject feedback, and only later graduate to trusted/autonomous-with-audit modes. This is not just safety; it is how lab quality improves.
 
+### Video: AI Agent Environment Tour
+
+Source: `https://www.tiktok.com/t/ZP8GDh5Y7/`
+
+Resolved page: `https://www.tiktok.com/@androoagi/video/7636984528522824991`
+
+Creator: `@androoagi` / androoAGI
+
+Local research files:
+
+- `research/tiktok/7636984528522824991.vtt`
+- `research/tiktok/7636984528522824991.raw.txt`
+- `research/tiktok/7636984528522824991.md`
+
+Engagement observed:
+
+- Plays: 1,100,000
+- Likes: 72,900
+- Comments: 1,515
+- Saves: 29,137
+- Shares: 21,700
+
+Tour inventory:
+
+- `Ultron` / head orchestrator
+- Factory Room / `Forge`
+- Etsy stores using Printify/Printful fulfillment
+- Supplement business using Suppleful
+- Research Lab / `Nova`
+- Communications Base
+- Archives / Obsidian-like durable context
+- Feedback section for approve/reject/iterate notes
+- Armory for OpenClaw skills
+- Treasury Room for monthly agent cost management
+- Media Bay for drag/drop TikTok scheduling and content management
+- War Room for daily/weekly agent performance review
+- Second Factory Room / `Vibes` DJ music agent
+- Pixel Lab for game assets
+- Fiverr thumbnail service
+- Blog / affiliate room
+- Agent break room / flavor space
+
+Implication for Agentarium:
+
+This video expands Agentarium from a task visualization canvas into a full **AI business operating system**. The MVP should stay small, but the architecture should reserve explicit surfaces for treasury/cost control, archives/memory, feedback/training, war-room strategy reviews, media publishing, unified communications, fulfillment-backed factory labs, and marketplace/content labs.
+
 ## Immediate takeaways
 
 1. The Gumroad/Bryan product appears downstream from the broader AndrooAGI/OpenClaw-style ecosystem trend and may sell process/framework/static dashboard files rather than a true interactive agent operating environment.

@@ -48,6 +48,11 @@ Minimum canvas elements:
 - Memory archive
 - Tool/account access terminal
 - Approval gate
+- Feedback / training console
+- Archives / durable memory room
+- Treasury / cost-control room
+- War Room / strategy review room
+- Media Bay / publishing scheduler
 - Metrics / performance panel
 - Event timeline overlay
 
@@ -147,11 +152,16 @@ Seed lab examples from AndrooAGI/Kenn context:
 
 - **Etsy business lab** — generates Etsy product ideas, researches competitors, creates/listing assets, connects Printify-style fulfillment, publishes to a live Etsy shop through approved/gated automation, and graduates from supervised design feedback to trusted autonomy.
 - **Fiverr thumbnail lab** — receives customer thumbnail requests, generates AI thumbnail candidates, routes them through QA agents, finalizes approved work, and delivers output back to the customer for a fee.
-- **Music generation lab** — has a dedicated music-generation agent, creates AI-generated music, moves outputs down a conveyor-belt workflow, and publishes finished assets to a YouTube channel.
 - **Research / market intelligence lab** — continuously studies active businesses, competitors, trends, and opportunities, then routes findings to the relevant lab.
 - **Media/marketing lab** — turns product assets into TikTok slideshows, UGC-style ads, YouTube uploads, or other distribution content.
+- **Music generation lab** — has a dedicated music/DJ agent that creates audio assets, moves outputs down a conveyor-belt workflow, and routes finished work to YouTube or other publishing/distribution channels.
+- **Game/asset production lab** — generates game assets or visual asset packs and publishes/sells them on marketplaces.
+- **Blog / affiliate lab** — writes articles and tracks affiliate-product placement, compliance, and commission performance.
 - **Skill armory** — discovers, quarantines, inspects, replicates, approves, and manages agent skills/capabilities.
-- **Training / feedback lab** — captures approve/reject/human-feedback loops that improve agent output before allowing higher autonomy.
+- **Training / feedback lab** — captures approve/reject/iterate notes that improve agent output before allowing higher autonomy.
+- **Archives / memory lab** — stores durable context, feedback, preferences, decisions, and business knowledge for agent retrieval.
+- **Treasury / cost-control lab** — tracks monthly agent/model/tool/API cost, budget, revenue, ROI, and runaway-spend risk.
+- **War Room / strategy lab** — daily/weekly agent review of what is working, what is not, and what changes to try next.
 - **Blueprint / systems architecture lab** — turns intake forms into implementation blueprints and routes work to the right downstream lab.
 
 ### Agent XP
@@ -206,12 +216,15 @@ The ecosystem has health indicators:
 - blocked task count
 - failed handoffs
 - unreviewed outputs
-- stale memory
+- stale memory / archive drift
 - tool errors
 - agent overload
 - approval backlog
 - labs stuck in supervised/training mode
 - external-action risk backlog
+- monthly agent/tool spend
+- lab ROI / revenue vs cost
+- strategy-review items not acted on
 
 ### Lab maturity
 
