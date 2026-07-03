@@ -162,13 +162,48 @@ Relevance to Agentarium:
 
 Foundational research/reference. Less likely to be the easiest implementation base because it is older and research-shaped, but conceptually important.
 
+## TikTok evidence
+
+### Video: AI ecosystem upgrades
+
+Source: `https://www.tiktok.com/t/ZP8GATsb4/`
+
+Resolved page: `https://www.tiktok.com/@theaveragenoobfb/video/7639108154579569951`
+
+Local transcript files:
+
+- `research/tiktok/7639108154579569951.vtt`
+- `research/tiktok/7639108154579569951.md`
+
+Key transcript facts:
+
+- The product is called “Hermy's HQ” / “Hermes HQ.”
+- The speaker says they “just added Forge Labs.”
+- Forge has “three new intake forms,” and the UI is glowing because work is pending.
+- Clicking Forge Labs enters the “systems architect department.”
+- Named sub-agents in that department: `Blueprint`, `Relay`, `Pulse`, `Echo`, `Ember`.
+- New intake blueprint forms are waiting at the “Blueprint Center.”
+- The speaker avoids opening the Blueprint Center because it would show business information.
+
+Visual read:
+
+- Looks like a colorful 2D/3D HQ/city-map dashboard.
+- More like an operational command-center map than a Sims-like free-roaming social simulation.
+- Buildings/departments seem clickable.
+- Glowing rooms/buildings indicate pending work.
+- Floating cards/panels suggest task/agent/department state.
+
+Implication for Agentarium:
+
+This strengthens the direction toward **spatial operational dashboard** rather than pure AI-town social simulation. The core metaphor should be HQ → departments/labs → intake queues/centers → sub-agent teams.
+
 ## Immediate takeaways
 
 1. The Gumroad product appears to sell a process/framework and HTML dashboard files, not necessarily a true interactive agent operating environment.
 2. The static-image complaint is consistent with the tiny 375 KB package size and the review.
 3. **Agentshire is rejected as the primary direction** because it feels too much like a Sims-style video game/social simulation rather than an office/operations tool.
-4. **AI Town is the current best base candidate** because it is closer to the thing Kenn remembers and may be suitable to fork or adapt.
-5. Agentarium’s differentiator should be operational usefulness: task/quest state, real agent adapter boundaries, audit log, approval gates, replay, and eventually Hermes/OpenClaw/Codex/Claude integrations.
+4. **AI Town is still the strongest open-source base candidate**, but the target product is less “AI characters living in town” and more “HQ/department map for operational AI work.”
+5. Agentarium’s differentiator should be operational usefulness: task/quest state, intake queues, real agent adapter boundaries, audit log, approval gates, replay, and eventually Hermes/OpenClaw/Codex/Claude integrations.
 
 ## Recommended next investigation
 
