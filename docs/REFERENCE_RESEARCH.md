@@ -197,6 +197,46 @@ Implication for Agentarium:
 
 This strengthens the direction toward **spatial operational dashboard** rather than pure AI-town social simulation. The core metaphor should be HQ → departments/labs → intake queues/centers → sub-agent teams.
 
+### Video: How my AI agents safely build and manage skills
+
+Source: `https://www.tiktok.com/t/ZP8GDF97w/`
+
+Resolved page: `https://www.tiktok.com/@androoagi/video/7624600530156784927`
+
+Creator: `@androoagi` / androoAGI
+
+Local transcript files:
+
+- `research/tiktok/7624600530156784927.vtt`
+- `research/tiktok/7624600530156784927.md`
+
+Key transcript facts:
+
+- The creator calls it an “interactive AI agent ecosystem dungeon in space.”
+- AI agents “live inside” the spatial environment.
+- Agents are organized into different rooms.
+- Factory rooms represent autonomous businesses.
+- A conveyor belt represents an Etsy store/business pipeline.
+- A research agent constantly researches the autonomous businesses and competitors.
+- The “armory room” is where the agent builds and manages its own skills on OpenClaw.
+- A terminal/panel shows connected accounts/API keys, such as YouTube and Etsy, and what the agents have access to.
+- Skills can be crafted by choosing type, name, and description.
+- ClawHub is described as a site for downloading OpenClaw skills made by other people.
+- The creator warns that third-party skills cannot be trusted and may contain malware.
+- Recommended safety workflow: download untrusted skill → inspect internals → replicate/rebuild the skill rather than directly installing it.
+
+Visual read:
+
+- Looks like a colorful sci-fi management/strategy screen.
+- Space-station/base layout with multiple rooms/modules in a grid/cutaway view.
+- Rooms contain terminals, glowing panels, radar-like displays, tiny icons, labels, and status indicators.
+- Top/status bars appear to show operational metrics such as revenue/orders/products/agent counts.
+- More operational dashboard / management sim than free-roaming character sim.
+
+Implication for Agentarium:
+
+This adds a strong **space station / dungeon / compartmentalized HQ** metaphor. Rooms should map to capabilities. Agentarium should include an **Armory / Skill Center** where skills have provenance, permissions, quarantine status, inspection status, and replication/approval flow. This is more important than pure character wandering.
+
 ## Immediate takeaways
 
 1. The Gumroad product appears to sell a process/framework and HTML dashboard files, not necessarily a true interactive agent operating environment.

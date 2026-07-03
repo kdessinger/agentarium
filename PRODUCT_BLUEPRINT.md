@@ -2,10 +2,11 @@
 
 ## Vision
 
-Agentarium is a gamified 3D operating environment for AI agent ecosystems. It lets a human define goals, watch specialized agents collaborate, approve risky steps, inspect reasoning trails, and improve the agent colony over time.
+Agentarium is a gamified spatial operating environment for AI agent ecosystems. It lets a human define goals, watch specialized agents collaborate, inspect departments/rooms, approve risky steps, inspect reasoning trails, and improve the agent ecosystem over time.
 
 The product should feel like a cross between:
 
+- a space-station / HQ management sim
 - a strategy game
 - a mission-control dashboard
 - an agent orchestration console
