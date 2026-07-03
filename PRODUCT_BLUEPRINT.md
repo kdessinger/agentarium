@@ -275,9 +275,9 @@ MVP behavior: deterministic orchestrator that moves a simulated work order betwe
 
 Reference name from AndrooAGI: Nova.
 
-Role: researches businesses, competitors, trends, products, and opportunities; sends structured findings to production labs.
+Role: researches businesses, competitors, trends, products, and opportunities; converts market evidence into structured opportunity packets; sends those packets to production labs such as Forge.
 
-MVP behavior: produces a mock opportunity packet.
+MVP behavior: produces a mock Etsy opportunity packet with source evidence, product concept, keywords, adaptation angle, risk flags, confidence, and handoff target.
 
 ### Factory Agent / Factory Lab
 

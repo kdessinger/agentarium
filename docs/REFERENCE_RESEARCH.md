@@ -327,8 +327,11 @@ Key station/agent facts:
 - The system exists so AndrooAGI can see where agents are and what they are doing at any moment.
 - Human operator sits in a command chair / dashboard and can see revenue, per-agent detail, and weekly performance.
 - `Ultron` sits in the same command room and is the main commander/orchestrator, running on Opus 4.6.
-- `Nova` is in the research lab and researches businesses, Etsy products, competitors, and opportunities.
-- Nova sends research to `Forge`.
+- `Nova` is not just generic research; Nova is the market-intelligence success engine for Etsy.
+- The transcript says the secret is not that agents produce products, but that Nova researches stores/products doing extremely well and sends proven concepts to Forge.
+- Nova looks at what people are already buying, extracts concepts, and hands them to Forge to generate designs based on that research.
+- Nova also monitors other active businesses and AI/model news.
+- Focused note: `research/nova-etsy-success-loop.md`.
 - `Forge` is the factory/Etsy agent, focused on the Etsy store, connected to Nano Banana Pro and Printify, and creates Etsy listings.
 - Printify is connected to Etsy for manufacturing and shipping.
 - `Pixel` is the main designer of the station/rooms, is connected to Nano Banana Pro, and runs the Fiverr YouTube-thumbnail service.
