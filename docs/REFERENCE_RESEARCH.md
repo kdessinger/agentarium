@@ -69,7 +69,7 @@ Interpretation: the provided screenshot appears to be a sales/cover graphic for 
 
 ## Open-source / related software leads
 
-### 1. Agentshire
+### 1. Agentshire — rejected as primary reference
 
 URL: `https://github.com/Agentshire/Agentshire`
 
@@ -98,15 +98,19 @@ README claims:
 - Interactive 3D with status cards, work logs, thinking stream, TODO.
 - AI tool control over town events like broadcast, spawn NPCs, trigger effects, time/weather.
 
+Kenn's assessment:
+
+Agentshire is **not** the thing he remembered and is not the right primary direction. It feels more like **The Sims / video game social simulation** than an office/operations tool.
+
 Relevance to Agentarium:
 
-Very high. This is the closest observed match to “AI agents as characters in a 3D town.” It may be the open-source app Kenn remembered, or at least a strong candidate.
+Useful as a distant reference for “agents represented as NPCs,” but too game/social-life oriented for the current target. Do not prioritize this as the base unless the project direction changes toward a full Sims-like AI society.
 
 Cautions:
 
 - It is tied to OpenClaw/QClaw versions.
 - Compatibility table says OpenClaw CLI 2026.3.13 recommended; OpenClaw 2026.4.x+ not yet supported due to channel init regression.
-- Needs hands-on install verification before assuming it works locally.
+- Too far from the office/operations command-center feel Kenn wants.
 
 ### 2. AI Town
 
@@ -162,8 +166,8 @@ Foundational research/reference. Less likely to be the easiest implementation ba
 
 1. The Gumroad product appears to sell a process/framework and HTML dashboard files, not necessarily a true interactive agent operating environment.
 2. The static-image complaint is consistent with the tiny 375 KB package size and the review.
-3. **Agentshire** is currently the closest open-source match to the desired “agent NPCs in a 3D town” experience.
-4. **AI Town** is the most established open-source base for AI characters in a simulated town.
+3. **Agentshire is rejected as the primary direction** because it feels too much like a Sims-style video game/social simulation rather than an office/operations tool.
+4. **AI Town is the current best base candidate** because it is closer to the thing Kenn remembers and may be suitable to fork or adapt.
 5. Agentarium’s differentiator should be operational usefulness: task/quest state, real agent adapter boundaries, audit log, approval gates, replay, and eventually Hermes/OpenClaw/Codex/Claude integrations.
 
 ## Recommended next investigation
