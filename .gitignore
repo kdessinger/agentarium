@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+.venv/
+venv/
+
+# builds
+.next/
+dist/
+build/
+coverage/
+
+# env/secrets
+.env
+.env.*
+!.env.example
+
+# local/editor
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# generated/cache
+.cache/
+.tmp/
+__pycache__/
+.pytest_cache/
