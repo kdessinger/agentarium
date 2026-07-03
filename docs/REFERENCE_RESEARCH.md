@@ -235,30 +235,26 @@ Visual read:
 
 Implication for Agentarium:
 
-This adds a strong **space station / dungeon / compartmentalized HQ** metaphor. Rooms should map to capabilities. Agentarium should include an **Armory / Skill Center** where skills have provenance, permissions, quarantine status, inspection status, and replication/approval flow. This is more important than pure character wandering.
+This adds a strong **space-station / connected-labs / compartmentalized HQ** metaphor. Keep the source phrase “dungeon” only as research context; do not use it as Agentarium’s product language. Rooms should map to capabilities. Agentarium should include an **Armory / Skill Center** where skills have provenance, permissions, quarantine status, inspection status, and replication/approval flow. This is more important than pure character wandering.
 
 ## Immediate takeaways
 
-1. The Gumroad product appears to sell a process/framework and HTML dashboard files, not necessarily a true interactive agent operating environment.
-2. The static-image complaint is consistent with the tiny 375 KB package size and the review.
-3. **Agentshire is rejected as the primary direction** because it feels too much like a Sims-style video game/social simulation rather than an office/operations tool.
-4. **AI Town is still the strongest open-source base candidate**, but the target product is less “AI characters living in town” and more “HQ/department map for operational AI work.”
-5. Agentarium’s differentiator should be operational usefulness: task/quest state, intake queues, real agent adapter boundaries, audit log, approval gates, replay, and eventually Hermes/OpenClaw/Codex/Claude integrations.
+1. The Gumroad/Bryan product appears downstream from the broader AndrooAGI/OpenClaw-style ecosystem trend and may sell process/framework/static dashboard files rather than a true interactive agent operating environment.
+2. AndrooAGI is the original high-skill reference Kenn found; Bryan came later through links/comments and appears more commercialized/amateur by comparison.
+3. The desired product should not be called a “dungeon.” Kenn prefers a master system / AI operations canvas / connected labs metaphor.
+4. The target is **not** an AI social simulation. It is a gamified master canvas where individual AI labs do specific work and connect into one visible operating system.
+5. **Agentshire is rejected as the primary direction** because it feels too much like a Sims-style video game/social simulation rather than an office/operations tool.
+6. **AI Town remains a possible technical/reference base**, but the target product is less “AI characters living in town” and more “connected operational AI labs on a spatial canvas.”
+7. Agentarium’s differentiator should be operational usefulness: task/intake state, lab pipelines, real agent adapter boundaries, audit log, approval gates, replay, permissions, and skill quarantine/replication.
 
 ## Recommended next investigation
 
-1. Clone and run Agentshire in a sandbox.
-2. Clone and run AI Town in a sandbox.
-3. Compare:
-   - install friction
-   - visual quality
-   - real agent integration points
-   - event/log model
-   - extensibility
-   - licensing
-   - how hard it would be to adapt for Agentarium
-4. Decide whether Agentarium should:
-   - fork/adapt Agentshire
-   - use AI Town as inspiration only
-   - build a clean independent prototype
-   - create a Hermes/OpenClaw bridge into one of these worlds
+1. Continue collecting/transcribing AndrooAGI videos to reconstruct the product model.
+2. Identify whether AndrooAGI names or links any underlying open-source repo/framework.
+3. Inspect AI Town as a possible rendering/simulation/event-state base, but do not let it pull the product toward social simulation.
+4. Search specifically for open-source projects matching: spatial AI operations canvas, OpenClaw labs, agent rooms, AI dungeon in space, ClawHub skill manager, conveyor-belt agent pipelines.
+5. Decide whether Agentarium should:
+   - fork/adapt AI Town for rendering/state only
+   - build a clean independent prototype inspired by these videos
+   - create a Hermes/OpenClaw bridge into a spatial canvas
+   - use a builder first to mock the UI while keeping repo-owned architecture

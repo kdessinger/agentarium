@@ -2,7 +2,7 @@
 
 ## Vision
 
-Agentarium is a gamified spatial operating environment for AI agent ecosystems. It lets a human define goals, watch specialized agents collaborate, inspect departments/rooms, approve risky steps, inspect reasoning trails, and improve the agent ecosystem over time.
+Agentarium is a gamified spatial operating environment for AI agent ecosystems. It lets a human define goals, watch specialized AI labs work, inspect connected rooms/departments, approve risky steps, inspect reasoning trails, and improve the agent ecosystem over time.
 
 The product should feel like a cross between:
 
@@ -26,19 +26,24 @@ Later targets:
 
 ## Core surfaces
 
-### 1. World view
+### 1. Spatial operations canvas
 
-A full-viewport 3D scene showing agents, buildings, task objects, message routes, and current activity.
+A full-viewport 2D/3D canvas showing connected AI labs, agents, task objects, pipeline routes, and current activity.
 
-Minimum world elements:
+Minimum canvas elements:
 
-- Agent avatars
-- Quest board / command center
-- Research library
-- Builder workshop
+- Master command center / mission control
+- Specialized labs/rooms
+- Agent workers inside each lab
+- Intake/work queues
+- Conveyor belts or pipeline links between labs
+- Research/market intelligence lab
+- Factory/content-production lab
+- Music/media generation lab
+- Skill armory / capability management lab
 - Review/governance chamber
 - Memory archive
-- Tool portals
+- Tool/account access terminal
 - Approval gate
 - Event timeline overlay
 
@@ -129,6 +134,18 @@ Required safety concepts:
 ## Gamification mechanics
 
 Useful mechanics only. Avoid shallow points that do not improve understanding.
+
+### Labs as operational modules
+
+Each lab should map to a real work loop. Labs are not just rooms on a map; they are persistent operational systems.
+
+Seed lab examples from AndrooAGI/Kenn context:
+
+- **Etsy business lab** — generates Etsy product ideas, researches competitors, creates/listings assets, and publishes to a live Etsy shop through approved/gated automation.
+- **Music generation lab** — has a dedicated music-generation agent, creates AI-generated music, moves outputs down a conveyor-belt workflow, and publishes finished assets to a YouTube channel.
+- **Research / market intelligence lab** — continuously studies active businesses, competitors, trends, and opportunities, then routes findings to the relevant lab.
+- **Skill armory** — discovers, quarantines, inspects, replicates, approves, and manages agent skills/capabilities.
+- **Blueprint / systems architecture lab** — turns intake forms into implementation blueprints and routes work to the right downstream lab.
 
 ### Agent XP
 

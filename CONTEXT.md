@@ -4,22 +4,27 @@ This file gives a fresh AI/IDE agent enough context to work on Agentarium withou
 
 ## Origin
 
-Kenn wants to start a new project around an AI agent ecosystem with gamification in a 3D world.
+Kenn wants to start a new project around an AI agent ecosystem with gamification on a spatial canvas.
+
+The original inspiration came from **AndrooAGI**, whose videos show an AI-agent “dungeon in space” made of connected labs/rooms. Kenn does **not** like the term “dungeon”; the desired direction is a **master spatial system** or **AI operations canvas** where individual AI labs are connected and visible.
+
+Bryan/Hermes HQ appears to be downstream/commercialized inspiration from the same internet subculture, but comments suggest much of that product is static or amateur-level. AndrooAGI appears to be the higher-skill reference.
 
 The seed idea: multiple specialized AI agents work together on complex goals. Each agent has a role, the system has an orchestration layer, agents communicate through defined workflows, and the whole ecosystem is monitored, tested, and refined over time.
 
-Agentarium adds the missing product twist: make the ecosystem visible and playable as a 3D world.
+Agentarium adds the missing product twist: make the ecosystem visible and steerable as connected AI labs on a gamified operational canvas.
 
 ## Core concept
 
-Represent the agent ecosystem as a living world:
+Represent the agent ecosystem as a connected operational canvas:
 
-- **Agents** are characters/NPCs with names, roles, tools, energy, skill levels, reliability, and current assignments.
-- **Tasks** are quests, jobs, contracts, or mission cards.
-- **The orchestrator** is the quest board / mission control / mayor.
-- **Tools and integrations** are buildings, workshops, libraries, portals, or machines.
-- **Workflows** are paths, roads, conveyor belts, or message routes.
-- **Memory/knowledge** is a library, archive, map room, or world lore system.
+- **Labs/rooms** are specialized AI departments, each responsible for a class of work.
+- **Agents** are workers inside labs, with names, roles, tools, permissions, skill levels, reliability, and current assignments.
+- **Tasks** are intake forms, jobs, contracts, missions, or work orders.
+- **The orchestrator** is mission control: it routes work to the right lab and agent team.
+- **Tools and integrations** are machines, terminals, workshops, portals, or connected accounts inside labs.
+- **Workflows** are conveyor belts, queues, paths, message routes, or pipeline links between labs.
+- **Memory/knowledge** is a library, archive, map room, or shared knowledge store.
 - **Human approval** is a gate, checkpoint, council chamber, or command console.
 - **Logs and telemetry** are world history, replay, event scrolls, and inspectable timelines.
 
