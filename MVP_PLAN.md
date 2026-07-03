@@ -2,7 +2,7 @@
 
 > **For Hermes:** Use subagent-driven-development skill to implement this plan task-by-task once Kenn chooses a stack or approves the default.
 
-**Goal:** Build a local browser prototype of a gamified 3D AI-agent ecosystem where three simulated agents complete one quest through visible handoffs and an approval gate.
+**Goal:** Build a local browser prototype of a gamified AI-operations canvas where core stations — Mission Control, Steward, Research, Factory, Design/Fiverr, Communications, and Review — route one simulated work order through visible handoffs and an approval gate.
 
 **Architecture:** Start frontend-only with mock data and an event-driven state model. Keep contracts shaped for a future backend. Add real agent execution only after the world model and task visibility work.
 

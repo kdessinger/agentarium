@@ -301,6 +301,55 @@ Implication for Agentarium:
 
 AndrooAGI is monetizing the know-how through a course/community, apparently still waitlist/unfinished from the visible snippet. The market is early and demand exists, but Agentarium should focus on building the actual operational substrate rather than selling static demos or vague courseware.
 
+### Video: Orchestration layer station walkthrough
+
+Source: `https://www.tiktok.com/t/ZP8GD1dKF/`
+
+Resolved page: `https://www.tiktok.com/@androoagi/video/7623915514556960031`
+
+Creator: `@androoagi` / androoAGI
+
+Local transcript files:
+
+- `research/tiktok/7623915514556960031.vtt`
+- `research/tiktok/7623915514556960031.md`
+
+Engagement observed:
+
+- Plays: 849,100
+- Likes: 43,100
+- Comments: 639
+- Saves: 22,513
+- Shares: 8,457
+
+Key station/agent facts:
+
+- The system exists so AndrooAGI can see where agents are and what they are doing at any moment.
+- Human operator sits in a command chair / dashboard and can see revenue, per-agent detail, and weekly performance.
+- `Ultron` sits in the same command room and is the main commander/orchestrator, running on Opus 4.6.
+- `Nova` is in the research lab and researches businesses, Etsy products, competitors, and opportunities.
+- Nova sends research to `Forge`.
+- `Forge` is the factory/Etsy agent, focused on the Etsy store, connected to Nano Banana Pro and Printify, and creates Etsy listings.
+- Printify is connected to Etsy for manufacturing and shipping.
+- `Pixel` is the main designer of the station/rooms, is connected to Nano Banana Pro, and runs the Fiverr YouTube-thumbnail service.
+- `Cipher` is in the communications deck, manages/responds to emails, monitors comments, and alerts the human.
+
+Implication for Agentarium:
+
+This video defines the first concrete station set:
+
+- Mission Control / Command Deck
+- Steward / Orchestrator Seat
+- Research Lab
+- Factory / Etsy / Fulfillment Lab
+- Design Studio / Fiverr Thumbnail Lab
+- Communications Deck
+- Review / Governance Station
+- Tool Access / Connected Platform Panel
+- Metrics / Performance Panel
+
+This should drive the MVP more than the earlier generic three-agent plan.
+
 ## Immediate takeaways
 
 1. The Gumroad/Bryan product appears downstream from the broader AndrooAGI/OpenClaw-style ecosystem trend and may sell process/framework/static dashboard files rather than a true interactive agent operating environment.

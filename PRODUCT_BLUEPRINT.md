@@ -32,19 +32,23 @@ A full-viewport 2D/3D canvas showing connected AI labs, agents, task objects, pi
 
 Minimum canvas elements:
 
-- Master command center / mission control
+- Mission Control / Command Deck for the human operator
+- Steward / Orchestrator seat for the main coordinating agent
 - Specialized labs/rooms
 - Agent workers inside each lab
 - Intake/work queues
 - Conveyor belts or pipeline links between labs
-- Research/market intelligence lab
-- Factory/content-production lab
+- Research / market intelligence lab
+- Factory / Etsy / fulfillment lab
+- Design studio / Fiverr thumbnail lab
+- Communications deck for email, comments, alerts, and human notification routing
 - Music/media generation lab
 - Skill armory / capability management lab
 - Review/governance chamber
 - Memory archive
 - Tool/account access terminal
 - Approval gate
+- Metrics / performance panel
 - Event timeline overlay
 
 ### 2. Quest board
@@ -221,25 +225,59 @@ Human creates quest
   → World replay shows what happened
 ```
 
-## First three agents
+## Core station/agent set
 
-### Researcher
+### Human Operator / Command Chair
 
-Role: gather information, summarize options, cite sources later.
+Role: oversees the whole system, approves risky actions, inspects revenue/performance, and steers priorities.
 
-MVP behavior: simulated research result from mock data.
+MVP behavior: command deck panel with global status, pending approvals, and lab metrics.
 
-### Builder
+### Steward / Orchestrator
 
-Role: produce the artifact requested by the quest.
+Reference name from AndrooAGI: Ultron.
 
-MVP behavior: simulated build output, such as generated document/code snippet/card.
+Role: main coordinating agent that keeps the operation running, routes work, checks lab state, and escalates to the human.
 
-### Reviewer
+MVP behavior: deterministic orchestrator that moves a simulated work order between labs.
 
-Role: check quality, risk, policy, and acceptance criteria.
+### Research Agent / Research Lab
 
-MVP behavior: simulated pass/fail review with notes.
+Reference name from AndrooAGI: Nova.
+
+Role: researches businesses, competitors, trends, products, and opportunities; sends structured findings to production labs.
+
+MVP behavior: produces a mock opportunity packet.
+
+### Factory Agent / Factory Lab
+
+Reference name from AndrooAGI: Forge.
+
+Role: turns research into listings/products/assets and connects to fulfillment/storefront platforms such as Printify/Etsy.
+
+MVP behavior: creates a mock product/listing packet from research.
+
+### Design Agent / Design Studio
+
+Reference name from AndrooAGI: Pixel.
+
+Role: creates visual assets, designs station/room visuals, and handles customer-order creative work such as Fiverr thumbnails.
+
+MVP behavior: creates a mock thumbnail/product visual candidate and sends it to review.
+
+### Communications Agent / Communications Deck
+
+Reference name from AndrooAGI: Cipher.
+
+Role: monitors/responds to emails, comments, social messages, support channels, and notifies the human/steward about important inbound signals.
+
+MVP behavior: simulates an inbound customer/comment signal and routes it into the appropriate lab.
+
+### Reviewer / Governance Station
+
+Role: checks quality, risk, policy, customer requirements, and acceptance criteria before delivery or publishing.
+
+MVP behavior: simulated pass/fail review with notes and approval gate.
 
 ## Orchestration model
 
