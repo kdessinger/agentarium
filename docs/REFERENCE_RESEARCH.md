@@ -447,6 +447,48 @@ Implication for Agentarium:
 
 This video expands Agentarium from a task visualization canvas into a full **AI business operating system**. The MVP should stay small, but the architecture should reserve explicit surfaces for treasury/cost control, archives/memory, feedback/training, war-room strategy reviews, media publishing, unified communications, fulfillment-backed factory labs, and marketplace/content labs.
 
+### Video: Ultron, articulation, and founder-to-orchestrator loop
+
+Source: `https://www.tiktok.com/t/ZP8GmTjxH/`
+
+Resolved page: `https://www.tiktok.com/@androoagi/video/7649210408812760350`
+
+Creator: `@androoagi` / androoAGI
+
+Local research files:
+
+- `research/tiktok/7649210408812760350.vtt`
+- `research/tiktok/7649210408812760350.raw.txt`
+- `research/tiktok/7649210408812760350.md`
+
+Engagement observed:
+
+- Plays: 169,300
+- Likes: 9,067
+- Comments: 206
+- Saves: 3,963
+- Shares: 1,342
+
+Useful architecture, stripped of persona:
+
+- `Ultron` is the top-level steward/orchestrator inside “Ultron OS.”
+- The visible dashboard, roles, agents, workflows, and Etsy store began as a human-articulated vision.
+- Human describes the desired system to Ultron.
+- Ultron decomposes the vision and instructs/delegates work to other agents.
+- Agents build pieces and return outputs.
+- Human reviews/corrects outputs.
+- The loop repeats: instruction → output → feedback → rebuild.
+- Key claim: articulation is the crucial skill; vague instructions produce vague outputs.
+- Agents are builders/operators; the human/founder remains responsible for vision, standards, and feedback.
+
+Implication for Agentarium:
+
+Add an **Articulation Console** attached to Mission Control / Steward Seat. It should turn a human-described lab/system idea into a structured blueprint of rooms, agents, tools, workflows, dashboards, metrics, approval gates, risks, and simulation-first setup.
+
+Tone rule:
+
+Do **not** copy AndrooAGI’s hostile persona, cruelty language, or job-replacement framing. Keep the architecture; discard the attitude.
+
 ## Immediate takeaways
 
 1. The Gumroad/Bryan product appears downstream from the broader AndrooAGI/OpenClaw-style ecosystem trend and may sell process/framework/static dashboard files rather than a true interactive agent operating environment.

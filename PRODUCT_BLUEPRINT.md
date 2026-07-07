@@ -89,19 +89,24 @@ Each agent has an inspectable card:
 - blocked reasons
 - allowed action scope
 
-### 4. Orchestrator console
+### 4. Orchestrator / Articulation console
 
-The orchestrator decides how work is split and routed.
+The orchestrator decides how work is split and routed. The articulation console is where the human turns a vision into labs, agents, workflows, dashboards, and approval gates.
 
 The console should show:
 
+- founder/operator vision statement
+- proposed lab/room blueprint
 - task decomposition
+- agent role proposals
 - agent selection rationale
+- tool/platform connection needs
 - parallel vs sequential plan
 - handoff chain
 - risk classification
 - pending approvals
 - retry/escalation rules
+- feedback/iteration history
 
 ### 5. Event log and replay
 
@@ -269,7 +274,7 @@ Reference name from AndrooAGI: Ultron.
 
 Role: main coordinating agent that keeps the operation running, routes work, checks lab state, and escalates to the human.
 
-MVP behavior: deterministic orchestrator that moves a simulated work order between labs.
+MVP behavior: deterministic orchestrator that moves a simulated work order between labs, plus a simple articulation flow that turns a human-described lab idea into a proposed room/agent/workflow blueprint.
 
 ### Research Agent / Research Lab
 
