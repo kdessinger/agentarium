@@ -117,3 +117,54 @@ Phase 3 should prioritize:
 The generated image is now the primary visual north star: a full-ship pixel-art cutaway with connected rooms, animated tiny agents, glowing corridors, and room-specific machinery.
 
 Do not let Agentarium drift into a normal SaaS dashboard with a decorative map. The world is the interface.
+
+
+## Image-first background-plate pipeline
+
+Kenn's recommended implementation approach is now the preferred Phase 3 strategy:
+
+1. Generate the static backgrounds first.
+2. Generate one geographically coherent whole-ship cross-section image for Ship Overview.
+3. Generate a dedicated room background image for every room.
+4. Use those static images as background plates.
+5. Add interactivity/hotspots on top of the ship image so clicking or double-clicking a room swaps the screen to that room's image.
+6. Add agent sprites and animation only after the background image layer is working.
+7. Keep the state/event/audit model underneath the image layer so the game visuals remain truthful.
+
+This is intentionally closer to classic game map/interior navigation than to a procedural 3D app. The initial implementation can use static PNG backgrounds plus transparent clickable regions, then add animation layers:
+
+```text
+whole-ship background PNG
+  + room hotspot map
+  + route/status overlays
+  + agent sprite layer
+  + UI inspector/audit overlay
+```
+
+For Room View:
+
+```text
+room background PNG
+  + agent/subagent sprite layer
+  + room-specific hotspot map
+  + packet/tool/status overlays
+  + room profile / inspector overlay
+```
+
+For Agent View:
+
+```text
+agent profile/character panel
+  + avatar/sprite portrait
+  + function/tool/permission controls
+  + task/event history
+```
+
+Created art prompt and asset files:
+
+- `docs/art/IMAGE_PROMPTS.md`
+- `docs/art/image-prompt-manifest.json`
+- `docs/art/CONCEPT_ART_ASSET_INDEX.md`
+- `docs/art/concept-art-gallery.html`
+- `assets/concept-art/ship/ship-overview-cross-section.png`
+- `assets/concept-art/rooms/*.png`

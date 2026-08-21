@@ -120,6 +120,30 @@ Ship Overview → Room View → Agent View
 
 The existing app may be refactored rather than thrown away, but the visual priority changes: the world should become the main interface and dashboards should become secondary overlays.
 
+### Task 3.0: Generate static background plates before animation
+
+**Objective:** Follow the image-first approach: create static art backgrounds first, then add interaction and animation layers.
+
+**Files:**
+- Read: `docs/art/IMAGE_PROMPTS.md`
+- Use: `assets/concept-art/ship/ship-overview-cross-section.png`
+- Use: `assets/concept-art/rooms/*.png`
+
+**Required behavior:**
+
+- Ship Overview uses the whole-ship cross-section image as the base layer.
+- Each room view uses that room's generated background as the base layer.
+- Room clicks/double-clicks are implemented as transparent hotspots over the ship image.
+- Agent sprites/animations are layered after the image backgrounds are in place.
+- Generated text inside images is not trusted for UI labels; app labels remain real DOM/UI overlays.
+
+**Verification:**
+
+- Whole-ship image renders full viewport without distortion.
+- Room hotspot map selects the correct room.
+- Double-clicking a room swaps to the correct room background.
+- The implementation does not crop away critical room details at the target viewport.
+
 ### Task 3.1: Create full-viewport ship overview
 
 **Objective:** Replace/reshape the current canvas into an immersive pixel-art or isometric ship overview.
