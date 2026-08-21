@@ -96,3 +96,20 @@ The 3D layer is not merely a skin. It is a model of operational state.
 If an agent walks to the library, the underlying event should mean it is retrieving knowledge. If it enters the workshop, it is building. If it waits at a gate, approval is required. If it sends a message, the event log should show the payload summary.
 
 Every visual metaphor should map to a real system state.
+
+
+## Post-Phase-2 visual correction
+
+Kenn reviewed the first implemented prototype and said it is an interesting start, but the desired direction is much closer to the generated Agentarium concept image: an animated pixel-art / video-game-like interactive space-station experience.
+
+The key interaction model is now:
+
+```text
+Ship Overview → Room View → Agent View
+```
+
+- Ship Overview shows the whole station and all rooms as pixel-art diorama rooms with ambient animations.
+- Double-clicking a room opens Room View, showing the room's profile, agents/subagents, tools, packets, queues, and current work.
+- Double-clicking an agent opens Agent View, showing a character/profile interface where the agent's function, tools, permissions, and future behavior can be inspected and eventually modified.
+
+The current dashboard-like prototype should be treated as a state-contract proof, not the final UI direction. Future refinement should preserve its simulation/event/approval model while moving the interface toward a living pixel-art management game.

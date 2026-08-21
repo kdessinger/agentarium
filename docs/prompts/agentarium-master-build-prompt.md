@@ -1176,3 +1176,19 @@ Do not begin Phase 2 integrations unless Kenn explicitly asks for them after rev
 - [ ] Data, event, state, approval, replay, and lab-maturity contracts are clear enough to implement.
 - [ ] Verification covers simulation flow, approval/denial, replay, responsiveness, and failure modes.
 - [ ] The builder can hand this to v0, OpenCode, Codex, or Claude after approval without needing unstated context.
+
+
+## Post-Phase-2 feedback addendum
+
+Kenn approved the prompt and Phase 2 produced a working first pass. After seeing it, Kenn clarified the intended visual/product direction:
+
+- The prototype is a useful start, but the target should be much closer to the generated Agentarium concept image.
+- Agentarium should feel like an animated pixel-art / video-game interactive experience, not a flat dashboard with a map.
+- The default view should be a **Ship Overview**: a view of the entire spaceship where all rooms are visible.
+- Rooms should look like pixel-art image/diorama interiors with ambient animation that makes it look like AIs are moving around and doing things.
+- Double-clicking a room should open a **Room View** with the details of what is happening in that room.
+- A room may contain several subagents, one hard-working agent, or an idle/sleeping agent.
+- Double-clicking an agent should open an **Agent View** with that agent's profile/character sheet and controls for modifying that agent's future functionality.
+- The state/event/approval/audit model remains valuable and should be preserved under the richer game-like UI.
+
+For the next worker: treat this addendum as higher priority than any earlier wording that could be interpreted as accepting a normal dashboard-style implementation.

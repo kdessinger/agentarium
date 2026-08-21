@@ -28,7 +28,25 @@ Later targets:
 
 ### 1. Spatial operations canvas
 
-A full-viewport 2D/3D canvas showing connected AI labs, agents, task objects, pipeline routes, and current activity.
+A full-viewport pixel-art / isometric ship overview showing connected AI labs, agents, task objects, pipeline routes, and current activity.
+
+The intended top-level experience is closer to a video-game management sim than a conventional dashboard. The generated concept image is the visual north star: a cutaway space station with distinct rooms, glowing connected corridors, tiny animated AI characters, consoles, machinery, screens, and room-specific activity.
+
+The canvas must support a nested interaction hierarchy:
+
+```text
+Ship Overview
+  → double-click room
+Room View
+  → double-click agent
+Agent View
+```
+
+- **Ship Overview** shows the entire space station and all rooms at once. Rooms should read as pixel-art image/diorama modules, not plain graph nodes.
+- **Room View** zooms into one room, showing its profile, interior scene, agents/subagents, tools, queues, packets, and room-specific work state.
+- **Agent View** opens a character/profile view for one agent, including role, status, skills, permissions, current task, recent events, subagents where applicable, and future functionality controls.
+
+Every animation must still map back to application state/events. The world is the interface, not decoration.
 
 Minimum canvas elements:
 
@@ -335,23 +353,32 @@ The frontend can start with mock state, but should behave as if live events are 
 
 ## Design direction
 
-Visual tone: warm sci-fi command village. Not corporate dashboard sludge.
+Visual tone: animated pixel-art sci-fi space-station cutaway. Not corporate dashboard sludge.
 
-Possible references:
+Primary visual reference:
 
-- strategy-game town map
-- miniature diorama
-- mission control
-- fantasy guild hall
-- cozy cyberpunk workshop
+- the generated Agentarium concept image / current attached screenshot: a full-ship pixel-art cutaway with connected rooms, animated tiny agents, glowing corridors, room labels, consoles, factories, memory graphs, approval chambers, and status panels.
+
+Possible supporting references:
+
+- strategy-game base management screens
+- isometric RPG interiors
+- miniature diorama rooms
+- pixel-art management sims
+- mission-control interfaces used as overlays, not as the whole product
+- cozy cyberpunk workshops
 
 Must-have UX qualities:
 
-- readable from a distance
-- inspectable up close
+- readable from ship-overview distance
+- inspectable through room and agent zoom levels
 - full-screen immersive layout
-- clear status colors
-- visible handoffs
+- rooms look like room interiors, not labeled boxes
+- agents look like characters/sprites with visible state
+- clear double-click navigation: ship → room → agent
+- clear status colors, labels, and animation
+- visible handoffs through corridors/pipelines
+- inspectors/audit trails available as overlays
 - no hidden magic
 
 ## Risks
