@@ -34,9 +34,9 @@ Do not begin by building a giant autonomous swarm. Begin with a few configured a
 
 ## Phase 2 self-commissioning application
 
-The active browser application lives in `app/`. A fresh browser starts inside an animated construction bay with the Commissioning Guide. The installer chooses visual presentation, Standard or Demo mode, world template, agents, Forges, and governance; inspects a blueprint; then runs truthful resumable local build jobs before the world is presented.
+The active browser application lives in `app/`. A fresh browser starts inside an animated construction bay with the Commissioning Guide. The installer edits structured visual, mode, world, agent, Forge, and governance inputs; inspects the complete topology/permission/asset/cost blueprint; then explicitly approves bounded local build jobs and the final presentation.
 
-The bundled offline path is **Spaceship + Pixel Art** and uses `assets/concept-art/`. Other world/style combinations retain complete art prompts and show honest placeholders until matching generation is separately configured and approved.
+The bundled offline path is **Spaceship + Pixel Art** and uses `assets/concept-art/` plus its authored compartment hotspots. Other world/style combinations retain complete art prompts, disable mismatched spaceship hotspot geometry, and show honest placeholders with an explicit room chooser until matching generation is separately configured and approved.
 
 After commissioning, the primary navigation is:
 
@@ -45,6 +45,10 @@ World Overview → Room View → Agent View
 ```
 
 Standard mode is the default and starts with no operational records. Demo mode is explicit, visibly bannered, non-networked, stored separately, uses `demo:*` IDs plus `synthetic_demo` provenance, and can be purged without changing Standard.
+
+Browser persistence is schema-versioned and validated before hydration. Standard and Demo active workspaces use separate v2 keys; malformed, cross-mode, Demo-namespaced, and invalid-provenance records are rejected into a recoverable path. An incomplete draft opens Resume, Restart with backup, Inspect, Export, and Import controls instead of being silently trusted.
+
+Each local build attempt records its ID, timestamps, plan-bound inputs, validated result or error, and checks. Hydration rejects forged or stale completion state. Build controls support pause/resume, cancellation, deliberate failure/retry testing, idempotent completed jobs, and resumable one-room asset replacement/review with safe restoration on rejection. Replay advances through recorded events without invoking adapters or mutating the current world.
 
 ### Run locally
 
@@ -76,5 +80,8 @@ npm run test:e2e
 6. Open Audit and confirm Standard operational collections are empty and missing providers block honestly.
 7. Recommission and confirm the active world remains available until the draft is approved and presented.
 8. Commission Demo separately; confirm the persistent banner, namespaced synthetic records, purge control, and no Standard influence.
+9. Refresh mid-draft; verify the recovery screen can resume, inspect, export/import, or restart while preserving a backup.
+10. In the build console, inspect a completed attempt, pause/resume, inject and retry a failure, and replace one room asset.
+11. In Demo, choose Leave Demo and verify confirmation offers to purge Demo while preserving Standard.
 
 Implementation boundaries and verified behavior are documented in `app/IMPLEMENTATION_NOTES.md`.

@@ -1,8 +1,21 @@
 import { chromium } from '@playwright/test'
 import { mkdir } from 'node:fs/promises'
+import { spawn } from 'node:child_process'
 
 const baseURL = process.env.AGENTARIUM_URL ?? 'http://127.0.0.1:4173/'
 await mkdir('visual-evidence', { recursive: true })
+let localServer
+try {
+  const response = await fetch(baseURL)
+  if (!response.ok) throw new Error(`HTTP ${response.status}`)
+} catch {
+  localServer = spawn(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['run', 'dev', '--', '--host', '127.0.0.1', '--port', '4173'], { stdio: 'ignore' })
+  for (let attempt = 0; attempt < 40; attempt += 1) {
+    try { if ((await fetch(baseURL)).ok) break } catch { /* server is still starting */ }
+    await new Promise((resolve) => setTimeout(resolve, 250))
+    if (attempt === 39) throw new Error('Visual-check server did not become ready')
+  }
+}
 const browser = await chromium.launch({ headless: true })
 
 async function commission(page) {
@@ -41,3 +54,4 @@ for (const [name, viewport] of Object.entries({ desktop: { width: 1440, height: 
 }
 
 await browser.close()
+if (localServer) localServer.kill('SIGTERM')

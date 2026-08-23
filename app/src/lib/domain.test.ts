@@ -116,10 +116,11 @@ describe('mode and provenance boundaries', () => {
 describe('truthful jobs and operation', () => {
   it('resumes build jobs without rerunning completed work', () => {
     const initial = createBuildJobs(createBuildPlan(createCommissioningDraft()))
-    const once = runNextBuildJob(initial)
-    const resumed = runNextBuildJob(once)
+    const plan = createBuildPlan(createCommissioningDraft())
+    const once = runNextBuildJob(plan, initial)
+    const resumed = runNextBuildJob(plan, once)
     expect(resumed.filter((job) => job.status === 'complete')).toHaveLength(2)
-    expect(resumed[0].attempts).toBe(1)
+    expect(resumed[0].attempts).toHaveLength(1)
   })
 
   it('covers every room with an approved asset or honest placeholder and hotspot', () => {
