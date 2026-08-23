@@ -1217,7 +1217,8 @@ Required starting choices:
 6. **Resort** — a campus of connected buildings, paths, villas, studios, operations lodge, recreation, and landscaped shared areas.
 7. **Sky Ship** — a large flying vessel above the clouds, decks, engine/balloon or anti-gravity systems, helm, observation spaces, and aerial docks.
 8. **Battleship** — armored ocean vessel, bridge, combat information center, deck machinery, engineering, communications, and compartmentalized operations.
-9. **Custom Theme** — the installer describes any original setting, structure, geography, and naming language.
+9. **Modern Corporate Office** — contemporary headquarters with reception, executive command suite, open-plan departments, conference rooms, creative studios, operations center, secure IT/server areas, employee lounge, elevators, and city/campus views.
+10. **Custom Theme** — the installer describes any original setting, structure, geography, and naming language.
 
 Do not treat these as color skins over the same spaceship. A selected template must drive:
 
@@ -1257,6 +1258,7 @@ type WorldTemplateId =
   | 'resort'
   | 'sky_ship'
   | 'battleship'
+  | 'modern_corporate_office'
   | 'custom'
 
 interface WorldThemeAnswers {
@@ -1530,7 +1532,7 @@ The self-building flow is complete only if all are true:
 1. A fresh install launches the animated commissioning guide instead of an empty dashboard.
 2. Theme, world-template, agent, business/Forge, and governance questions produce a valid versioned `CommissioningSpec`.
 3. The first interview decision selects a visual presentation; Pixel Art is optional and works with every world template.
-4. The world-template chooser includes Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, and Custom Theme; the selected template changes topology, terminology, movement, and art prompts rather than acting as a color skin.
+4. The world-template chooser includes Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, Modern Corporate Office, and Custom Theme; the selected template changes topology, terminology, movement, and art prompts rather than acting as a color skin.
 5. Changing visual style preserves world topology, rooms, agents, businesses, workflows, memory, and approvals.
 6. The installer can revise answers before build approval.
 7. Background builder characters correspond one-to-one with inspectable `BuildJob` records.

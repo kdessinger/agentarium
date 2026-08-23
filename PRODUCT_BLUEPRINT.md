@@ -146,7 +146,7 @@ Install
 Interview areas:
 
 1. **Visual presentation** — ask first whether the user wants Pixel Art, Illustrated 2D, Isometric 3D, Cinematic/Realistic, Clean Vector/Graphic, or a Custom Visual Style. Pixel Art is optional and can be applied to every world template; it is not tied to Spaceship.
-2. **Theme/world** — then show the world-template chooser: Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, or Custom Theme. The selection drives topology, movement, terminology, materials, exterior setting, and art prompts; then ask the world name, rooms, and bundled-vs-generated art.
+2. **Theme/world** — then show the world-template chooser: Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, Modern Corporate Office, or Custom Theme. The selection drives topology, movement, terminology, materials, exterior setting, and art prompts; then ask the world name, rooms, and bundled-vs-generated art.
 3. **Agents** — name, purpose, room, provider, model/fallback, tools, permissions, memory, autonomy level, subagents, budget, and success measures.
 4. **Businesses/Forges** — customer, sellable output, inputs/outputs, production and QA agents, external integration intent, approvals, metrics, and risks.
 5. **Operations/governance** — storage, backup, privacy, audit/replay, deployment intent, notification channels, spend limits, credential handling, retries, and approval policy.

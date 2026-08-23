@@ -76,11 +76,11 @@
 - Test: `app/src/lib/commissioningQuestions.test.ts`
 
 **Steps:**
-1. Write tests for six visual styles, Pixel Art enable/disable behavior, nine world templates, Custom Theme handling, required interview sections, and Forge classification.
+1. Write tests for six visual styles, Pixel Art enable/disable behavior, ten world templates, Custom Theme handling, required interview sections, and Forge classification.
 2. Encode `Pixel Art`, `Illustrated 2D`, `Isometric 3D`, `Cinematic/Realistic`, `Clean Vector/Graphic`, and `Custom Visual Style` independently from world templates.
 3. Make visual presentation the first interview decision. Pixel Art must be selectable for every template; when selected, ask 8-bit, 16-bit, modern high-detail, or custom fidelity.
 4. Verify switching visual style preserves topology, rooms, agents, businesses, workflows, memory, and approvals while scheduling only the affected visual assets for replacement.
-5. Encode `Space Station`, `Spaceship`, `Cruise Ship`, `Underground Bunker`, `Skyscraper`, `Resort`, `Sky Ship`, `Battleship`, and `Custom Theme` as typed templates with topology, movement, terminology, material, exterior, and world defaults.
+5. Encode `Space Station`, `Spaceship`, `Cruise Ship`, `Underground Bunker`, `Skyscraper`, `Resort`, `Sky Ship`, `Battleship`, `Modern Corporate Office`, and `Custom Theme` as typed templates with topology, movement, terminology, material, exterior, and world defaults.
 6. Build accessible illustrated style cards followed by the template-card chooser; selecting a template shows a topology/terminology preview before confirmation.
 7. Ensure `Custom Theme` collects setting, world context, layout logic, command area, movement system, materials, mood, and landmarks, then asks the user to confirm the interpretation.
 8. Ask palette, rooms, and accessibility after style and world template are confirmed.
