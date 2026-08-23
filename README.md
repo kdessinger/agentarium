@@ -32,9 +32,19 @@ Start with a clean Standard installation, explicit adapter boundaries, and super
 
 Do not begin by building a giant autonomous swarm. Begin with a few configured agents, one orchestrator, visible messages, quest state, approval gates, provenance, and a replayable activity log.
 
-## Phase 1 prototype
+## Phase 2 self-commissioning application
 
-The legacy browser prototype lives in `app/`. Its current deterministic fixture flow should be treated as **Demo mode only**. It is not the Standard-mode data model. The next implementation phase must add first-run Standard/Demo commissioning, empty Standard operational state, provenance, real adapter boundaries, and strict fixture isolation.
+The active browser application lives in `app/`. A fresh browser starts inside an animated construction bay with the Commissioning Guide. The installer chooses visual presentation, Standard or Demo mode, world template, agents, Forges, and governance; inspects a blueprint; then runs truthful resumable local build jobs before the world is presented.
+
+The bundled offline path is **Spaceship + Pixel Art** and uses `assets/concept-art/`. Other world/style combinations retain complete art prompts and show honest placeholders until matching generation is separately configured and approved.
+
+After commissioning, the primary navigation is:
+
+```text
+World Overview → Room View → Agent View
+```
+
+Standard mode is the default and starts with no operational records. Demo mode is explicit, visibly bannered, non-networked, stored separately, uses `demo:*` IDs plus `synthetic_demo` provenance, and can be purged without changing Standard.
 
 ### Run locally
 
@@ -51,19 +61,20 @@ Vite prints the local URL (normally `http://localhost:5173`).
 ```bash
 cd app
 npm test
-npm run build
 npm run lint
+npm run build
+npm run test:e2e
 ```
 
 ### Manual smoke procedure
 
-1. Load the app and confirm the station map fills the available viewport.
-2. Select Nova Room and Nova; confirm room and agent details appear in the 2D inspector.
-3. Treat the existing seeded vision and records as the legacy isolated Demo walkthrough.
-4. Inspect the ordered tasks and start the Demo walkthrough.
-5. Watch the Ultron → Nova → Etsy Forge → Pixel → Governance handoffs and confirm each fixture is visibly Demo-only.
-6. At the approval gate, confirm the Demo walkthrough pauses and cannot perform an external action.
-7. Approve and confirm the quest completes while Media Bay remains blocked from external delivery.
-8. Reset, repeat, deny, and confirm the quest blocks instead of completing.
-9. Use Replay to move backward and forward, then return to the unchanged live state.
-10. Repeat at a narrow viewport and with reduced motion enabled.
+1. Clear site storage and reload; confirm the in-world Commissioning Guide appears before any finished world.
+2. Confirm all six visual presentations, Standard/Demo, and all ten world templates are available independently.
+3. Complete Standard commissioning with Spaceship + Pixel Art and inspect the blueprint.
+4. Approve the build and run each local build job; confirm progress changes only when a job completes.
+5. Present the world, double-click The Bridge, then double-click Ultron. Use the narrow room chooser on a touch-width viewport.
+6. Open Audit and confirm Standard operational collections are empty and missing providers block honestly.
+7. Recommission and confirm the active world remains available until the draft is approved and presented.
+8. Commission Demo separately; confirm the persistent banner, namespaced synthetic records, purge control, and no Standard influence.
+
+Implementation boundaries and verified behavior are documented in `app/IMPLEMENTATION_NOTES.md`.
