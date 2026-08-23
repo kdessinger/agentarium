@@ -113,3 +113,12 @@ Ship Overview → Room View → Agent View
 - Double-clicking an agent opens Agent View, showing a character/profile interface where the agent's function, tools, permissions, and future behavior can be inspected and eventually modified.
 
 The current dashboard-like prototype should be treated as a state-contract proof, not the final UI direction. Future refinement should preserve its simulation/event/approval model while moving the interface toward a living pixel-art management game.
+
+
+## Self-building commissioning direction
+
+Kenn wants Agentarium to become a self-building application. On first startup, a small animated Builder Agent should interview the installer using in-world chat bubbles. The interview covers theme/world choices, agent purpose/provider/model/tool/permission choices, business/Forge workflows, and the remaining governance/installation questions.
+
+The system then shows a reviewable blueprint. After approval, bounded background builder agents visibly create/select the ship and room art, build declarative agent/workflow manifests, validate safety boundaries, and assemble the configured application. The completed ship is then presented to the owner.
+
+This is configuration-driven commissioning, not uncontrolled self-modifying code. Bundled concept art must support a fully local/offline setup; real paid generation, credentials, and external integrations remain separately approval-gated. Art backgrounds come first, then hotspots, sprites, and animation.

@@ -126,6 +126,47 @@ The console should show:
 - retry/escalation rules
 - feedback/iteration history
 
+### 4.5 Self-building commissioning experience
+
+Agentarium should install as a generic core runtime and **commission itself into the owner's ship** on first startup.
+
+The first-run experience is part of the world, not a normal setup wizard:
+
+```text
+Install
+  → animated Builder Agent appears in an unfinished construction bay
+  → conversational interview
+  → inspectable ship/agent/business blueprint
+  → explicit build approval
+  → bounded builder agents visibly assemble art, rooms, agents, and workflows
+  → QA and final review
+  → completed ship is presented to the owner
+```
+
+Interview areas:
+
+1. **Theme/world** — ship name, pixel-art style, palette, mood, rooms, geography, accessibility, and bundled-vs-generated art.
+2. **Agents** — name, purpose, room, provider, model/fallback, tools, permissions, memory, autonomy level, subagents, budget, and success measures.
+3. **Businesses/Forges** — customer, sellable output, inputs/outputs, production and QA agents, external integration intent, approvals, metrics, and risks.
+4. **Operations/governance** — storage, backup, privacy, audit/replay, deployment intent, notification channels, spend limits, credential handling, retries, and approval policy.
+
+Self-building means **configuration and asset generation**, not uncontrolled source-code self-modification. Builder agents create versioned manifests, room topology, hotspot maps, art backgrounds, agent definitions, workflows, and local project state. Real credentials, paid generation, external writes, deployment, and spending remain approval-gated.
+
+The construction animation must be truthful: every visible builder corresponds to an inspectable build job. The system must resume after refresh/failure and avoid rerunning completed jobs.
+
+Art is built before animation:
+
+```text
+whole-ship cross-section background
+  + normalized room hotspots
+  + per-room background plates
+  + agent sprite anchors
+  + state overlays
+  + later animation/effects
+```
+
+The bundled concept art provides an offline commissioning path; users can later regenerate or replace individual rooms without rebuilding the entire ship.
+
 ### 5. Event log and replay
 
 Every visible action should have an underlying event.

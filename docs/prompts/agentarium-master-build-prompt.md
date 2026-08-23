@@ -1,8 +1,8 @@
-# Agentarium — Master Build Prompt (Phase 1 Prototype)
+# Agentarium — Master Build Prompt (Approved Prototype + Commissioning Direction)
 
-> Status: draft for Kenn review. This is a build instruction, not permission to begin implementation.
+> Status: approved by Kenn for local implementation. The image-first art pipeline and self-building first-run commissioning direction were added by Kenn after the first prototype review.
 >
-> **Hard gate:** Do not create, modify, install, run, deploy, publish, connect, or configure any application code from this prompt until Kenn explicitly approves this exact prompt. If approval is absent, reply only with a concise confirmation that the prompt was received and is awaiting Kenn’s approval.
+> **Remaining hard gate:** Local simulation, onboarding, bundled-art assembly, and reversible configuration work are approved. Real credentials, paid model/image calls, external integrations, publishing, spending, deployment, and irreversible actions still require explicit scoped approval.
 
 ## Copy from here into the selected builder after approval
 
@@ -1081,6 +1081,344 @@ src/
 
 Do not create all components merely to satisfy the directory sketch. Keep units focused and avoid duplicated business rules.
 
+# 12.5 Self-building first-run commissioning system
+
+Agentarium should become a **self-building application** in a controlled, configuration-driven sense. On first startup it interviews the installer, produces a reviewable ship blueprint, spawns bounded builder jobs, assembles art and agent manifests, and then presents the commissioned application.
+
+Do **not** implement uncontrolled self-modifying source code. The builder may generate configuration, manifests, art assets, room topology, hotspot maps, agent definitions, workflow definitions, and local project data. It must not silently rewrite the core runtime, install arbitrary packages, fetch skills, expose secrets, spend money, or call external services without a visible approval step.
+
+## 12.5.1 First-run detection and resumability
+
+Persist a versioned local commissioning record. On launch:
+
+```text
+no commissioning record -> show First-Run Commissioning
+incomplete record        -> offer Resume, Restart, or Inspect Draft
+complete record          -> load the commissioned ship
+schema version mismatch  -> run a reversible migration or show a clear recovery path
+```
+
+The flow must be resumable after refresh/crash. Answers should save after each completed section. Restart must require confirmation and must preserve an exportable backup of the previous draft.
+
+Suggested contract:
+
+```ts
+type CommissioningStatus =
+  | 'not_started'
+  | 'interviewing'
+  | 'awaiting_blueprint_approval'
+  | 'building'
+  | 'awaiting_final_review'
+  | 'complete'
+  | 'failed'
+
+interface CommissioningSpec {
+  schemaVersion: number
+  status: CommissioningStatus
+  owner: OwnerAnswers
+  theme: ThemeAnswers
+  agents: AgentDefinition[]
+  businesses: BusinessDefinition[]
+  rooms: RoomProfile[]
+  governance: GovernanceAnswers
+  integrations: IntegrationIntent[]
+  buildPlan: BuildPlan | null
+  buildJobs: BuildJob[]
+  generatedAssets: GeneratedAsset[]
+  createdAt: string
+  updatedAt: string
+}
+```
+
+## 12.5.2 Animated installer guide
+
+The first screen should not be a conventional setup wizard card. A small animated pixel-art **Builder Agent** appears inside an unfinished/dim ship construction bay. Use a functional internal name such as `CommissioningGuide`; the displayed character name may be selected later.
+
+Behavior:
+
+- The agent enters the scene, notices the installer, and opens a chat bubble over its head.
+- Questions appear conversationally, one decision-sized prompt at a time.
+- A compact transcript/history remains available so the installer can revise earlier answers.
+- Keyboard, mouse, and touch controls all work.
+- `prefers-reduced-motion` replaces entrance/build animations with immediate state changes.
+- The guide explains why sensitive questions are needed and never asks the installer to paste raw secrets into an ordinary chat bubble.
+- Provider credentials, if enabled in a future live mode, use dedicated masked credential fields and secure storage adapters; they are never written into generated prompts, logs, screenshots, or repo files.
+
+The guide is warm, competent, and lightly personable. It must not be childish, obsequious, or verbose.
+
+## 12.5.3 Interview sequence
+
+The interview is adaptive, but it must cover these sections and produce structured answers.
+
+### Q1 — Theme and world questions
+
+Ask enough to define a coherent visual system:
+
+- ship/station name
+- overall metaphor: starship, orbital station, carrier, exploratory vessel, or custom
+- pixel-art era/default fidelity (`SNES-inspired 16-bit` is the recommended default)
+- palette and mood
+- hull silhouette and ship geography preference
+- desired rooms and any custom rooms
+- whether the installer prefers cozy, industrial, military-clean, scientific, whimsical, or mixed interiors
+- avatar style and whether the owner avatar usually appears on The Bridge
+- motion level, sound preference, accessibility needs, contrast, color-blind support, and reduced-motion preference
+- whether to use bundled Agentarium art, generate new art, or start bundled and regenerate room-by-room later
+
+Do not ask for dozens of low-value cosmetic choices up front. Offer strong defaults and allow later editing.
+
+### Q2 — Agent questions
+
+For each agent ask or infer, then confirm:
+
+- name and visual identity
+- purpose and responsibilities
+- primary room
+- provider
+- preferred model and optional fallback model
+- tools/capabilities
+- permissions and prohibited actions
+- memory scope
+- autonomy level: simulated, supervised, trusted, or bounded autonomous
+- approval triggers
+- expected inputs and outputs
+- subagents, if any
+- idle behavior and whether the agent may visit Ten Forward
+- cost/budget constraints
+- success measures
+
+Always include an owner/steward relationship. Ultron is the default Bridge steward, but the installer may rename the character without changing the steward role contract.
+
+### Q3 — Business and Forge questions
+
+For every proposed business ask:
+
+- business purpose and customer
+- whether it produces a sellable product/service (therefore a Forge) or only communicates/supports
+- inputs, outputs, and delivery destination
+- production agents and QA/review agents
+- research/evidence source intent
+- approval points
+- external integrations desired later
+- revenue/cost metrics the user wants to see
+- compliance, IP, privacy, safety, and brand risks
+- current maturity: idea, simulated, supervised, trusted, or live
+
+Never infer that a Communications Room is a Forge. A Forge manufactures a sellable output or revenue-producing service; Communications routes messages/signals.
+
+### Q4 — Operations, governance, and installation questions
+
+Ask the remaining questions needed to build safely:
+
+- local-only, LAN, or future hosted deployment intent
+- single owner or future multi-user intent
+- data sensitivity and retention
+- local storage/backup/export preferences
+- audit/replay requirements
+- approval policy for external actions
+- budget/spend limits
+- credential-storage preference (without requesting credentials in chat)
+- desired integrations and whether each is mock, read-only, or future write-capable
+- notification channels
+- failure/retry behavior
+- maintenance window and update policy
+- telemetry/privacy choice
+- whether generated art and agent configurations require review individually or as a batch
+
+At the end, show an **Assumptions and Open Questions** page. Do not hide inferred defaults.
+
+## 12.5.4 Blueprint approval before building
+
+The interview output must become an inspectable `BuildPlan` before any background builder starts. Show:
+
+- ship name, theme, palette, and cross-section topology
+- room list with `Room Name`, `Type`, `Description`, and `Level`
+- spatial adjacency map
+- agent roster with provider/model intent and permission boundaries
+- Forge/business definitions
+- workflow routes and approval gates
+- art asset list
+- estimated external calls/cost if live generation is enabled
+- assumptions, unresolved questions, warnings, and non-goals
+
+Controls:
+
+```text
+Revise answers
+Approve local/simulated build
+Approve selected paid generation jobs (future live mode only)
+Export commissioning spec
+Cancel safely
+```
+
+No builder job may move from `planned` to `running` until the relevant scope is approved.
+
+## 12.5.5 Builder animation and truthful progress
+
+After approval, transition to a ship-construction presentation. Show the guide agent at a console while small background builder agents spawn for bounded jobs.
+
+Example builder roles:
+
+- `TopologyBuilder` — creates ship geography and hotspot map
+- `ArtDirector` — enforces the shared visual style
+- `ShipArtist` — generates/selects the whole-ship cross-section background
+- `RoomArtist` — generates/selects each room background
+- `AgentArchitect` — writes agent manifests
+- `WorkflowArchitect` — writes routes, approvals, and Forge workflows
+- `SafetyInspector` — verifies permissions and external-action gates
+- `AssemblyAgent` — assembles the commissioned configuration
+- `QAAgent` — verifies asset coverage, navigation, and schema validity
+
+The builder animation can combine pixel-art construction activity with an optional ASCII build console. It must be truthful: every visible worker maps to a real `BuildJob`; progress reflects completed steps, not a fake timer.
+
+Example ASCII mode:
+
+```text
+        .-=================-.
+       /   AGENTARIUM OS     \
+      |  COMMISSIONING SHIP  |
+       \_____.--------._____/
+             | BUILD |
+
+[01/08] TopologyBuilder   COMPLETE
+[02/08] ArtDirector      COMPLETE
+[03/08] ShipArtist       RUNNING
+[04/08] RoomArtists      7/22
+[05/08] AgentArchitect   QUEUED
+[06/08] WorkflowBuilder  QUEUED
+[07/08] SafetyInspector  QUEUED
+[08/08] Assembly + QA    QUEUED
+```
+
+The user may pause, inspect, retry a failed job, replace one generated asset, or cancel. Completed successful jobs must not rerun unnecessarily.
+
+## 12.5.6 Art-generation pipeline
+
+Art generation is a first-class commissioning phase, not an afterthought.
+
+Repository sources of truth:
+
+- `docs/art/IMAGE_PROMPTS.md` — human-readable detailed prompts
+- `docs/art/image-prompt-manifest.json` — machine-readable prompt/asset manifest
+- `docs/art/CONCEPT_ART_ASSET_INDEX.md` — generated asset index
+- `assets/concept-art/ship/ship-overview-cross-section.png` — bundled whole-ship background
+- `assets/concept-art/rooms/*.png` — bundled room background plates
+
+Generation order:
+
+1. Build the room roster and adjacency/topology graph.
+2. Create a shared art-direction/style bible from the theme answers.
+3. Generate or select the geographically coherent whole-ship cross-section first.
+4. Generate/select room backgrounds using the same palette, pixel scale, lighting language, hull materials, camera language, and room geography.
+5. Validate that every room ID has exactly one background plate or an explicit placeholder.
+6. Create normalized transparent hotspot polygons over the whole-ship image.
+7. Create room-local sprite anchor points and interaction zones.
+8. Present a contact sheet/gallery for review.
+9. Allow per-room regenerate, replace, approve, or defer.
+10. Save provenance for every generated/imported asset.
+
+The whole-ship image is the navigational map. The room images are the Room View backgrounds. Generated labels inside images are never authoritative; real room names and controls must be accessible DOM/UI overlays.
+
+Suggested asset contract:
+
+```ts
+interface GeneratedAsset {
+  id: string
+  kind: 'ship_background' | 'room_background' | 'agent_sprite' | 'effect_layer'
+  ownerId?: string
+  source: 'bundled' | 'generated' | 'uploaded' | 'placeholder'
+  promptId?: string
+  provider?: string
+  model?: string
+  seed?: string
+  path: string
+  width: number
+  height: number
+  status: 'planned' | 'running' | 'needs_review' | 'approved' | 'rejected' | 'failed'
+  createdAt: string
+  approvalEventId?: string
+}
+
+interface Hotspot {
+  id: string
+  targetType: 'room' | 'agent' | 'tool'
+  targetId: string
+  polygon: Array<{ x: number; y: number }> // normalized 0..1
+  label: string
+  enabled: boolean
+}
+```
+
+For the approved local prototype, the builder must work without external image generation by using the bundled concept-art assets. A future live image provider is optional and adapter-based. Before any paid/remote generation, show provider/model, image count, estimated cost if available, output destination, and an explicit approval action.
+
+Art consistency checks:
+
+- same ship/hull language across rooms
+- coherent pixel-art era and palette
+- no franchise logos or copied visual identity
+- no unreadable generated text used as UI
+- room purpose visually legible
+- critical controls not baked only into raster art
+- sufficient quiet space for sprites and overlays
+- usable crop at desktop and narrow viewport
+- room geography matches the ship overview well enough for navigation continuity
+
+## 12.5.7 Agent and workflow generation
+
+`AgentArchitect` produces declarative manifests, not executable arbitrary code. Each generated agent must have:
+
+- stable ID, name, role, room, level, and visual asset reference
+- provider/model intent (or `unconfigured`)
+- allowed tools and denied actions
+- memory scope
+- autonomy/maturity level
+- inputs, outputs, and handoff targets
+- approval triggers
+- budget/cost policy
+- fallback/error behavior
+
+The builder may generate simulation adapters and mock packets. It may not activate real providers, tools, skills, credentials, or external writes merely because the interview named them.
+
+## 12.5.8 Final assembly and presentation
+
+When all required jobs pass QA:
+
+1. Fade from the construction bay to the completed whole-ship cross-section.
+2. Bring the guide agent onto The Bridge.
+3. Present a concise commissioning report: rooms built, agents configured, bundled/generated assets, simulated vs connected capabilities, unresolved items, and safety gates.
+4. Offer a guided first tour: Bridge → one room → one agent → Archives → approval gate.
+5. Mark commissioning `complete` only after the final application loads and navigation smoke checks pass.
+6. Preserve a `Recommission` control in Settings for later theme/room/agent changes without erasing history.
+
+## 12.5.9 Failure and recovery behavior
+
+- One failed room image must not destroy the whole build; use a clear placeholder and allow retry.
+- A failed provider call must preserve answers and completed assets.
+- The same build job must be idempotent or use a unique attempt ID.
+- Cancellation stops queued work and lets an in-flight safe job finish or abort cleanly.
+- A build log records job input summary, result, error, attempt count, and timestamps without secrets.
+- The user can export/import the versioned `CommissioningSpec`.
+- Recommissioning creates a draft revision and does not replace the current working ship until approved.
+
+## 12.5.10 Commissioning acceptance criteria
+
+The self-building flow is complete only if all are true:
+
+1. A fresh install launches the animated commissioning guide instead of an empty dashboard.
+2. Theme, agent, business/Forge, and governance questions produce a valid versioned `CommissioningSpec`.
+3. The installer can revise answers before build approval.
+4. Background builder characters correspond one-to-one with inspectable `BuildJob` records.
+5. The local/offline path assembles a ship using bundled art without any external call.
+6. The art pipeline covers one ship background and every selected room background.
+7. Whole-ship hotspots open the correct room views.
+8. Generated agent manifests preserve provider/model intent without claiming credentials are configured.
+9. Refresh/crash resumes the commissioning flow without losing completed answers/jobs.
+10. The build can pause, cancel, retry failed jobs, and replace one room asset without rebuilding everything.
+11. Final QA runs before status changes to `complete`.
+12. The completed ship is presented with a clear report of simulated, configured, and still-unconfigured capabilities.
+13. No secret appears in chat history, prompts, logs, generated files, or screenshots.
+14. Paid/remote generation and external integrations remain explicitly approval-gated.
+
 # 13. Acceptance criteria and verification
 
 Do not claim completion until all verification steps below have actually been run against the built artifact.
@@ -1109,6 +1447,9 @@ The prototype is complete only if all are true:
 18. The application labels mock/simulated content honestly and does not contain fake live revenue/orders/publishing claims.
 19. Primary controls work with keyboard navigation; `prefers-reduced-motion` remains legible.
 20. Layout is verified at desktop and narrow viewport widths with no inaccessible primary control or horizontal overflow.
+21. A fresh-install state opens the commissioning guide and can complete the offline/bundled-art commissioning path.
+22. The resulting ship uses the whole-ship background plus clickable room hotspots and room-specific image backgrounds.
+23. Commissioning answers, build jobs, and final asset/agent manifests are inspectable and resumable.
 
 ## 13.2 Minimum automated tests
 
@@ -1122,6 +1463,10 @@ Add focused tests around state/simulation logic. At minimum prove:
 6. Replay does not change event count or append duplicate events.
 7. Reset returns to the deterministic baseline.
 8. Every seeded station and agent uses valid enum/status values.
+9. Commissioning interview answers validate into a versioned `CommissioningSpec`.
+10. Builder jobs resume idempotently and do not duplicate approved assets.
+11. Every selected room has a background asset or explicit placeholder and a valid hotspot target.
+12. Offline commissioning performs zero external provider calls.
 
 If the selected stack has a standard test runner, use it. Also run the project build/type-check/lint command appropriate to the chosen stack.
 
@@ -1142,6 +1487,10 @@ Include a short documented manual smoke procedure:
 10. Reset, run again, deny approval, and verify the quest does not complete.
 11. Enter replay; step through all events; exit replay and confirm current state remains intact.
 12. Repeat at narrow width and with reduced motion enabled.
+13. Clear commissioning state; reload and verify the animated guide appears.
+14. Complete the interview using bundled art, approve the build plan, and verify each visible builder maps to a real build job.
+15. Refresh mid-build; resume without losing answers or rerunning completed jobs.
+16. Finish assembly; verify the ship opens, a room hotspot opens its matching room image, and the commissioning report is accurate.
 ```
 
 ## 13.4 Completion report
@@ -1158,7 +1507,7 @@ Never report a feature as working based solely on reading the code. Verify the r
 
 # 14. Definition of done
 
-Phase 1 is done when Agentarium is a polished, honest, local, full-viewport operational simulation where Kenn can articulate a vision, inspect a deterministic plan, watch the Ultron → Nova → Etsy Forge → Pixel → Governance workflow, make the human approval decision, inspect the audit trail, and replay what happened.
+Phase 1 is done when Agentarium is a polished, honest, local, full-viewport operational simulation that can commission itself from a first-run interview: collect a versioned configuration, show an approved build plan, assemble bundled ship/room art and declarative agent/workflow manifests through inspectable builder jobs, present the completed ship, and then let Kenn articulate a vision, inspect a deterministic plan, watch the Ultron → Nova → Etsy Forge → Pixel → Governance workflow, make the human approval decision, inspect the audit trail, and replay what happened.
 
 The visual world, state model, event log, and inspectors must agree. The prototype should make the future direction feel real without pretending that live agents, marketplace accounts, publishing, money, credentials, or autonomous external actions already exist.
 
@@ -1175,6 +1524,8 @@ Do not begin Phase 2 integrations unless Kenn explicitly asks for them after rev
 - [ ] Forge/Pixel/Cipher/Governance behavior is concrete and inspectable.
 - [ ] Data, event, state, approval, replay, and lab-maturity contracts are clear enough to implement.
 - [ ] Verification covers simulation flow, approval/denial, replay, responsiveness, and failure modes.
+- [ ] First-run commissioning covers theme, agents/providers/models, businesses/Forges, governance, art generation/selection, background builder jobs, resumability, and final presentation.
+- [ ] Art generation follows the prompt manifest and produces a whole-ship map plus one background plate per selected room before animation is layered on.
 - [ ] The builder can hand this to v0, OpenCode, Codex, or Claude after approval without needing unstated context.
 
 
