@@ -2,7 +2,7 @@
 
 > **For Hermes:** Use subagent-driven-development skill to implement this plan task-by-task.
 
-**Goal:** Turn the current Agentarium prototype into a resumable first-run commissioning experience that interviews the installer, builds an approved configuration from bundled art and declarative manifests, and presents the completed ship.
+**Goal:** Turn the current Agentarium prototype into a resumable first-run commissioning experience that interviews the installer, independently selects visual style and world template, builds an approved configuration from matching art/placeholders and declarative manifests, and presents the completed world.
 
 **Architecture:** Add a versioned commissioning domain beside the existing simulation domain. The builder is a deterministic state machine backed by Zustand persistence: interview → blueprint review → bounded build jobs → QA → final presentation. Phase 1 uses bundled concept art and local manifests; provider/model/image adapters remain declared but disconnected until separately approved.
 
@@ -68,21 +68,25 @@
 **Files:**
 - Create: `app/src/lib/commissioningQuestions.ts`
 - Create: `app/src/lib/worldTemplates.ts`
+- Create: `app/src/lib/visualStyles.ts`
+- Create: `app/src/components/commissioning/VisualStyleChooser.tsx`
 - Create: `app/src/components/commissioning/WorldTemplateChooser.tsx`
 - Create: `app/src/components/commissioning/InterviewFlow.tsx`
 - Create: `app/src/components/commissioning/AnswerEditor.tsx`
 - Test: `app/src/lib/commissioningQuestions.test.ts`
 
 **Steps:**
-1. Write tests for the nine required world templates, Custom Theme handling, required interview sections, and Forge classification.
-2. Encode `Space Station`, `Spaceship`, `Cruise Ship`, `Underground Bunker`, `Skyscraper`, `Resort`, `Sky Ship`, `Battleship`, and `Custom Theme` as typed templates with topology, movement, terminology, material, exterior, and art-direction defaults.
-3. Build an accessible illustrated template-card chooser; selecting a card shows a topology/terminology preview before confirmation.
-4. Ensure `Custom Theme` collects setting, world context, layout logic, command area, movement system, materials, mood, and landmarks, then asks the user to confirm the interpretation.
-5. Ask pixel-art style, palette, rooms, and accessibility only after the world template is confirmed.
-6. Encode strong defaults with conditional follow-ups.
-7. Add dedicated masked credential-intent controls that never store raw secrets.
-8. Add back/edit and assumptions/open-questions review.
-9. Verify and commit: `feat: add commissioning interview`.
+1. Write tests for six visual styles, Pixel Art enable/disable behavior, nine world templates, Custom Theme handling, required interview sections, and Forge classification.
+2. Encode `Pixel Art`, `Illustrated 2D`, `Isometric 3D`, `Cinematic/Realistic`, `Clean Vector/Graphic`, and `Custom Visual Style` independently from world templates.
+3. Make visual presentation the first interview decision. Pixel Art must be selectable for every template; when selected, ask 8-bit, 16-bit, modern high-detail, or custom fidelity.
+4. Verify switching visual style preserves topology, rooms, agents, businesses, workflows, memory, and approvals while scheduling only the affected visual assets for replacement.
+5. Encode `Space Station`, `Spaceship`, `Cruise Ship`, `Underground Bunker`, `Skyscraper`, `Resort`, `Sky Ship`, `Battleship`, and `Custom Theme` as typed templates with topology, movement, terminology, material, exterior, and world defaults.
+6. Build accessible illustrated style cards followed by the template-card chooser; selecting a template shows a topology/terminology preview before confirmation.
+7. Ensure `Custom Theme` collects setting, world context, layout logic, command area, movement system, materials, mood, and landmarks, then asks the user to confirm the interpretation.
+8. Ask palette, rooms, and accessibility after style and world template are confirmed.
+9. Add dedicated masked credential-intent controls that never store raw secrets.
+10. Add back/edit and assumptions/open-questions review.
+11. Verify and commit: `feat: add commissioning interview`.
 
 ### Task 5: Generate and approve a build blueprint
 

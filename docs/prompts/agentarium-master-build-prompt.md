@@ -19,7 +19,7 @@ If a requirement is unclear, preserve safety and make the smallest reversible si
 
 ## 0.2 Build objective
 
-Build a serious, local, browser-runnable **Phase 1 prototype/simulation** for **Agentarium**: a spatial AI operations canvas represented as a pixel-art-inspired space station of connected labs.
+Build a serious, local, browser-runnable **Phase 1 prototype/simulation** for **Agentarium**: a spatial AI operations canvas represented as a themed world of connected rooms/labs. The bundled starter world is a pixel-art-inspired spaceship, but commissioned worlds must support Pixel Art as an optional visual style rather than a universal requirement.
 
 The prototype must make a simulated multi-agent workflow legible from start to finish. Rooms are first-class ship entities with profiles, levels, and inspectable responsibilities:
 
@@ -39,7 +39,7 @@ This is a simulation and control-surface prototype. It is not a live agent platf
 
 Product name: **Agentarium**.
 
-Use a warm, legible, pixel-art-inspired sci-fi space station / operations canvas. It should feel like a management game crossed with a mission-control console: alive, practical, inspectable, and calm under pressure.
+Use a warm, legible operations canvas that feels like a management game crossed with a mission-control console: alive, practical, inspectable, and calm under pressure. The bundled starter uses pixel-art sci-fi, while commissioned worlds use the installer-selected visual style and world template.
 
 Use the useful architectural lessons from public AI-agent-space-station references:
 - visible connected labs
@@ -399,10 +399,12 @@ Governance checks acceptance criteria and risk. It should reject or request revi
 
 ## 5.1 Style
 
-Use a pixel-art-informed visual system without requiring literal low-resolution raster art everywhere:
+For the bundled starter, use a pixel-art-informed sci-fi visual system without requiring literal low-resolution raster art everywhere:
 - deep space/navy background with warm amber, cyan, violet, and green operational lights
 - clear room silhouettes/modules, short readable labels, controlled glow
 - sprites, tile details, or stylized isometric geometry if practical
+
+For commissioned worlds, use the chosen `VisualStyleAnswers`. Pixel Art is one supported option, not the permanent renderer. Components, navigation, inspectors, hotspots, event bindings, and room/agent contracts must remain usable across Pixel Art, Illustrated 2D, Isometric 3D, Cinematic/Realistic, Clean Vector/Graphic, and Custom styles.
 - motion that communicates routing, queueing, waiting, success, failure, or blocked state
 - high-contrast accessible text and status indicators
 - a calm command-center feel, not a casino and not a sterile SaaS admin screen
@@ -1116,7 +1118,8 @@ interface CommissioningSpec {
   schemaVersion: number
   status: CommissioningStatus
   owner: OwnerAnswers
-  theme: ThemeAnswers
+  presentation: VisualStyleAnswers
+  theme: WorldThemeAnswers
   agents: AgentDefinition[]
   businesses: BusinessDefinition[]
   rooms: RoomProfile[]
@@ -1132,7 +1135,7 @@ interface CommissioningSpec {
 
 ## 12.5.2 Animated installer guide
 
-The first screen should not be a conventional setup wizard card. A small animated pixel-art **Builder Agent** appears inside an unfinished/dim ship construction bay. Use a functional internal name such as `CommissioningGuide`; the displayed character name may be selected later.
+The first screen should not be a conventional setup wizard card. A small animated **Builder Agent** appears inside a neutral unfinished construction environment. Before a visual style is selected, use a clean style-neutral silhouette/guide presentation. After Q0, the guide and environment may preview/adopt the selected style. Use a functional internal name such as `CommissioningGuide`; the displayed character name may be selected later.
 
 Behavior:
 
@@ -1149,6 +1152,56 @@ The guide is warm, competent, and lightly personable. It must not be childish, o
 ## 12.5.3 Interview sequence
 
 The interview is adaptive, but it must cover these sections and produce structured answers.
+
+### Q0 — Visual presentation style
+
+Ask this at the very beginning of commissioning, before the world-template question:
+
+> **“How should your Agentarium look?”**
+
+**Pixel art must be optional and available for every world template.** It is a presentation choice, not a property of the Spaceship theme and not a requirement of Agentarium.
+
+Offer these starting choices as preview cards:
+
+1. **Pixel Art** — retro game presentation. If selected, ask for an era/fidelity such as 8-bit, 16-bit/SNES-inspired, high-detail modern pixel art, or custom. The bundled Agentarium spaceship art uses high-detail 16-bit/SNES-inspired pixel art.
+2. **Illustrated 2D** — polished hand-drawn/digital illustration with layered backgrounds and animated overlays.
+3. **Isometric 3D** — rendered miniature/diorama spaces with 3D characters and camera movement.
+4. **Cinematic / Realistic** — detailed concept-art or realistic environments with restrained interface overlays.
+5. **Clean Vector / Graphic** — crisp shapes, diagrams, strong silhouettes, and lightweight animation.
+6. **Custom Visual Style** — installer describes an original art direction or supplies reference images.
+
+For every choice, show the same small sample scene or topology in each visual style so the installer is choosing an art treatment rather than accidentally changing the world architecture.
+
+The installer can also toggle **Pixel Treatment** on or off later in the style editor. Turning it on applies pixel-grid, palette, sprite, and animation conventions to the currently selected world template. Turning it off preserves the world topology and operational configuration and asks the installer to select the replacement presentation style. Changing presentation style must not recreate agents, businesses, rooms, memory, workflows, or approvals.
+
+Suggested contract:
+
+```ts
+type VisualStyleId =
+  | 'pixel_art'
+  | 'illustrated_2d'
+  | 'isometric_3d'
+  | 'cinematic_realistic'
+  | 'clean_vector'
+  | 'custom'
+
+interface VisualStyleAnswers {
+  styleId: VisualStyleId
+  pixelArtEnabled: boolean
+  pixelEra?: '8_bit' | '16_bit' | 'modern_high_detail' | 'custom'
+  customStyleDescription?: string
+  referenceAssetIds: string[]
+  palette: string[]
+  mood: string[]
+  animationLevel: 'none' | 'subtle' | 'active'
+  soundEnabled: boolean
+  reducedMotion: boolean
+  highContrast: boolean
+  colorBlindMode?: string
+}
+```
+
+The selected visual style drives the shared style bible, whole-world image prompt, room-image prompts, agent rendering method, animation language, camera treatment, and asset QA. It does **not** alter room IDs, topology, Forge classification, agent responsibilities, or operational contracts.
 
 ### Q1 — Theme and world questions
 
@@ -1184,16 +1237,13 @@ After the installer chooses a template:
 2. Let the installer accept it, adjust it, or return to the template gallery.
 3. If `Custom Theme` is selected, ask for the setting, exterior/world context, layout logic, central command area, movement system, materials, mood, and any must-have landmarks. Summarize the interpretation for confirmation before proceeding.
 4. Ask for the world/vessel/property name.
-5. Then ask the remaining visual questions:
-   - pixel-art era/default fidelity (`SNES-inspired 16-bit` is the recommended default)
-   - palette and mood
+5. Then ask the remaining world-specific questions. Do not ask for pixel-art fidelity here; that belongs to Q0 and applies equally to every template:
    - desired rooms and any custom rooms
    - whether the installer prefers cozy, industrial, military-clean, scientific, whimsical, luxurious, natural, or mixed interiors
    - avatar style and the owner's usual command-room location
-   - motion level, sound preference, accessibility needs, contrast, color-blind support, and reduced-motion preference
    - whether to use bundled art, generate new art, or start with placeholders and regenerate room-by-room later
 
-The bundled art is the **Spaceship** starter set. Other templates must not silently reuse spaceship art as if it matched. If remote image generation is not configured/approved, use clearly labelled local placeholder scenes and retain the complete generated prompts for later rendering.
+The bundled art is the **Spaceship + Pixel Art** starter set. Other world/style combinations must not silently reuse that art as if it matched. If remote image generation is not configured/approved, use clearly labelled local placeholder scenes and retain the complete generated prompts for later rendering.
 
 Suggested contract:
 
@@ -1216,9 +1266,6 @@ interface WorldThemeAnswers {
   commandRoomDisplayName: string
   movementMetaphor: 'corridors' | 'decks' | 'elevators' | 'tunnels' | 'paths' | 'custom'
   layoutPreference: string
-  pixelEra: string
-  palette: string[]
-  mood: string[]
   roomIds: string[]
   artSource: 'bundled' | 'generate' | 'placeholders_then_generate'
   accessibility: {
@@ -1233,13 +1280,10 @@ Ask enough to define a coherent visual system, but do not make the user design a
 
 - world/vessel/property name
 - selected world template and confirmed topology
-- pixel-art era/default fidelity (`SNES-inspired 16-bit` is the recommended default)
-- palette and mood
 - silhouette/geography preference appropriate to the selected template
 - desired rooms and any custom rooms
 - whether the installer prefers cozy, industrial, military-clean, scientific, whimsical, luxurious, natural, or mixed interiors
 - avatar style and where the owner usually appears in the selected template's command area
-- motion level, sound preference, accessibility needs, contrast, color-blind support, and reduced-motion preference
 - whether to use matching bundled art when available, generate new art, or use labelled placeholders and regenerate room-by-room later
 
 Do not ask for dozens of low-value cosmetic choices up front. Offer strong defaults and allow later editing.
@@ -1384,9 +1428,9 @@ Repository sources of truth:
 Generation order:
 
 1. Build the room roster and adjacency/topology graph.
-2. Create a shared art-direction/style bible from the theme answers.
+2. Create a shared art-direction/style bible from the independent visual-presentation answers plus the selected world template.
 3. Generate or select the geographically coherent whole-ship cross-section first.
-4. Generate/select room backgrounds using the same palette, pixel scale, lighting language, hull materials, camera language, and room geography.
+4. Generate/select room backgrounds using the same palette, lighting language, materials, camera language, room geography, and style-specific rules. Enforce pixel scale and sprite conventions only when Pixel Art is enabled.
 5. Validate that every room ID has exactly one background plate or an explicit placeholder.
 6. Create normalized transparent hotspot polygons over the whole-ship image.
 7. Create room-local sprite anchor points and interaction zones.
@@ -1431,7 +1475,9 @@ For the approved local prototype, the builder must work without external image g
 Art consistency checks:
 
 - same ship/hull language across rooms
-- coherent pixel-art era and palette
+- coherent selected visual style and palette across the whole world and rooms
+- when Pixel Art is enabled: coherent pixel era, grid/block scale, palette limits, sprite treatment, and nearest-neighbor rendering
+- when Pixel Art is disabled: no accidental pixelation, pixel-font requirement, or pixel-only animation assumption
 - no franchise logos or copied visual identity
 - no unreadable generated text used as UI
 - room purpose visually legible
@@ -1483,19 +1529,21 @@ The self-building flow is complete only if all are true:
 
 1. A fresh install launches the animated commissioning guide instead of an empty dashboard.
 2. Theme, world-template, agent, business/Forge, and governance questions produce a valid versioned `CommissioningSpec`.
-3. The world-template chooser includes Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, and Custom Theme; the selected template changes topology, terminology, movement, and art prompts rather than acting as a color skin.
-4. The installer can revise answers before build approval.
-5. Background builder characters correspond one-to-one with inspectable `BuildJob` records.
-6. The local/offline Spaceship path assembles a ship using bundled art without any external call; other unrendered templates use honest placeholders rather than mismatched spaceship art.
-7. The art pipeline covers one whole-world background and every selected room background.
-8. Whole-world hotspots open the correct room views.
-9. Generated agent manifests preserve provider/model intent without claiming credentials are configured.
-10. Refresh/crash resumes the commissioning flow without losing completed answers/jobs.
-11. The build can pause, cancel, retry failed jobs, and replace one room asset without rebuilding everything.
-12. Final QA runs before status changes to `complete`.
-13. The completed world is presented with a clear report of simulated, configured, and still-unconfigured capabilities.
-14. No secret appears in chat history, prompts, logs, generated files, or screenshots.
-15. Paid/remote generation and external integrations remain explicitly approval-gated.
+3. The first interview decision selects a visual presentation; Pixel Art is optional and works with every world template.
+4. The world-template chooser includes Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, and Custom Theme; the selected template changes topology, terminology, movement, and art prompts rather than acting as a color skin.
+5. Changing visual style preserves world topology, rooms, agents, businesses, workflows, memory, and approvals.
+6. The installer can revise answers before build approval.
+7. Background builder characters correspond one-to-one with inspectable `BuildJob` records.
+8. The local/offline Spaceship + Pixel Art path assembles a ship using bundled art without any external call; other unrendered world/style combinations use honest placeholders rather than mismatched art.
+9. The art pipeline covers one whole-world background and every selected room background.
+10. Whole-world hotspots open the correct room views.
+11. Generated agent manifests preserve provider/model intent without claiming credentials are configured.
+12. Refresh/crash resumes the commissioning flow without losing completed answers/jobs.
+13. The build can pause, cancel, retry failed jobs, and replace one room asset without rebuilding everything.
+14. Final QA runs before status changes to `complete`.
+15. The completed world is presented with a clear report of simulated, configured, and still-unconfigured capabilities.
+16. No secret appears in chat history, prompts, logs, generated files, or screenshots.
+17. Paid/remote generation and external integrations remain explicitly approval-gated.
 
 # 13. Acceptance criteria and verification
 

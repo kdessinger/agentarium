@@ -28,7 +28,7 @@ Later targets:
 
 ### 1. Spatial operations canvas
 
-A full-viewport pixel-art / isometric ship overview showing connected AI labs, agents, task objects, pipeline routes, and current activity.
+A full-viewport themed world overview showing connected AI labs, agents, task objects, pipeline routes, and current activity. The bundled starter is a pixel-art/isometric spaceship, but visual style is commissioned independently from world type.
 
 The intended top-level experience is closer to a video-game management sim than a conventional dashboard. The generated concept image is the visual north star: a cutaway space station with distinct rooms, glowing connected corridors, tiny animated AI characters, consoles, machinery, screens, and room-specific activity.
 
@@ -42,7 +42,7 @@ Room View
 Agent View
 ```
 
-- **Ship Overview** shows the entire space station and all rooms at once. Rooms should read as pixel-art image/diorama modules, not plain graph nodes.
+- **World Overview** shows the entire selected world and all rooms/areas at once. In Pixel Art mode, rooms read as pixel-art image/diorama modules; other styles use their own coherent rendering language. No style should collapse back into plain graph nodes.
 - **Room View** zooms into one room, showing its profile, interior scene, agents/subagents, tools, queues, packets, and room-specific work state.
 - **Agent View** opens a character/profile view for one agent, including role, status, skills, permissions, current task, recent events, subagents where applicable, and future functionality controls.
 
@@ -145,10 +145,11 @@ Install
 
 Interview areas:
 
-1. **Theme/world** — begin with an illustrated world-template chooser: Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, or Custom Theme. The selection drives topology, movement, terminology, materials, exterior setting, and art prompts; then ask the world name, pixel-art style, palette, mood, rooms, accessibility, and bundled-vs-generated art.
-2. **Agents** — name, purpose, room, provider, model/fallback, tools, permissions, memory, autonomy level, subagents, budget, and success measures.
-3. **Businesses/Forges** — customer, sellable output, inputs/outputs, production and QA agents, external integration intent, approvals, metrics, and risks.
-4. **Operations/governance** — storage, backup, privacy, audit/replay, deployment intent, notification channels, spend limits, credential handling, retries, and approval policy.
+1. **Visual presentation** — ask first whether the user wants Pixel Art, Illustrated 2D, Isometric 3D, Cinematic/Realistic, Clean Vector/Graphic, or a Custom Visual Style. Pixel Art is optional and can be applied to every world template; it is not tied to Spaceship.
+2. **Theme/world** — then show the world-template chooser: Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, or Custom Theme. The selection drives topology, movement, terminology, materials, exterior setting, and art prompts; then ask the world name, rooms, and bundled-vs-generated art.
+3. **Agents** — name, purpose, room, provider, model/fallback, tools, permissions, memory, autonomy level, subagents, budget, and success measures.
+4. **Businesses/Forges** — customer, sellable output, inputs/outputs, production and QA agents, external integration intent, approvals, metrics, and risks.
+5. **Operations/governance** — storage, backup, privacy, audit/replay, deployment intent, notification channels, spend limits, credential handling, retries, and approval policy.
 
 Self-building means **configuration and asset generation**, not uncontrolled source-code self-modification. Builder agents create versioned manifests, room topology, hotspot maps, art backgrounds, agent definitions, workflows, and local project state. Real credentials, paid generation, external writes, deployment, and spending remain approval-gated.
 
@@ -394,7 +395,7 @@ The frontend can start with mock state, but should behave as if live events are 
 
 ## Design direction
 
-Visual tone: animated pixel-art sci-fi space-station cutaway. Not corporate dashboard sludge.
+Bundled visual tone: animated pixel-art sci-fi spaceship cutaway. Commissioned visual tone: the selected visual presentation applied coherently to the selected world template. Pixel Art is optional for every theme. Never fall back to corporate dashboard sludge.
 
 Primary visual reference:
 
