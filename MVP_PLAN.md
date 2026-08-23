@@ -2,9 +2,9 @@
 
 > **For Hermes:** Use subagent-driven-development skill to implement this plan task-by-task once Kenn chooses a stack or approves the default.
 
-**Goal:** Build a local browser prototype of a gamified AI-operations canvas where the primary experience is a pixel-art/isometric space-station game interface: Ship Overview → Room View → Agent View. The simulation should route one work order through visible handoffs and an approval gate, but the UI should feel like an animated living ship, not a flat dashboard.
+**Goal:** Build a local browser application where the primary experience is World Overview → Room View → Agent View. Standard mode starts clean and routes only configured real/user-entered work; optional isolated Demo mode can exercise one visible handoff/approval walkthrough. The UI should feel like a living world, not a flat dashboard.
 
-**Architecture:** Start frontend-only with mock data and an event-driven state model. Keep contracts shaped for a future backend. Add real agent execution only after the world model and task visibility work.
+**Architecture:** Use an event-driven state model with provenance and replaceable adapters. Standard mode starts empty and uses real/user-entered/derived data only; missing dependencies block honestly. Demo fixtures are optional, isolated, and loaded only when commissioning selects Demo mode.
 
 **Default Tech Stack:** Vite React + TypeScript + React Three Fiber + Zustand + CSS/Tailwind-style utility classes.
 
@@ -62,16 +62,20 @@ npm run dev
 
 - TypeScript compiles.
 
-### Task 1.3: Add mock world data
+### Task 1.3: Add installation mode, empty Standard state, and isolated Demo fixtures
 
-**Objective:** Seed the first world with three agents, one quest template, and empty event log.
+**Objective:** Initialize commissioned room/agent configuration with empty Standard operational collections; provide a separate deterministic Demo fixture set only for Demo mode.
 
 **Files:**
-- Create: `app/src/lib/mockWorld.ts`
+- Create: `app/src/lib/standardWorld.ts`
+- Create: `app/src/lib/demoFixtures.ts`
+- Create: `app/src/lib/adapterRegistry.ts`
 
 **Verification:**
 
-- Mock data imports cleanly.
+- Standard operational collections initialize empty.
+- Standard cannot resolve the Demo fixture adapter.
+- Demo records use `demo:*` IDs and `synthetic_demo` provenance.
 
 ## Phase 2 — World state and event engine
 
@@ -86,7 +90,7 @@ npm run dev
 
 - `createQuest`
 - `startQuest`
-- `advanceSimulation`
+- `advanceRun` (manual-step Demo or supervised workflows only)
 - `requestApproval`
 - `approveRequest`
 - `denyRequest`
@@ -96,9 +100,9 @@ npm run dev
 
 - Store unit/smoke test or dev page can call actions without errors.
 
-### Task 2.2: Implement deterministic quest simulation
+### Task 2.2: Implement workflow engine plus isolated deterministic Demo walkthrough
 
-**Objective:** Make one quest move through orchestrator → researcher → builder → reviewer → approval → complete.
+**Objective:** Make real configured workflows use the shared engine, and let Demo mode exercise orchestrator → researcher → builder → reviewer → approval → complete using only the isolated fixture adapter.
 
 **Files:**
 - Modify: `app/src/store/worldStore.ts`
@@ -196,7 +200,7 @@ The existing app may be refactored rather than thrown away, but the visual prior
 
 - Double-click navigation works with mouse.
 - Equivalent keyboard-accessible controls exist.
-- Returning from Agent View → Room View → Ship Overview preserves simulation state.
+- Returning from Agent View → Room View → World Overview preserves operational state.
 
 ### Task 3.4: Preserve operational truth under the game layer
 
@@ -206,8 +210,8 @@ The existing app may be refactored rather than thrown away, but the visual prior
 
 - Every visible animation maps to a station, agent, task, packet, approval, or event state.
 - Inspectors and audit timeline remain available as overlays.
-- Simulation-only boundaries remain visible.
-- No visual implies live external publishing, spending, messaging, or agent autonomy.
+- Standard/Demo mode and configured/unconfigured/action boundaries remain visible.
+- No visual implies an external publish, spend, message, or autonomous action occurred unless a configured adapter actually returned that result and the audit event records it.
 
 ## Phase 4 — Operational UI overlays
 
@@ -220,7 +224,7 @@ The existing app may be refactored rather than thrown away, but the visual prior
 
 **Verification:**
 
-- Start button begins simulation.
+- Start button begins a configured run, or the isolated walkthrough in Demo mode.
 - Quest status is visible.
 
 ### Task 4.2: Add agent inspector
@@ -243,7 +247,7 @@ The existing app may be refactored rather than thrown away, but the visual prior
 
 **Verification:**
 
-- Every simulation step creates a readable event.
+- Every workflow transition creates a readable event with provenance.
 
 ### Task 4.4: Add approval gate UI
 
@@ -282,7 +286,7 @@ The existing app may be refactored rather than thrown away, but the visual prior
 
 ### Task 5.3: Add smoke verification
 
-**Objective:** Add a minimal test or script proving the simulation reaches expected states.
+**Objective:** Prove Standard/Demo isolation, honest blocked states, and that the Demo walkthrough reaches expected states.
 
 **Verification:**
 
@@ -299,4 +303,4 @@ The existing app may be refactored rather than thrown away, but the visual prior
 - Human approval gate pauses the flow.
 - Approving completes the quest.
 - Event log proves what happened.
-- Mock data/contracts are easy to replace with real backend later.
+- Real adapters are replaceable, and Demo fixtures remain isolated from Standard operation.

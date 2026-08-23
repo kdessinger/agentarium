@@ -2,7 +2,7 @@
 
 > Status: approved by Kenn for local implementation. The image-first art pipeline and self-building first-run commissioning direction were added by Kenn after the first prototype review.
 >
-> **Remaining hard gate:** Local simulation, onboarding, bundled-art assembly, and reversible configuration work are approved. Real credentials, paid model/image calls, external integrations, publishing, spending, deployment, and irreversible actions still require explicit scoped approval.
+> **Remaining hard gate:** Local onboarding, bundled-art assembly, reversible configuration, and local application development are approved. Credentials, paid model/image calls, external integrations, publishing, spending, deployment, destructive actions, and expanded autonomy require the explicit commissioned setup/approval policy.
 
 ## Copy from here into the selected builder after approval
 
@@ -13,29 +13,28 @@ You are building Phase 1 of Agentarium. Treat this specification as a contract. 
 
 ## 0.1 Authority
 
-Kenn is the owner and final authority. The Steward proposes and routes. Agents execute only inside the simulation. The user approves or denies every gated decision.
+Kenn is the owner and final authority. The Steward proposes and routes. Configured agents may perform real work only within their granted tools, credentials, budgets, approval policy, and audit boundaries. The user approves or denies every gated decision.
 
-If a requirement is unclear, preserve safety and make the smallest reversible simulation choice. Surface the assumption in the app’s activity log or implementation notes; do not invent integrations, credentials, business results, revenue, marketplace data, or successful work.
+If a requirement is unclear, preserve safety and choose the smallest reversible action. Surface assumptions in the activity log or implementation notes. Never invent integrations, credentials, evidence, business results, revenue, marketplace data, messages, orders, or successful work.
 
 ## 0.2 Build objective
 
-Build a serious, local, browser-runnable **Phase 1 prototype/simulation** for **Agentarium**: a spatial AI operations canvas represented as a themed world of connected rooms/labs. The bundled starter world is a pixel-art-inspired spaceship, but commissioned worlds must support Pixel Art as an optional visual style rather than a universal requirement.
+Build a serious, browser-runnable **Agentarium application**: a self-commissioning spatial AI operations system represented as a themed world of connected rooms/labs. The bundled starter world is a pixel-art-inspired spaceship, but visual style and world theme are independently commissioned.
 
-The prototype must make a simulated multi-agent workflow legible from start to finish. Rooms are first-class ship entities with profiles, levels, and inspectable responsibilities:
+After commissioning, Standard mode operates only on configured real data and real agent/tool results:
 
-1. Kenn enters a human vision in the Articulation Console.
-2. The Steward turns that vision into an inspectable blueprint, task plan, handoff chain, risk classification, and proposed station/agent use.
-3. Kenn launches one deterministic simulation from that approved blueprint.
-4. Nova produces a realistic structured opportunity packet from mock market evidence.
-5. Forge turns that packet into a mock product/listing packet.
-6. Pixel produces a mock visual/media candidate packet.
-7. Review/Governance evaluates the candidate and pauses at a human approval gate.
-8. Kenn approves or denies the gate.
-9. The app records an immutable-looking audit trail and lets Kenn replay the sequence.
+1. The owner enters a vision in the Articulation Console.
+2. The Steward creates an inspectable blueprint, task plan, handoff chain, risk classification, and proposed room/agent use.
+3. The owner approves the plan and launches the permitted workflow.
+4. Agents use only configured providers, tools, data sources, and integrations.
+5. Missing configuration produces an honest `Unconfigured`, `Unavailable`, or `No data yet` state—not invented fallback content.
+6. Governance pauses at defined human approval gates.
+7. Every action, result, failure, and handoff leaves an inspectable event with provenance.
+8. The user can replay what actually happened.
 
-This is a simulation and control-surface prototype. It is not a live agent platform yet.
+Demo mode is optional and exists solely for evaluation, training, screenshots, and product tours. It may load synthetic fixtures only when the installer explicitly selects Demo mode during commissioning. Demo data must never appear in Standard mode.
 
-## 0.3 Product identity and tone
+# 0.3 Product identity and tone
 
 Product name: **Agentarium**.
 
@@ -58,20 +57,30 @@ Do **not** copy any creator’s persona, visual identity, naming, prose, hostile
 
 Agents are specialized collaborators in a supervised operating system. The human is responsible for vision, standards, permissions, and final decisions.
 
-## 0.4 Hard safety boundary
+## 0.4 Operating modes and hard data boundary
 
-Phase 1 is simulation-only. The current mode must be visible at all times as `SIMULATION — no external actions`.
+Agentarium supports two mutually exclusive installation modes:
 
-Do not implement or call:
-- live LLMs or agent runtimes
-- marketplace, Etsy, Printify, Fiverr, email, social-media, payment, analytics, or publishing APIs
-- credentials, secret storage, OAuth, authentication, billing, subscriptions, or marketplace accounts
-- file-system actions beyond ordinary local development/build behavior
-- network actions that publish or deliver content
-- autonomous loops, background agents, cron jobs, workers, or retries that run without the user pressing a visible simulation control
-- actual spending, ordering, listing, messaging, fulfillment, or customer delivery
+### Standard mode — default
 
-Every result in the UI must be visibly labelled `Mock`, `Simulated`, `Dry-run`, or `Example` where a user could otherwise mistake it for live work.
+- No mock, fake, sample, seeded, synthetic, or invented operational data is loaded.
+- Empty rooms show honest empty states.
+- Unconfigured agents/providers/models/integrations show `Unconfigured` and a setup action.
+- Configured read/write tools return their actual results and errors with provenance.
+- The system never fabricates a success so a workflow looks complete.
+- External, destructive, publishing, spending, credential, and public actions follow the commissioned approval policy and remain human-gated where required.
+- Standard mode must not import, query, merge, or display the Demo dataset.
+
+### Demo mode — explicit opt-in during commissioning
+
+- Uses a separate synthetic fixture namespace/storage partition.
+- Shows a persistent `DEMO MODE — synthetic data; no external actions` banner.
+- Every fixture/evidence/packet/event carries `dataClass: 'synthetic_demo'`.
+- Demo connectors are non-networked and cannot receive production credentials.
+- Leaving Demo mode requires confirmation and offers to purge all Demo records.
+- Demo records must never influence production memory, maturity, XP, reliability, budgets, analytics, training feedback, or agent decisions.
+
+There is no silent fallback from Standard mode to Demo mode. If a connector, provider, model, credential, or evidence source is absent or fails, block the dependent task and show the actual missing prerequisite/error.
 
 # 1. Implementation target and technical constraints
 
@@ -87,7 +96,7 @@ Use the repository’s existing application stack if one is already present and 
 
 A pseudo-3D or 2.5D isometric world is acceptable if it produces a stronger, more reliable full-viewport operational prototype than rushed 3D. Do not fake “3D” with a single static background image. Every room, agent, quest state, event, and handoff must be driven by application state and inspectable.
 
-Do not add a backend for Phase 1. Use a replaceable mock API/service boundary and deterministic client-side state. Browser localStorage may preserve demo preferences or an explicitly labelled local simulation snapshot, but the app must work cleanly without persisted data.
+Use replaceable service/adapter boundaries. Standard mode adapters return configured real data or explicit empty/error states. Demo fixtures live behind a separate `DemoFixtureAdapter` that is impossible to instantiate unless commissioning mode is `demo`. Browser localStorage may preserve local commissioning/configuration state and a strictly partitioned Demo dataset; never store secrets there.
 
 ## 1.2 Required project hygiene
 
@@ -100,11 +109,12 @@ Before changing code:
 When creating an app from an empty repository, include:
 - local run instructions
 - a clear project structure
-- mock data isolated from rendering code
-- shared TypeScript contracts
-- deterministic simulation actions
-- smoke tests or a verification script
-- an implementation note stating that Phase 1 has no live side effects
+- real adapter results and empty/error states isolated from rendering code
+- Demo fixtures isolated in a dedicated demo-only module and storage namespace
+- shared TypeScript contracts with provenance/data classification
+- deterministic state transitions and auditable tool actions
+- smoke tests proving Standard mode contains zero synthetic records
+- an implementation note listing configured, unconfigured, read-only, gated-write, and Demo-only capabilities
 
 Use functional names for components. Good: `QuestBoard`, `EventTimeline`, `ApprovalGate`, `StationInspector`. Bad: `AgentariumPanel`, `AgentariumCard`, `CoolWidget`.
 
@@ -124,42 +134,38 @@ Use room/profile language in the UI where it clarifies the world model. Example 
 - On narrower screens, preserve the same information hierarchy through a responsive drawer/tab layout. Do not leave controls inaccessible behind horizontal overflow.
 - Do not require sound, animation, hover, or color alone to understand status.
 
-# 2. Phase 1 scope and non-goals
+# 2. Initial implementation scope and non-goals
 
 ## 2.1 In scope
 
-Build a polished simulated prototype with:
-- a full-viewport space-station operations canvas
-- named room modules and visibly connected routes
-- Ultron / the Steward on The Bridge and the required specialized agents
-- an Articulation Console with a preset, editable founder/operator vision
-- deterministic blueprint generation from that vision
-- an inspectable quest board and task decomposition
-- a complete mock opportunity → product/listing → visual candidate → governance workflow
-- human approval/denial handling
-- detailed append-only-style event log
-- replay controls that reset and replay deterministic events without generating new invented history
-- dry-run/simulation status, audit details, and lab maturity indicators
-- station/agent/task/packet inspectors
-- visible failure and blocked states
-- responsive behavior and testable state contracts
+Build a polished self-commissioning application with:
+- full-viewport World Overview → Room View → Agent View navigation
+- selectable visual style and world theme
+- named room modules and connected routes
+- first-class room and agent profiles
+- provider/model/tool/integration configuration intent
+- explicit Standard or Demo operating mode
+- Standard-mode empty/unconfigured/error states with no synthetic fallback
+- optional Demo dataset isolated behind explicit opt-in
+- Articulation Console, inspectable blueprints, quests, tasks, packets, approvals, audit log, and replay
+- real adapter boundaries, provenance, permissions, budgets, and human gates
+- visible blocked/failure states
+- responsive, accessible behavior and testable contracts
 
 ## 2.2 Explicit non-goals
 
 Do not build:
-- real agent execution or model calls
-- real market research or web scraping
-- real Etsy/Printify/Fiverr/YouTube/TikTok/social integrations
-- publishing, delivery, spending, commerce, fulfillment, or revenue processing
-- login, multi-tenant workspaces, billing, subscriptions, payments, or production auth
-- a plugin marketplace or skill installer
-- unbounded multi-agent loops or autonomous background processes
-- production database, queue, WebSocket/SSE service, or deployment infrastructure
+- uncontrolled self-modifying source code
+- unbounded agent loops
+- silent credential activation
+- silent external publishing, delivery, spending, commerce, fulfillment, or customer messaging
+- fake revenue, orders, customers, evidence, security posture, budgets, skills, or success in Standard mode
+- automatic fallback to Demo fixtures when real data is missing
 - a chatbot as the primary interface
-- a Sims-like character-life game, break-room simulation, or decorative NPC wandering
-- a generic enterprise Kanban dashboard with a tiny decorative canvas
+- a Sims-like social simulation where operational truth is secondary
+- a generic enterprise dashboard with a decorative world
 
-Do not silently build ahead into Phase 2. Leave extension seams; do not pretend they are connected.
+Leave unsupported integrations visibly unconfigured. Do not pretend they are connected.
 
 # 3. Information architecture and station map
 
@@ -188,7 +194,7 @@ The `Type` must clearly distinguish operational purpose. Use these room types in
 - `recreation` — non-production social/life room
 - `support` — treasury, media, skill armory, feedback/training, etc.
 
-`Level` is the room's maturity/capability level for the prototype. It can be a simple integer or label, but it must be visible and consistent. Example: `Level 1 — Simulated`.
+`Level` is the room's maturity/capability level. It can be a simple integer or label, but it must be visible and consistent. Examples: `Level 1 — Draft`, `Level 2 — Supervised`, or, only in Demo mode, `Level 1 — Demo`.
 
 ## 3.2 Required rooms
 
@@ -202,7 +208,7 @@ Render all of these named rooms. They may be grouped into sectors to keep the fi
    - Ultron is the AI that primarily interacts with Kenn.
    - When Kenn is logged into Agentarium, Kenn's avatar appears in the world, usually on The Bridge.
    - Like a spaceship bridge, The Bridge can communicate with every other room on the ship.
-   - Shows current simulation mode, active quest, pending approvals, world health, and current sequence position.
+   - Shows installation mode, current run state, active quest, pending approvals, connector health, and current sequence position.
 
 2. **The War Room**
    - A conference room attached to The Bridge.
@@ -216,26 +222,26 @@ Render all of these named rooms. They may be grouped into sectors to keep the fi
 
 4. **Nova Room / Research and Design Lab**
    - Market-intelligence and research/design station.
-   - Produces opportunity packets from explicitly mock evidence, not vague research prose.
+   - Produces opportunity packets from configured, attributable evidence sources. In Standard mode it blocks when evidence is unavailable; only Demo mode may use synthetic evidence.
    - Nova studies high-performing patterns and turns them into original opportunity packets with risk flags.
 
 5. **Forge Rooms**
    - Forges are business/factory rooms that interact with the outside world to build sellable products or produce income.
    - A Forge is distinct from Communications: it makes/sells/delivers value; Communications routes signals/messages.
-   - Phase 1 must model Forge as a category and include at least these room profiles, even if most are standby/simulated:
+   - Model Forge as a category. Include selected Forge room profiles; unconfigured Forges remain honest empty/standby rooms:
      - Etsy Forge
      - Fiverr Forge
      - Print-on-Demand Forge
      - Supplements Forge
      - Old-Time Photo Restoration Forge
      - High-Ticket Affiliate Forge
-   - The default simulation may focus on Etsy Forge, but the other Forges should appear as inactive/standby rooms with honest Phase 1 labels.
+   - The commissioned setup may focus on Etsy Forge; other Forges appear only if selected/configured and show honest active, unconfigured, or standby states.
 
 6. **Pixel Room / Graphic Artist Studio**
    - Visual and media production station.
    - Pixel is the graphic artist.
-   - Turns mock listing direction into thumbnail/product-media candidate packets.
-   - It does not communicate with Fiverr or deliver a customer asset in Phase 1.
+   - Turns attributable listing direction into thumbnail/product-media candidate packets.
+   - It communicates or delivers only through explicitly configured integrations and commissioned approval gates.
 
 7. **Vibes Room / Music Artist Studio**
    - Audio/music creative station.
@@ -245,18 +251,18 @@ Render all of these named rooms. They may be grouped into sectors to keep the fi
 8. **Developer Room / App Builder Lab**
    - Software/app-building station.
    - Developer is responsible for app prototypes, internal tools, adapters, and future software builds.
-   - Phase 1 may keep this room in standby unless the prototype uses it as a mock future capability.
+   - Keep this room unconfigured/standby until its provider, model, tools, and permissions are configured.
 
 9. **Security Room**
    - Ship security station.
    - The security agent keeps the entire ship secure.
-   - Shows mock security posture, permission boundaries, external-action risk, and alerts.
-   - It must reinforce that Phase 1 is simulation-only and no credentials/live adapters are connected.
+   - Shows security posture derived from configured checks and real local telemetry; unavailable checks display `Not configured` rather than invented findings.
+   - It must distinguish configured, read-only, gated-write, unavailable, and Demo-only security capabilities.
 
 10. **Communications Room**
     - Outside-world signal room, but explicitly not a Forge.
-    - Handles simulated messages, emails, comments, alerts, customer signals, and routing.
-    - It does not manufacture products, sell products, publish, send, or deliver in Phase 1.
+    - Handles messages, emails, comments, alerts, customer signals, and routing only from configured channels. Demo mode uses isolated synthetic signals.
+    - It does not manufacture products. Sending or replying requires a configured channel and commissioned approval/permission policy.
 
 11. **Review / Governance Station**
     - Quality, policy, IP/trademark, acceptance criteria, and risk review.
@@ -273,7 +279,7 @@ Render all of these named rooms. They may be grouped into sectors to keep the fi
       - memory-bank search/retrieval controls
       - provenance/timeline views showing where a memory came from and which agent used it
     - The visual reference is a pale graph canvas with dense central clusters, smaller satellite clusters, and gray/pink/red nodes and edges. Treat this as a living neural/star-map memory graph, not a flat file browser.
-    - In Phase 1 the data is mock/local/simulated, but the model should make memory feel like inspectable world infrastructure.
+    - In Standard mode Archives stores only actual events, approved memories, configured knowledge sources, and explicit user entries. Demo memories remain isolated and are purgeable.
 
 13. **Feedback / Training Console**
     - Records approve/reject/iterate feedback against output quality.
@@ -281,15 +287,15 @@ Render all of these named rooms. They may be grouped into sectors to keep the fi
 
 14. **Skill Armory**
     - Capability inventory and safety metaphor.
-    - Displays mock skills with provenance, permission scope, quarantine/inspection status, and approval status. Never implements downloading or installation.
+    - Displays actual discovered/configured skills with provenance, permission scope, quarantine/inspection status, and approval status. If none exist, show an empty state. Demo mode may show synthetic examples in its isolated inventory.
 
 15. **Treasury**
     - Cost-control and budget metaphor.
-    - Shows a mock budget, estimated simulation cost as `$0.00`, and an explicit `No live spend connected` notice. Do not invent live revenue.
+    - Shows actual metered/configured costs and budgets when available; otherwise show `Cost tracking not configured` or `No recorded spend`. Never invent revenue, spend, or savings.
 
 16. **Media Bay**
     - Scheduling/publishing metaphor.
-    - Shows mock queued media packets and a blocked `External delivery requires approval + future live adapter` state.
+    - Shows actual queued media packets from configured workflows. If publishing is unconfigured, show `Publishing not configured`; if configured, enforce its approval policy.
 
 17. **Ten Forward**
     - Recreational non-production room.
@@ -300,7 +306,7 @@ Render all of these named rooms. They may be grouped into sectors to keep the fi
 
 ## 3.3 Spatial relationships
 
-Use visible routes so the default simulation reads as a real operational pipeline:
+Use visible routes so configured workflows read as real operational pipelines:
 
 ```text
 The Bridge / Articulation Console
@@ -315,7 +321,7 @@ The Bridge / Articulation Console
 
 The Bridge must have visible communications links to every room. The War Room should appear attached to The Bridge. Communications Room must visibly connect inbound signals to The Bridge or the relevant operational room. Skill Armory, Treasury, Media Bay, Security, Archives, Feedback, Developer, Vibes, and Ten Forward should be connected as supporting/living modules rather than buried in a settings menu.
 
-Do not imply that every room is active in the first simulation. Inactive rooms should explain their state, for example: `Standby — no approved live adapter in Phase 1`.
+Do not imply every room is active. Inactive rooms explain whether they are unconfigured, unavailable, standby, blocked, or Demo-only.
 
 # 4. Required roles and responsibilities
 
@@ -325,9 +331,9 @@ The human operator is not an agent. Kenn is represented by a logged-in avatar th
 - writes or edits the articulation vision
 - primarily interacts with Ultron on The Bridge
 - inspects proposed work
-- starts/resets/replays the simulation
+- starts/stops/resets/replays runs
 - approves or denies gated actions
-- can stop a running simulation
+- can stop a running workflow
 - can inspect every underlying record
 
 ## 4.2 Ultron / Steward
@@ -344,33 +350,34 @@ Ultron / the Steward must not claim sent messages, live tool use, executed model
 
 ## 4.3 Nova
 
-Nova is a market-intelligence engine, not a generic research chatbot. Nova’s mock output must be a structured **Opportunity Packet** with evidence and risk fields specified in Section 6.
+Nova is a market-intelligence engine, not a generic research chatbot. In Standard mode, Nova produces a structured **Opportunity Packet** only from configured evidence sources, with source references, capture time, confidence, and risk fields. If no usable source exists, Nova blocks and requests configuration/evidence. Demo mode may use clearly classified synthetic evidence from the isolated Demo fixture adapter.
 
-Nova’s logic is represented as:
+Nova’s logic is:
 
 ```text
-mock market evidence
+attributable evidence
   → observed demand/pattern
   → adaptation idea
-  → IP/trademark/policy/oversaturation checks
-  → confidence and next action
-  → handoff to Forge
+  → IP/trademark/policy review
+  → original opportunity packet
+  → Forge handoff
 ```
 
-Nova must never be described as copying other sellers. The product behavior is to observe market patterns, identify demand signals, and propose original/adapted concepts with explicit risk flags.
+Nova must not copy a seller’s design and must not invent research.
 
 ## 4.4 Forge
 
-Forge is a supervised factory/production agent. It consumes an Opportunity Packet and outputs a **Mock Product Listing Packet**. It must surface missing inputs or risk flags instead of pretending the listing is ready for publication.
+Forge is a supervised factory/production agent. It consumes a valid Opportunity Packet and outputs a **Product Listing Packet**. It surfaces missing inputs, unconfigured fulfillment/publishing, or risk flags instead of pretending a listing or product is complete.
 
 ## 4.5 Pixel
 
-Pixel is a visual/media agent. It consumes Forge’s packet and outputs a **Mock Visual Candidate Packet**. It may render a styled placeholder/thumbnail composition or data-driven visual concept inside the prototype, but it must be labelled mock and must not call an image-generation service.
+Pixel is a visual/media agent. It consumes Forge’s packet and produces a **Visual Candidate Packet** through its configured rendering/image tools. If no renderer is configured, Pixel blocks or creates only a user-requested local draft from available assets; it never labels an unrendered concept as a finished asset. Demo mode may use the isolated bundled/synthetic example.
 
 ## 4.6 Cipher
 
-Cipher is an inbound-signal and communications-routing agent. It belongs in the Communications Room, which interacts with the outside world but is not a Forge. Cipher handles simulated inbound signals, classifies urgency/risk, and forwards a mock handoff. It must not send messages.
+Cipher is an inbound-signal and communications-routing agent. It belongs in Communications, which is not a Forge. In Standard mode it processes only configured real channels and records source/message identifiers. With no channel configured, it shows an empty/unconfigured state. Demo mode may route isolated synthetic signals and cannot send externally.
 
+## 4.7 Vibes
 ## 4.7 Vibes
 
 Vibes is the music/audio artist. In Phase 1, Vibes can remain standby, but the room profile must explain that this room is for future audio/music generation and media support. It must not call live music-generation services.
@@ -381,7 +388,7 @@ Developer is the app/software builder. In Phase 1, Developer can remain standby,
 
 ## 4.9 Security
 
-Security protects the whole ship. It should surface simulated security posture, permission boundaries, external-action risk, unapproved adapter warnings, and no-credentials-connected status. Security must reinforce approval gates rather than bypass them.
+Security protects the whole world. It surfaces actual configured checks/local telemetry, permission boundaries, connector health, external-action risk, and unapproved adapter warnings. Missing checks show `Not configured`; Security must never invent posture or bypass gates.
 
 ## 4.10 Ten Forward
 
@@ -389,7 +396,7 @@ Ten Forward is not a productivity engine. It is the recreational/life room where
 
 ## 4.11 Archives
 
-Archives commands the system memory banks for all agents. It should make memory inspectable through graph/mind-map concepts, search, filters, provenance, timelines, and relationship edges. In Phase 1, memory data is mock/local/simulated, but the product metaphor should be strong enough to guide later real memory-bank integration.
+Archives commands the system memory banks for all agents. It makes actual approved memories, events, knowledge sources, provenance, timelines, and relationship edges inspectable through graph/mind-map concepts, search, and filters. Standard and Demo memory stores are strictly partitioned; Demo content is never used for Standard retrieval or decisions.
 
 ## 4.12 Review / Governance
 
@@ -430,19 +437,19 @@ Pair every color with a label/icon/text. Do not rely only on color, pulse, or an
 Provide these visible controls with clear disabled states and explanations:
 - Edit Vision
 - Generate Blueprint
-- Start Simulation
-- Advance One Step
-- Pause / Stop Simulation
+- Start Run
+- Advance One Step (Demo or supervised manual-step workflows only)
+- Pause / Stop Run
 - Reset World
 - Approve
 - Deny
 - Replay from Start
 - Replay Previous Event
 - Replay Next Event
-- Exit Replay / Return to Live Simulation State
+- Exit Replay / Return to Current Operational State
 - Inspect selected station/agent/quest/event
 
-`Start Simulation` is disabled until a valid blueprint exists. Approval controls are disabled unless an approval is pending. Do not make controls appear active when their underlying action is unsupported.
+`Start Run` is disabled until a valid approved blueprint and every required provider/tool/integration are configured. Approval controls are disabled unless an approval is pending. Never make unsupported controls appear active.
 
 ## 5.4 Inspector and accessibility requirements
 
@@ -456,65 +463,46 @@ The inspector must include:
 - relevant inputs and outputs
 - dependencies
 - risk/mode
-- timestamp or deterministic simulation sequence number
+- timestamp and event sequence number
 - link/click target to the related event/packet when applicable
 
 Keyboard navigation must reach all primary controls. Add `prefers-reduced-motion` handling so handoff motion becomes a clear static route/state change rather than continuous animation.
 
 # 6. Data contracts — create exact, replaceable TypeScript types
 
-Keep types in a deliberate shared module, such as `src/lib/types.ts`. Do not put them inline in UI components. Use exact names or a strongly equivalent structure with the same semantics.
+Keep types in a shared module, not UI components. The key rule is provenance and data classification: every operational record says whether it is real/configured, user-entered, generated from real inputs, or synthetic Demo data.
 
 ```ts
-type SimulationMode = 'simulation' | 'dry_run' | 'local_read_only' | 'live_gated' | 'destructive_gated';
+type InstallationMode = 'standard' | 'demo';
+type ActionMode = 'read_only' | 'supervised' | 'gated_write' | 'bounded_autonomous' | 'disabled';
+type DataClass = 'real' | 'user_entered' | 'derived' | 'synthetic_demo';
+type ConnectionState = 'configured' | 'unconfigured' | 'unavailable' | 'error';
 type AgentStatus = 'idle' | 'queued' | 'working' | 'blocked' | 'needs_approval' | 'completed' | 'failed' | 'offline';
 type QuestStatus = 'draft' | 'queued' | 'assigned' | 'running' | 'blocked' | 'needs_approval' | 'complete' | 'failed' | 'cancelled';
 type TaskStatus = 'queued' | 'assigned' | 'running' | 'blocked' | 'needs_approval' | 'complete' | 'failed' | 'cancelled';
 type RiskLevel = 'safe' | 'review' | 'external' | 'destructive';
-type LabMaturity = 'draft' | 'simulated' | 'supervised' | 'training' | 'trusted' | 'autonomous_with_audit' | 'suspended';
+type LabMaturity = 'draft' | 'demo' | 'supervised' | 'training' | 'trusted' | 'autonomous_with_audit' | 'suspended';
 type ApprovalStatus = 'pending' | 'approved' | 'denied' | 'expired';
 
-type Position3D = { x: number; y: number; z: number };
+type Provenance = {
+  dataClass: DataClass;
+  sourceType: 'user' | 'file' | 'api' | 'tool' | 'agent' | 'event' | 'demo_fixture';
+  sourceId: string;
+  sourceLabel: string;
+  capturedAt: string;
+  adapterId?: string;
+  externalUrl?: string;
+  contentHash?: string;
+};
 
-type RoomType =
-  | 'bridge'
-  | 'war_room'
-  | 'forge'
-  | 'communications'
-  | 'archives'
-  | 'specialist_lab'
-  | 'governance'
-  | 'recreation'
-  | 'support';
+type Position3D = { x: number; y: number; z: number };
+type RoomType = 'bridge' | 'war_room' | 'forge' | 'communications' | 'archives' | 'specialist_lab' | 'governance' | 'recreation' | 'support';
 
 type Station = {
   id: string;
-  name: string;
   roomName: string;
   type: RoomType;
-  kind:
-    | 'bridge'
-    | 'articulation_console'
-    | 'nova_room'
-    | 'etsy_forge'
-    | 'fiverr_forge'
-    | 'print_on_demand_forge'
-    | 'supplements_forge'
-    | 'photo_restoration_forge'
-    | 'affiliate_forge'
-    | 'pixel_room'
-    | 'vibes_room'
-    | 'developer_room'
-    | 'security_room'
-    | 'communications_room'
-    | 'governance_station'
-    | 'archives'
-    | 'feedback_console'
-    | 'skill_armory'
-    | 'treasury'
-    | 'media_bay'
-    | 'war_room'
-    | 'ten_forward';
+  kind: string;
   description: string;
   level: number;
   levelLabel: string;
@@ -529,11 +517,15 @@ type Station = {
 
 type Agent = {
   id: string;
-  name: 'Ultron' | 'Nova' | 'Forge' | 'Pixel' | 'Vibes' | 'Cipher' | 'Developer' | 'Security' | 'Governor';
+  name: string;
   role: string;
-  stationId: string; // room/station id where this agent currently belongs
+  stationId: string;
   status: AgentStatus;
   position: Position3D;
+  providerId?: string;
+  modelId?: string;
+  connectionState: ConnectionState;
+  actionMode: ActionMode;
   skills: Record<string, number>;
   permissions: string[];
   currentTaskId?: string;
@@ -551,12 +543,12 @@ type Quest = {
   status: QuestStatus;
   priority: 'low' | 'normal' | 'high';
   riskLevel: RiskLevel;
-  mode: SimulationMode;
+  actionMode: ActionMode;
   acceptanceCriteria: string[];
   taskIds: string[];
   createdAt: string;
   updatedAt: string;
-  source: 'articulation_console' | 'seeded_demo';
+  source: 'articulation_console' | 'demo_fixture';
 };
 
 type Task = {
@@ -566,7 +558,7 @@ type Task = {
   objective: string;
   status: TaskStatus;
   assignedAgentId?: string;
-  stationId?: string; // room/station id where this task is currently located
+  stationId?: string;
   dependsOnTaskIds: string[];
   inputPacketIds: string[];
   outputPacketIds: string[];
@@ -579,11 +571,9 @@ type Task = {
 type EvidenceItem = {
   id: string;
   label: string;
-  kind: 'mock_listing' | 'mock_store' | 'mock_trend' | 'mock_feedback' | 'policy_note';
-  sourceLabel: string;
+  kind: 'listing' | 'store' | 'trend' | 'feedback' | 'policy_note' | 'other';
   observedSignal: string;
-  capturedAt: string;
-  isMock: true;
+  provenance: Provenance;
 };
 
 type OpportunityPacket = {
@@ -591,8 +581,6 @@ type OpportunityPacket = {
   kind: 'opportunity_packet';
   questId: string;
   producedByAgentId: string;
-  sourcePlatform: 'Etsy';
-  sourceStoreOrListing: string;
   evidenceIds: string[];
   observedSignals: string[];
   customerBuyerPattern: string;
@@ -606,7 +594,7 @@ type OpportunityPacket = {
   handoffTargetAgentId: string;
   recommendedNextAction: string;
   confidence: 'low' | 'medium' | 'high';
-  isMock: true;
+  provenance: Provenance[];
 };
 
 type ProductListingPacket = {
@@ -619,12 +607,12 @@ type ProductListingPacket = {
   productDescriptionDraft: string;
   materialsOrFormat: string[];
   keywordDrafts: string[];
-  priceRangeDraft: string;
-  fulfillmentStatus: 'not_connected_simulation_only';
-  publishStatus: 'not_published_simulation_only';
+  priceRangeDraft?: string;
+  fulfillmentStatus: 'unconfigured' | 'draft' | 'ready_for_approval' | 'submitted' | 'error';
+  publishStatus: 'unconfigured' | 'draft' | 'ready_for_approval' | 'published' | 'error';
   openQuestions: string[];
   riskFlags: OpportunityPacket['riskFlags'];
-  isMock: true;
+  provenance: Provenance[];
 };
 
 type VisualCandidatePacket = {
@@ -633,22 +621,24 @@ type VisualCandidatePacket = {
   questId: string;
   producedByAgentId: string;
   productListingPacketId: string;
-  assetType: 'product_mockup' | 'thumbnail' | 'media_slide';
+  assetType: 'product_render' | 'thumbnail' | 'media_slide';
   conceptTitle: string;
   compositionNotes: string;
   altText: string;
   reviewChecklist: string[];
-  renderStatus: 'mock_preview_only';
-  isMock: true;
+  renderStatus: 'unconfigured' | 'draft' | 'rendered' | 'error';
+  assetIds: string[];
+  provenance: Provenance[];
 };
 
 type InboundSignal = {
   id: string;
-  source: 'mock_comment' | 'mock_customer_request' | 'mock_alert';
+  channelId: string;
+  externalMessageId?: string;
   summary: string;
   urgency: 'low' | 'normal' | 'high';
   suggestedRouteStationId: string;
-  isMock: true;
+  provenance: Provenance;
 };
 
 type ApprovalRequest = {
@@ -668,34 +658,13 @@ type ApprovalRequest = {
   decisionReason?: string;
 };
 
-type WorldEventType =
-  | 'vision.submitted'
-  | 'blueprint.proposed'
-  | 'quest.created'
-  | 'quest.decomposed'
-  | 'agent.assigned'
-  | 'agent.started'
-  | 'agent.message.sent'
-  | 'packet.created'
-  | 'task.completed'
-  | 'review.failed'
-  | 'review.passed'
-  | 'approval.requested'
-  | 'approval.granted'
-  | 'approval.denied'
-  | 'quest.completed'
-  | 'quest.failed'
-  | 'simulation.paused'
-  | 'simulation.reset';
-
 type WorldEvent = {
   id: string;
   sequence: number;
   timestamp: string;
-  type: WorldEventType;
+  type: string;
   actorId?: string;
-  targetAgentId?: string;
-  stationId?: string; // room/station id where this task is currently located
+  stationId?: string;
   questId?: string;
   taskId?: string;
   packetId?: string;
@@ -703,7 +672,7 @@ type WorldEvent = {
   summary: string;
   detail: string;
   payload: Record<string, unknown>;
-  isMock: true;
+  provenance: Provenance;
 };
 
 type BlueprintProposal = {
@@ -717,11 +686,11 @@ type BlueprintProposal = {
   approvalTriggers: string[];
   successMetrics: string[];
   openQuestions: string[];
-  status: 'draft' | 'ready_for_simulation';
+  status: 'draft' | 'ready_for_approval' | 'approved';
 };
 
 type WorldState = {
-  mode: SimulationMode;
+  installationMode: InstallationMode;
   stations: Station[];
   agents: Agent[];
   quests: Quest[];
@@ -733,7 +702,7 @@ type WorldState = {
   events: WorldEvent[];
   activeBlueprint?: BlueprintProposal;
   selectedEntity?: { type: 'station' | 'agent' | 'quest' | 'task' | 'packet' | 'event' | 'approval'; id: string };
-  simulation: {
+  run: {
     status: 'ready' | 'running' | 'paused' | 'awaiting_approval' | 'completed' | 'failed' | 'stopped';
     activeQuestId?: string;
     nextSequence: number;
@@ -744,133 +713,71 @@ type WorldState = {
 
 ## 6.1 Contract rules
 
-- IDs must be stable, readable, and deterministic for the seeded demo. Example: `quest-nova-forge-001`, `task-research-001`, `packet-opportunity-001`.
-- Use ISO-8601 timestamps or deterministic simulation timestamps consistently; do not mix formats.
-- Events are append-only during a run. Do not mutate old event summaries to make the history look better.
-- Do not make status changes without emitting an associated event.
-- Every packet must reference its producing agent and source input.
-- Every approval must name the proposed action, risk, alternatives, evidence, and final human decision.
-- Every mock source/evidence object must declare `isMock: true`.
-- Do not use `any` as a shortcut in TypeScript contracts.
+- Standard mode accepts only `real`, `user_entered`, or `derived` records.
+- `synthetic_demo` records are rejected outside the Demo partition.
+- Every evidence item, packet, signal, and event must contain provenance.
+- Derived output must reference its real/user-entered input provenance.
+- IDs are stable and collision-safe. Demo IDs use a separate namespace such as `demo:*`.
+- Events are append-only; no status changes without an event.
+- Every approval names the action, risk, alternatives, evidence, and human decision.
+- Do not use `any` as a shortcut.
 
-# 7. Deterministic simulation behavior
+# 7. Runtime behavior by installation mode
 
-## 7.1 Seeded articulation vision
+## 7.1 Standard mode
 
-Pre-fill the Articulation Console with this editable vision:
+Standard mode starts clean after commissioning:
 
-> Create a supervised Etsy-inspired product exploration lab that uses market evidence to propose an original product concept, produces a mock listing and visual candidate, routes it through governance, and never publishes or spends money without explicit human approval.
+- no seeded quests, evidence, packets, signals, skills, budgets, memories, revenue, orders, customers, or completed work
+- commissioned rooms and agent profiles may exist as configuration, but operational collections are empty until real/user actions create them
+- unconfigured providers/models/tools/integrations block dependent work with a precise setup requirement
+- configured adapters return real results/errors with provenance
+- local user-authored drafts are `user_entered`, not mock
+- agent-generated outputs based on real/user-entered inputs are `derived`
+- approvals govern real proposed actions according to commissioned policy
+- audit/replay reflects actual state transitions and tool results
 
-The console must make it obvious this is a starting example. Kenn can edit it before generating a blueprint.
+Example empty states:
 
-## 7.2 Blueprint generation
+```text
+Nova: No evidence sources configured.
+Communications: No channels connected.
+Treasury: Cost tracking not configured.
+Skill Armory: No skills discovered or imported.
+Media Bay: Publishing integration not configured.
+```
 
-`Generate Blueprint` must be deterministic. It must not call an AI service. The generated blueprint must include:
-- clear goal
-- stated assumptions
-- selected rooms: The Bridge, War Room, Articulation Console, Nova Room, Etsy Forge, Pixel Room, Communications Room, Governance, Archives, Feedback, Treasury, Media Bay, Skill Armory, Ten Forward, Developer Room, Security Room, and Vibes Room
-- selected agents: Ultron, Nova, Forge, Pixel, Governor; Cipher, Vibes, Developer, and Security as observed/standby agents where relevant
-- sequential task decomposition
-- dependencies
-- explicit simulation-only constraint
-- explicit external publishing/spending trigger requiring approval
-- risk register
-- success metrics based on completeness and review, not imagined sales
-- open questions
+Do not populate those surfaces to make the application look busy.
 
-Provide a visible rationale for each agent assignment. Example: `Nova selected because this task begins with structured mock demand evidence, not production.`
+## 7.2 Demo mode
 
-## 7.3 Default task plan
+Demo mode may load the Etsy-inspired Nova → Forge → Pixel → Governance walkthrough for training/product evaluation. It must:
 
-Generating the seeded blueprint must create, at minimum, this task sequence:
+- be explicitly selected during commissioning
+- use only `demo:*` IDs and `synthetic_demo` provenance
+- display the persistent Demo banner
+- disable all production adapters and credential entry
+- use deterministic synthetic fixture data
+- pause at the demonstration approval gate without external action
+- support reset/replay of the isolated Demo dataset
+- support a one-action Demo purge
 
-1. `Task 1 — Classify articulation vision` — Ultron / Steward
-2. `Task 2 — Produce mock market opportunity packet` — Nova
-3. `Task 3 — Draft mock product/listing packet` — Forge
-4. `Task 4 — Draft mock visual/media candidate` — Pixel
-5. `Task 5 — Governance quality and risk review` — Governor
-6. `Task 6 — Human decision on simulated external-publish boundary` — Human operator
-7. `Task 7 — Record outcome and feedback` — Ultron / Feedback Console
+Demo fixtures can include a synthetic opportunity packet, product/listing draft, visual candidate, governance decision, skill examples, budget examples, and inbound signals. All must remain clearly identified as Demo data.
 
-The app must keep dependency order. Advancing or auto-playing a deterministic simulation must not jump from Task 2 to Task 5 or complete a task whose dependency is incomplete.
+## 7.3 Workflow execution
 
-## 7.4 Opportunity packet seed content
+For both modes:
 
-Nova’s mock packet must be concrete enough for inspection. Use invented-but-clearly-marked mock evidence; do not identify actual Etsy stores/listings or make factual market claims.
+1. Generate an inspectable blueprint.
+2. Require blueprint approval before execution.
+3. Enforce task dependencies.
+4. Block when required evidence, provider, model, tool, integration, permission, or credential is absent.
+5. Emit an event for every transition and tool result.
+6. Pause at human gates.
+7. Stop cleanly without later timer/background mutation.
+8. Replay from recorded events without rerunning tools or adding events.
 
-Seed packet qualities:
-- source platform is `Etsy` but visibly labelled mock research
-- evidence includes at least three mock signals, for example repeat interest in personalized seasonal garden markers, a gift-buying pattern, and a style motif
-- product concept proposes an original adaptation, not copying a seller
-- keywords, pricing observation, competition notes, adaptation angle, confidence, and risk flags are filled
-- include at least one reviewable risk flag, such as `trademark_risk` or `oversaturated_niche`
-- handoff target is Forge
-
-## 7.5 Forge packet seed content
-
-Forge’s output must include:
-- a mock product title draft
-- concise mock description draft
-- materials/format notes
-- keyword drafts
-- mock price-range draft
-- `not_connected_simulation_only` fulfillment state
-- `not_published_simulation_only` publish state
-- open questions
-- inherited risk flags
-
-Forge must not report a completed external listing. The visual station should show this packet has moved only into a simulated design-review path.
-
-## 7.6 Pixel packet seed content
-
-Pixel’s output must include:
-- a mock product mockup, thumbnail, or media-slide concept
-- composition notes
-- alt text
-- a review checklist
-- `mock_preview_only` render status
-
-If you include a visual thumbnail, generate it from simple local CSS/SVG/HTML composition or a local placeholder design; do not call a real image model/service. The image/preview must carry a `Mock visual candidate` label.
-
-## 7.7 Governance and approval behavior
-
-Governance must review the Forge and Pixel packets against visible acceptance criteria. It should pass craft/readability checks but pause the simulation for a human decision because publication/fulfillment would be an external action.
-
-The approval request must say something like:
-- Proposed action: `Advance mock candidate to a future live-publishing adapter (not available in Phase 1).`
-- Current result: `No external action will occur in this prototype.`
-- Risk: `external`
-- Alternatives: `Keep in supervised review`, `Return to Forge for revision`, `Deny and archive`
-
-The approval modal/panel must explain that Approve means only “approve the simulated workflow outcome/next design state”; it must not publish anything.
-
-### Approve path
-
-On approval:
-1. Append `approval.granted`.
-2. Mark the approval resolved by `human_operator`.
-3. Complete Task 6 and Task 7.
-4. Mark quest `complete`.
-5. Add feedback that the prototype’s simulated artifact is accepted for archive/training feedback.
-6. Keep Media Bay explicitly blocked from real delivery: `No live publishing adapter connected.`
-
-### Deny path
-
-On denial:
-1. Append `approval.denied`.
-2. Mark the approval resolved by `human_operator`.
-3. Mark Task 6 and quest as `blocked` or `failed` according to the explicit UI decision; prefer `blocked` if a revision path exists.
-4. Create an event and feedback item naming the reason.
-5. Offer clear controls to reset, replay, or return the packet to Forge in simulation.
-6. Never silently advance to completion.
-
-## 7.8 Advance, pause, stop, and reset semantics
-
-- `Advance One Step` performs only the next legal transition and adds the corresponding event(s).
-- `Start Simulation` may auto-progress on a controlled timer, but must pause at human approval and must be stoppable.
-- `Pause / Stop Simulation` must leave a visible `paused` or `stopped` state with an event. It must not discard history.
-- `Reset World` restores the deterministic seed state after confirmation, clears the active run’s derived records, and adds/retains a visible reset event in the new run context.
-- No simulation action may mutate state after it is stopped or while it waits for approval.
+Standard mode never calls the Demo adapter. Demo mode never calls production adapters.
 
 # 8. Event, audit, and replay contract
 
@@ -887,10 +794,10 @@ Build an event timeline that shows, at minimum:
 - expandable detail/payload view
 
 Examples:
-- `#03 Nova started mock market-evidence review in Nova Room.`
+- `#03 Nova started evidence review in Nova Room using source adapter research-web-01.`
 - `#05 Nova created opportunity packet packet-opportunity-001 and handed it to Forge.`
-- `#10 Governor requested human approval because the next conceptual boundary is external publishing.`
-- `#11 Human operator approved the simulated workflow outcome. No external action occurred.`
+- `#10 Governor requested human approval before external publishing.`
+- `#11 Human operator approved the proposed action; the publishing adapter returned result ID ...`
 
 Do not expose private chain-of-thought. This is an operational audit log, not a hidden-reasoning dump. Show concise routing rationale, structured inputs/outputs, and explicit state transitions.
 
@@ -905,13 +812,13 @@ Required replay behavior:
 - show current replay cursor `Event X of Y`
 - visually highlight the affected station/route/agent for the selected replay event
 - show the corresponding inspector/event details
-- exit replay back to the current simulation state without data loss
+- exit replay back to the current operational state without data loss
 
 A replay is successful only if it explains what happened while the operator was away. It cannot be a decorative animation detached from event data.
 
-# 9. State store and mock API boundary
+# 9. State store and adapter boundary
 
-Create an explicit store, for example `src/store/worldStore.ts`, with actions whose names make future backend replacement straightforward.
+Create an explicit store such as `src/store/worldStore.ts`. Rendering components read state and invoke actions; they never manufacture evidence, packets, events, budgets, skills, or success.
 
 Minimum actions:
 
@@ -920,88 +827,75 @@ initializeWorld(): void;
 setSelectedEntity(entity?: WorldState['selectedEntity']): void;
 updateArticulationVision(vision: string): void;
 generateBlueprint(): void;
+approveBlueprint(): void;
 createQuestFromBlueprint(): void;
-startSimulation(): void;
-advanceSimulation(): void;
-pauseSimulation(): void;
-stopSimulation(): void;
+startRun(): void;
+pauseRun(): void;
+stopRun(): void;
 requestApproval(request: ApprovalRequest): void;
 approveRequest(requestId: string, reason?: string): void;
 denyRequest(requestId: string, reason: string): void;
 returnTaskForRevision(taskId: string, reason: string): void;
-resetWorld(): void;
+resetCurrentRun(): void;
 enterReplay(): void;
 setReplayCursor(sequence: number): void;
 exitReplay(): void;
+purgeDemoData(): void;
 ```
 
-Create a small mock API/service module that the store calls, even if it simply returns seeded data and deterministic transitions. Future implementations should be able to replace it with HTTP/SSE/WebSocket adapters without rewriting scene components.
+Required adapters:
 
-Do not let visual components directly manufacture tasks, packets, approvals, or events. Rendering components read state and invoke store actions only.
+```text
+AgentProviderAdapter
+EvidenceSourceAdapter
+CommunicationsAdapter
+PublishingAdapter
+CostTelemetryAdapter
+SkillInventoryAdapter
+MemoryAdapter
+DemoFixtureAdapter // demo installation only
+```
+
+Every adapter reports connection state and capabilities. Missing/failed adapters return typed unconfigured/error results, never fixtures. Dependency injection or an adapter registry must enforce that Standard mode cannot resolve `DemoFixtureAdapter` and Demo mode cannot resolve production write adapters.
 
 # 10. Lab maturity, feedback, skills, and health
 
 ## 10.1 Lab maturity
 
-Display and explain these maturity states:
+Display and explain:
 - `draft` — design/spec only
-- `simulated` — mock inputs/outputs; no real actions
-- `supervised` — future real work would require review
-- `training` — feedback is being collected
-- `trusted` — future bounded work could be eligible with audit
-- `autonomous_with_audit` — future-only; never enabled in Phase 1
-- `suspended` — paused for quality, safety, cost, or platform risk
+- `demo` — isolated synthetic walkthrough; never production
+- `supervised` — real work allowed with human review
+- `training` — real approve/reject feedback is collected under the configured policy
+- `trusted` — bounded routine work is eligible with audit logging
+- `autonomous_with_audit` — bounded autonomy explicitly commissioned and governed
+- `suspended` — paused for quality, safety, cost, credentials, or platform risk
 
-In the Phase 1 seeded scenario, operational labs should be `simulated` or `supervised`; no lab may be `autonomous_with_audit` in a way that suggests it can act.
+A lab does not become trusted because of Demo performance. Demo events, feedback, XP, and reliability cannot affect Standard maturity.
 
 ## 10.2 Feedback Console
 
-Show a concise feedback record after approve/deny:
-- target packet or task
-- verdict: approve/reject/revise
-- human reason
-- lesson/quality signal
-- resulting maturity implication
-- linked event ID
-
-Feedback changes only mock state. It does not claim to train a model.
+Feedback records include target, verdict, human reason, quality signal, resulting maturity implication, event ID, and provenance. Standard feedback reflects actual reviewed work. Demo feedback stays in the Demo partition and does not train/configure production agents.
 
 ## 10.3 Skill Armory
 
-Render a small mock skill inventory with at least three skill records. Each record needs:
-- name
-- capability summary
-- provenance: `local mock`, `reviewed mock`, or `quarantined mock`
-- permission scope
-- inspection status
-- approval status
-
-The UI must explicitly say that no skills can be downloaded or installed in Phase 1.
+Standard mode lists only actual discovered/imported/configured skills with provenance, permissions, inspection, and approval status. If none exist, show an honest empty state. Demo mode may show isolated synthetic examples.
 
 ## 10.4 Treasury and War Room
 
-Treasury must show only values derived from mock state. Include:
-- `Simulation cost: $0.00`
-- `Live spend: not connected`
-- visible future integration placeholder, disabled
+Treasury shows actual recorded/metered values when configured. Otherwise it shows `Cost tracking not configured` or `No recorded spend`. Never invent revenue, savings, spend, or ROI.
 
-War Room must calculate its health from the actual current state, including:
-- active/blocked/complete quest counts
-- pending approvals
-- failed/revised task count
-- station maturity distribution
-- unreviewed packet count
-- a concise recommendation based on those state values
+War Room health derives from current actual state: active/blocked/complete quests, pending approvals, failed/revised tasks, lab maturity, unreviewed packets, and connector health. In Demo mode, health is labelled Demo and excluded from Standard analytics.
 
 # 11. Failure modes to design and test explicitly
 
 Design for these failures. Do not hide them behind optimistic animation.
 
 1. **No blueprint exists**
-   - Start Simulation is disabled and explains that a blueprint must be generated first.
+   - Start Run is disabled and explains that a blueprint must be generated and approved first.
 
 2. **Empty or too-short vision**
-   - The articulation console validates it with a humane message and offers the seeded example.
+   - The articulation console validates it with a humane message. Standard mode does not inject a sample vision; Demo mode may offer its labelled fixture.
 
 3. **Dependency violation**
    - A task cannot advance before prerequisites complete. The inspector names the dependency.
@@ -1010,16 +904,16 @@ Design for these failures. Do not hide them behind optimistic animation.
    - Forge/Pixel/Governance shows a blocked state and records an event explaining which packet is missing.
 
 5. **Pending approval**
-   - Simulation must pause. No timer, replay, or UI shortcut can silently complete the quest past the gate.
+   - The run must pause. No timer, replay, or UI shortcut can silently complete the quest past the gate.
 
 6. **Approval denial**
    - The quest visibly blocks/fails according to the selected path, records reason, and offers reset/revise controls.
 
-7. **Stopped simulation**
+7. **Stopped run**
    - No scheduled timeout may continue processing after stop.
 
 8. **Replay isolation**
-   - Replay must not append duplicate events, mutate current state, or generate a new mock packet.
+   - Replay must not append duplicate events, mutate current state, rerun tools, or generate a new packet.
 
 9. **Visual-state drift**
    - A station/agent’s room color, glow, activity route, and inspector status must derive from one source of truth.
@@ -1031,10 +925,10 @@ Design for these failures. Do not hide them behind optimistic animation.
     - Handoffs remain understandable with animation reduced or disabled.
 
 12. **External-action confusion**
-    - At every approval and output surface, make it clear that Phase 1 does not publish, spend, communicate, or deliver externally.
+    - At every approval/output surface, show whether the relevant adapter is unconfigured, read-only, gated-write, or active, and what action will occur.
 
 13. **Fake success**
-    - Never report a mock packet as a sold product, published listing, delivered customer asset, or live agent result.
+    - Never report a draft, blocked result, failed adapter call, or Demo record as a sold product, published listing, delivered asset, or completed real action.
 
 # 12. Suggested component/module boundaries
 
@@ -1068,16 +962,17 @@ src/
     CommunicationsRoomPanel.tsx
   lib/
     types.ts
-    mockWorld.ts
-    simulationEngine.ts
-    mockApi.ts
+    worldState.ts
+    workflowEngine.ts
+    adapterRegistry.ts
+    demoFixtures.ts
     selectors.ts
   store/
     worldStore.ts
   styles/
     ...
   tests/
-    simulationEngine.test.ts
+    workflowEngine.test.ts
     worldStore.test.ts
 ```
 
@@ -1117,6 +1012,7 @@ type CommissioningStatus =
 interface CommissioningSpec {
   schemaVersion: number
   status: CommissioningStatus
+  installationMode: InstallationMode
   owner: OwnerAnswers
   presentation: VisualStyleAnswers
   theme: WorldThemeAnswers
@@ -1202,6 +1098,29 @@ interface VisualStyleAnswers {
 ```
 
 The selected visual style drives the shared style bible, whole-world image prompt, room-image prompts, agent rendering method, animation language, camera treatment, and asset QA. It does **not** alter room IDs, topology, Forge classification, agent responsibilities, or operational contracts.
+
+### Q0.5 — Operating mode and data policy
+
+Ask during commissioning, immediately after visual style:
+
+> **“Will this installation use real operational data, or should I create an isolated demonstration world?”**
+
+Choices:
+
+1. **Standard mode — recommended/default**
+   - starts with no operational data
+   - uses only user-entered data and configured real providers/tools/integrations
+   - shows honest empty/unconfigured/error states
+   - never loads Demo fixtures
+
+2. **Demo mode**
+   - loads an isolated synthetic walkthrough for training, screenshots, and evaluation
+   - performs no external actions
+   - shows a persistent Demo banner
+   - can be purged completely
+   - never contributes to Standard memory, analytics, maturity, XP, budgets, or decisions
+
+Do not preselect Demo mode. Record an explicit answer. Before confirming Demo mode, explain that all visible operational records will be synthetic. Before switching an existing Standard installation to Demo, create a separate Demo workspace/partition; never replace or mix the Standard dataset.
 
 ### Q1 — Theme and world questions
 
@@ -1302,7 +1221,7 @@ For each agent ask or infer, then confirm:
 - tools/capabilities
 - permissions and prohibited actions
 - memory scope
-- autonomy level: simulated, supervised, trusted, or bounded autonomous
+- autonomy level: demo-only, supervised, trusted, or bounded autonomous
 - approval triggers
 - expected inputs and outputs
 - subagents, if any
@@ -1325,7 +1244,7 @@ For every proposed business ask:
 - external integrations desired later
 - revenue/cost metrics the user wants to see
 - compliance, IP, privacy, safety, and brand risks
-- current maturity: idea, simulated, supervised, trusted, or live
+- current maturity: idea, demo-only, supervised, trusted, or live
 
 Never infer that a Communications Room is a Forge. A Forge manufactures a sellable output or revenue-producing service; Communications routes messages/signals.
 
@@ -1341,7 +1260,7 @@ Ask the remaining questions needed to build safely:
 - approval policy for external actions
 - budget/spend limits
 - credential-storage preference (without requesting credentials in chat)
-- desired integrations and whether each is mock, read-only, or future write-capable
+- desired integrations and whether each is unconfigured, read-only, supervised/gated-write, or disabled; Demo uses separate non-networked fixture adapters
 - notification channels
 - failure/retry behavior
 - maintenance window and update policy
@@ -1368,8 +1287,8 @@ Controls:
 
 ```text
 Revise answers
-Approve local/simulated build
-Approve selected paid generation jobs (future live mode only)
+Approve commissioned build
+Approve selected paid/remote generation jobs
 Export commissioning spec
 Cancel safely
 ```
@@ -1502,7 +1421,7 @@ Art consistency checks:
 - budget/cost policy
 - fallback/error behavior
 
-The builder may generate simulation adapters and mock packets. It may not activate real providers, tools, skills, credentials, or external writes merely because the interview named them.
+The builder may generate declarative adapter configuration and, only in Demo mode, isolated synthetic packets. Standard mode starts with empty operational collections and no fixture adapter. The builder must not activate providers, tools, skills, credentials, or external writes merely because the interview named them; activation follows dedicated setup and approval.
 
 ## 12.5.8 Final assembly and presentation
 
@@ -1510,7 +1429,7 @@ When all required jobs pass QA:
 
 1. Fade from the construction bay to the completed whole-ship cross-section.
 2. Bring the guide agent onto The Bridge.
-3. Present a concise commissioning report: rooms built, agents configured, bundled/generated assets, simulated vs connected capabilities, unresolved items, and safety gates.
+3. Present a concise commissioning report: installation mode, rooms built, agents configured, bundled/generated assets, configured/unconfigured/Demo-only capabilities, unresolved items, and safety gates.
 4. Offer a guided first tour: Bridge → one room → one agent → Archives → approval gate.
 5. Mark commissioning `complete` only after the final application loads and navigation smoke checks pass.
 6. Preserve a `Recommission` control in Settings for later theme/room/agent changes without erasing history.
@@ -1543,119 +1462,109 @@ The self-building flow is complete only if all are true:
 12. Refresh/crash resumes the commissioning flow without losing completed answers/jobs.
 13. The build can pause, cancel, retry failed jobs, and replace one room asset without rebuilding everything.
 14. Final QA runs before status changes to `complete`.
-15. The completed world is presented with a clear report of simulated, configured, and still-unconfigured capabilities.
+15. The completed world is presented with a clear report of Standard/Demo mode, configured, unconfigured, gated-write, and disabled capabilities.
 16. No secret appears in chat history, prompts, logs, generated files, or screenshots.
 17. Paid/remote generation and external integrations remain explicitly approval-gated.
 
 # 13. Acceptance criteria and verification
 
-Do not claim completion until all verification steps below have actually been run against the built artifact.
+Do not claim completion until verification runs against the built artifact.
 
 ## 13.1 Functional acceptance criteria
 
-The prototype is complete only if all are true:
-
-1. The app runs locally with documented commands.
-2. The initial view uses the full viewport and clearly reads as an operational space station, not a boxed dashboard.
-3. All required rooms are visible either on the world map or as immediately reachable sector/inspector items; all are selectable and explain their phase-one state.
-4. The Bridge, War Room, Articulation Console, Nova Room, Forge rooms, Pixel Room, Vibes Room, Developer Room, Security Room, Communications Room, Governance, Archives, Feedback, Skill Armory, Treasury, Media Bay, and Ten Forward have distinct roles and inspector/profile details.
-5. The user can edit the seeded vision and deterministically generate a blueprint.
-6. The blueprint contains task decomposition, agent rationale, risks, approvals, metrics, assumptions, and open questions.
-7. The user can start the seeded simulation and see the workflow move through Ultron on The Bridge → Nova → Etsy Forge → Pixel → Governance.
-8. Nova creates a structured mock Opportunity Packet with mock evidence, adaptation angle, keywords, confidence, and risk flags.
-9. Forge creates a structured mock Product Listing Packet with explicit not-published/not-connected states.
-10. Pixel creates a structured Mock Visual Candidate Packet without contacting an image-generation service.
-11. Governance creates a real in-app simulated approval request with evidence, alternatives, and external-risk explanation.
-12. The simulation pauses at the approval gate and cannot advance beyond it without an explicit user action.
-13. Approve completes the simulated quest and records feedback without performing external work.
-14. Deny produces an inspectable blocked/revision outcome and does not silently complete the quest.
-15. Every transition creates an inspectable event, and every visible animation/state maps back to an event/state record.
-16. Replay steps through recorded deterministic events without adding duplicates or altering the current run.
-17. Reset restores the known seed state.
-18. The application labels mock/simulated content honestly and does not contain fake live revenue/orders/publishing claims.
-19. Primary controls work with keyboard navigation; `prefers-reduced-motion` remains legible.
-20. Layout is verified at desktop and narrow viewport widths with no inaccessible primary control or horizontal overflow.
-21. A fresh-install state opens the commissioning guide and can complete the offline/bundled-art commissioning path.
-22. The resulting ship uses the whole-ship background plus clickable room hotspots and room-specific image backgrounds.
-23. Commissioning answers, build jobs, and final asset/agent manifests are inspectable and resumable.
+1. Fresh install launches commissioning and records an explicit `standard` or `demo` mode.
+2. Standard is the default; Demo cannot be entered accidentally.
+3. Standard starts with zero operational evidence, packets, signals, events, skills, budgets, customers, orders, revenue, or completed work unless created by the user or a configured real source.
+4. Standard rejects `synthetic_demo` records at its store/adapter boundary.
+5. Missing providers/models/tools/integrations produce honest empty, unconfigured, blocked, unavailable, or error states—never fixtures.
+6. Demo uses a separate namespace/storage partition, persistent banner, non-networked fixtures, and purge control.
+7. Demo data cannot affect Standard memory, XP, reliability, maturity, budgets, analytics, feedback, or decisions.
+8. The app runs locally with documented commands and a full-viewport World Overview.
+9. Visual style and world theme are independently commissioned; Pixel Art remains optional for every template.
+10. Required selected rooms have distinct profiles and correctly mapped backgrounds/hotspots.
+11. The user can articulate a vision and inspect/approve a blueprint with tasks, rationale, risks, permissions, connectors, assumptions, metrics, and open questions.
+12. A Standard run cannot start until its required dependencies are configured.
+13. Nova evidence and all downstream packets contain provenance; absent evidence blocks Nova.
+14. Forge and Pixel distinguish drafts, rendered/generated assets, submitted/published results, and errors using actual adapter responses.
+15. Governance creates an approval request for gated actions and prevents bypass.
+16. Approve invokes only the described commissioned action; deny/revise creates an inspectable blocked/revision path.
+17. Every transition/tool result creates an event; visible animations derive from state/events.
+18. Replay never reruns tools, duplicates events, or mutates current state.
+19. No UI surface presents fake revenue, orders, customers, security posture, skills, spend, messages, research, assets, or success in Standard mode.
+20. Commissioning/build jobs are resumable, inspectable, idempotent, and safely cancellable.
+21. Keyboard, reduced-motion, narrow-width, contrast, and overflow behavior are verified.
+22. Changing visual style regenerates only visual assets and preserves operational state.
 
 ## 13.2 Minimum automated tests
 
-Add focused tests around state/simulation logic. At minimum prove:
+At minimum prove:
 
-1. Blueprint generation creates the expected ordered task chain.
-2. The simulation cannot advance Forge before Nova’s opportunity packet exists.
-3. The simulation reaches `awaiting_approval` after Governance review.
-4. Approving resolves the request and completes the simulated quest without any external adapter invocation.
-5. Denying does not complete the quest and creates a blocked/revision event.
-6. Replay does not change event count or append duplicate events.
-7. Reset returns to the deterministic baseline.
-8. Every seeded station and agent uses valid enum/status values.
-9. Commissioning interview answers validate into a versioned `CommissioningSpec`.
-10. Builder jobs resume idempotently and do not duplicate approved assets.
-11. Every selected room has a background asset or explicit placeholder and a valid hotspot target.
-12. Offline commissioning performs zero external provider calls.
+1. Commissioning validates explicit Standard/Demo mode.
+2. Standard initializes all operational collections empty.
+3. Standard adapter registry cannot resolve `DemoFixtureAdapter`.
+4. Standard state rejects `synthetic_demo` provenance.
+5. Missing Nova evidence blocks the task without creating a packet.
+6. Missing provider/model/tool/integration yields typed unconfigured/error state without fallback content.
+7. Demo initializes only `demo:*` records and performs zero production-network/write adapter calls.
+8. Demo purge deletes Demo data and leaves Standard data unchanged.
+9. Blueprint dependencies and approval gates cannot be bypassed.
+10. Replay does not append events, rerun tools, or alter current state.
+11. Commissioning resumes without duplicating completed jobs/assets.
+12. Every selected room has a background or explicit placeholder and a valid hotspot.
+13. Switching visual style preserves operational topology/data and schedules only visual replacement jobs.
 
-If the selected stack has a standard test runner, use it. Also run the project build/type-check/lint command appropriate to the chosen stack.
+Also run the standard build, type-check, lint, unit, and end-to-end commands for the selected stack.
 
 ## 13.3 Manual smoke script
 
-Include a short documented manual smoke procedure:
-
 ```text
-1. Start the app and confirm the full viewport world loads.
-2. Select Nova and confirm the inspector shows simulated market-intelligence responsibility.
-3. Edit the seeded vision slightly and generate a blueprint.
-4. Inspect the plan, risks, selected agents, and approval trigger.
-5. Start simulation; observe Steward → Nova → Forge → Pixel → Governance handoffs.
-6. Open Nova’s packet and confirm every evidence item is marked mock.
-7. Open Forge’s packet and confirm publish/fulfillment are simulation-only.
-8. Wait for the approval gate; verify the simulation is paused.
-9. Approve; confirm the quest completes and Media Bay remains externally blocked.
-10. Reset, run again, deny approval, and verify the quest does not complete.
-11. Enter replay; step through all events; exit replay and confirm current state remains intact.
-12. Repeat at narrow width and with reduced motion enabled.
-13. Clear commissioning state; reload and verify the animated guide appears.
-14. Complete the interview using bundled art, approve the build plan, and verify each visible builder maps to a real build job.
-15. Refresh mid-build; resume without losing answers or rerunning completed jobs.
-16. Finish assembly; verify the ship opens, a room hotspot opens its matching room image, and the commissioning report is accurate.
+1. Clear commissioning state and start a fresh install.
+2. Choose visual style/world, then choose Standard mode.
+3. Complete commissioning without configuring operational connectors.
+4. Verify rooms are empty/unconfigured and no operational fixture records appear.
+5. Try to start a Nova workflow; verify it blocks on missing evidence/configuration.
+6. Configure or inject a controlled local real/user-entered test source; verify provenance flows into the packet.
+7. Verify a gated action pauses for approval and denial does not execute it.
+8. Enter replay and confirm no tool is rerun and no event is added.
+9. Recommission visual style and confirm rooms/agents/workflows/memory remain unchanged.
+10. Start a separate Demo commissioning/workspace.
+11. Verify the Demo banner, `demo:*` records, synthetic provenance, and zero production adapter calls.
+12. Purge Demo data and verify Standard remains unchanged.
+13. Refresh mid-build and verify answers/completed jobs resume without duplication.
+14. Repeat at narrow width, keyboard-only, high contrast, and reduced motion.
 ```
 
 ## 13.4 Completion report
 
-When finished, report:
+Report:
 - local run command and URL
 - files created/changed
-- verification commands actually run and their results
-- concise list of assumptions
-- exact list of intentionally simulated/not-connected boundaries
-- any acceptance criterion not met, with a direct reason
+- verification commands and actual results
+- selected installation mode(s) tested
+- configured, unconfigured, read-only, gated-write, disabled, and Demo-only capabilities
+- data-partition/provenance tests
+- assumptions and unmet criteria
 
-Never report a feature as working based solely on reading the code. Verify the running prototype.
+Never report a feature as working based only on source inspection.
 
 # 14. Definition of done
 
-Phase 1 is done when Agentarium is a polished, honest, local, full-viewport operational simulation that can commission itself from a first-run interview: collect a versioned configuration, show an approved build plan, assemble bundled ship/room art and declarative agent/workflow manifests through inspectable builder jobs, present the completed ship, and then let Kenn articulate a vision, inspect a deterministic plan, watch the Ultron → Nova → Etsy Forge → Pixel → Governance workflow, make the human approval decision, inspect the audit trail, and replay what happened.
+Agentarium is done for this phase when it self-commissions into an honest operational world. In Standard mode it starts clean, uses only real/user-entered/derived records with provenance, blocks on missing configuration, and executes only commissioned actions through explicit adapters and gates. Demo mode is optional, visibly synthetic, non-networked, isolated, purgeable, and incapable of influencing Standard operation.
 
-The visual world, state model, event log, and inspectors must agree. The prototype should make the future direction feel real without pretending that live agents, marketplace accounts, publishing, money, credentials, or autonomous external actions already exist.
-
-Do not begin Phase 2 integrations unless Kenn explicitly asks for them after reviewing this prototype. The completed Phase 1 prompt/prototype must preserve The Bridge, room profiles, Forges, Communications Room, Archives, Ten Forward, and specialist-room model.
+The visual world, state, connectors, audit log, approvals, and inspectors agree. No surface invents activity to make the world look busy.
 ```
 
 ## Review checklist for Kenn
 
-- [ ] The product reads as a spatial AI operations canvas, not a social simulation or static dashboard.
-- [ ] The prompt contains a hard approval gate before implementation.
-- [ ] Phase 1 is strict about simulation-only behavior and no external side effects.
-- [ ] The named rooms and agents match the intended Agentarium system, including The Bridge, War Room, Forges, Communications Room, Archives, Ten Forward, Pixel, Vibes, Nova, Developer, and Security.
-- [ ] Nova is defined as a structured market-intelligence engine, not vague generic research.
-- [ ] Forge/Pixel/Cipher/Governance behavior is concrete and inspectable.
-- [ ] Data, event, state, approval, replay, and lab-maturity contracts are clear enough to implement.
-- [ ] Verification covers simulation flow, approval/denial, replay, responsiveness, and failure modes.
-- [ ] First-run commissioning covers theme, agents/providers/models, businesses/Forges, governance, art generation/selection, background builder jobs, resumability, and final presentation.
-- [ ] Art generation follows the prompt manifest and produces a whole-ship map plus one background plate per selected room before animation is layered on.
-- [ ] The builder can hand this to v0, OpenCode, Codex, or Claude after approval without needing unstated context.
-
+- [ ] Standard mode is the default and contains no synthetic operational data.
+- [ ] Demo mode exists only through explicit commissioning choice and is visibly isolated.
+- [ ] Missing real configuration produces empty/unconfigured/blocked/error states, never fake fallback data.
+- [ ] All evidence/results/events include provenance and data classification.
+- [ ] Demo cannot affect Standard memory, metrics, maturity, budgets, feedback, or decisions.
+- [ ] Visual style and world theme remain independent commissioning choices.
+- [ ] Named rooms/agents and Forges/Communications distinctions remain intact.
+- [ ] Approval, adapter, event, replay, and safety contracts are implementable and tested.
+- [ ] Art generation and self-building commissioning remain resumable and inspectable.
 
 ## Post-Phase-2 feedback addendum
 

@@ -44,7 +44,7 @@ The world should answer:
 
 ## MVP scope
 
-Build a simulated vertical slice first:
+Build a small operational vertical slice first. Standard mode starts empty and blocks until required dependencies are configured; an isolated Demo mode may exercise the same UI with synthetic fixtures:
 
 1. One 3D world scene.
 2. Three specialized agents:
@@ -56,13 +56,13 @@ Build a simulated vertical slice first:
 5. Agent message/handoff visualization.
 6. Event log and replay.
 7. Human approval gate for risky actions.
-8. Mock backend data with clear API boundaries.
+8. Clear adapter boundaries, provenance, and honest empty/unconfigured/error states. Demo fixtures exist only in explicitly selected Demo mode.
 
-Real agent execution comes after the simulation proves the interface.
+Real agent execution is commissioned incrementally through supervised adapter boundaries and approval gates. Standard mode never fabricates activity while integrations are being configured.
 
 ## Non-goals for the first prototype
 
-- no real autonomous external actions
+- no unbounded or unapproved autonomous external actions
 - no billing
 - no marketplace
 - no plugin store
@@ -79,7 +79,7 @@ Frontend prototype:
 - React Three Fiber / Three.js
 - Zustand or lightweight state store
 - Tailwind or CSS modules
-- mock API module for world/task/agent data
+- adapter registry for real/user-entered/derived data plus a separately isolated Demo fixture adapter
 
 Backend later:
 
@@ -112,7 +112,7 @@ Ship Overview → Room View → Agent View
 - Double-clicking a room opens Room View, showing the room's profile, agents/subagents, tools, packets, queues, and current work.
 - Double-clicking an agent opens Agent View, showing a character/profile interface where the agent's function, tools, permissions, and future behavior can be inspected and eventually modified.
 
-The current dashboard-like prototype should be treated as a state-contract proof, not the final UI direction. Future refinement should preserve its simulation/event/approval model while moving the interface toward a living pixel-art management game.
+The current dashboard-like prototype should be treated as a legacy Demo/state-contract proof, not the final UI or Standard-data direction. Future refinement should preserve its event/approval contracts while moving the interface toward a living spatial management world and enforcing Standard/Demo isolation.
 
 
 ## Self-building commissioning direction
@@ -120,5 +120,7 @@ The current dashboard-like prototype should be treated as a state-contract proof
 Kenn wants Agentarium to become a self-building application. On first startup, a small animated Builder Agent should interview the installer using in-world chat bubbles. The first decision is visual presentation: Pixel Art, Illustrated 2D, Isometric 3D, Cinematic/Realistic, Clean Vector/Graphic, or Custom. Pixel Art is optional and can be applied to every world template. The next decision is the world template—Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, Modern Corporate Office, or Custom Theme. Visual style and world topology are independent: changing style must not rebuild agents, rooms, workflows, memory, or approvals. The interview then covers agent purpose/provider/model/tool/permission choices, business/Forge workflows, and governance/installation questions.
 
 The system then shows a reviewable blueprint. After approval, bounded background builder agents visibly create/select the ship and room art, build declarative agent/workflow manifests, validate safety boundaries, and assemble the configured application. The completed ship is then presented to the owner.
+
+Commissioning must explicitly choose **Standard** or **Demo** mode. Standard is the default and begins with no operational records; it uses only real, user-entered, or derived data with provenance and shows empty/unconfigured/blocked/error states when dependencies are absent. Demo mode is optional, synthetic, non-networked, visibly labelled, stored separately, purgeable, and unable to affect Standard memory, metrics, maturity, budgets, feedback, or decisions.
 
 This is configuration-driven commissioning, not uncontrolled self-modifying code. Bundled concept art must support a fully local/offline setup; real paid generation, credentials, and external integrations remain separately approval-gated. Art backgrounds come first, then hotspots, sprites, and animation.

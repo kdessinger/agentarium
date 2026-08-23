@@ -26,7 +26,9 @@ Agentarium should make multi-agent AI work visible and steerable. The 3D world i
 ## Development posture
 
 - Start with a small, working vertical slice.
-- Prefer simulated agents before real external actions.
+- Standard mode must start with no synthetic/mock operational data. Missing providers, tools, evidence, or integrations produce honest empty/unconfigured/blocked states.
+- Demo fixtures are allowed only when commissioning explicitly selects Demo mode; keep them in a separate namespace/storage partition and never let them influence Standard memory, metrics, maturity, budgets, or decisions.
+- Prefer supervised, gated real actions before bounded autonomy.
 - Keep backend/orchestration boundaries replaceable.
 - Do not hardwire one model provider, agent framework, or marketplace.
 - Do not add credentials or secrets to the repo.
@@ -54,6 +56,7 @@ When code exists:
 
 - include local run instructions
 - include smoke tests or verification scripts
-- keep mock data in obvious files/modules
+- keep Demo fixtures in obvious demo-only files/modules, unreachable from Standard mode
+- preserve provenance/data classification on evidence, packets, signals, and events
 - keep orchestration contracts documented
 - update docs when architecture changes

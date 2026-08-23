@@ -109,7 +109,7 @@ Phase 3 should prioritize:
 5. Adding room-specific interior scenes.
 6. Adding agent sprite states and ambient animations.
 7. Keeping inspectors/audit trails available, but making them secondary overlays rather than the dominant experience.
-8. Preserving simulation-only safety boundaries.
+8. Preserving Standard/Demo separation, configured-capability boundaries, provenance, and approval gates.
 9. Preserving the event/state model from Phase 2 so animation remains truthful.
 
 ## Important design principle

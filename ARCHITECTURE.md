@@ -16,7 +16,7 @@ Orchestrator
 Agent Runtimes / Tools / Models
 ```
 
-For the first prototype, the API and orchestrator can be mocked inside the frontend. The object contracts should still be shaped as if a real backend will replace them.
+Use replaceable adapter boundaries from the start. Standard mode returns configured real data or explicit empty/unconfigured/error states. Synthetic fixtures are restricted to a separately commissioned Demo mode and cannot be resolved by the Standard adapter registry.
 
 ## Layers
 
@@ -37,7 +37,7 @@ Suggested stack:
 - Three.js / React Three Fiber
 - Zustand or similar local state
 - CSS/Tailwind for inspector UI
-- mock API module
+- adapter registry plus isolated Demo fixture adapter
 
 ### 2. Agentarium API
 
@@ -85,7 +85,8 @@ Adapter contract should separate:
 
 - task input
 - allowed tools
-- execution mode: simulated, dry-run, live
+- installation mode: Standard or Demo
+- action mode: read-only, supervised, gated-write, bounded-autonomous, or disabled
 - stream events
 - final result
 - artifacts
@@ -95,8 +96,9 @@ Adapter contract should separate:
 
 MVP frontend-only prototype:
 
-- mock data in files
-- optional browser localStorage for demo state
+- real/user-entered/derived records with provenance
+- Demo fixtures in a separate namespace/storage partition
+- optional browser localStorage for non-secret commissioning state and isolated Demo state
 
 First backend prototype:
 
@@ -202,7 +204,7 @@ quest.completed
 
 Modes:
 
-1. **Simulation** — no real tools, all outputs mocked.
+1. **Demo** — explicit isolated synthetic walkthrough; no production tools or external actions.
 2. **Dry-run** — real planning, no external writes/actions.
 3. **Local read-only** — can inspect local files/tools with scoped permission.
 4. **Live gated** — can perform approved external actions.

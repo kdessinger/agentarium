@@ -200,8 +200,9 @@ Required safety concepts:
 - permission tiers per agent
 - human approval gates
 - audit logs
-- dry-run mode
-- simulation mode
+- Standard mode with real/user-entered/derived data only
+- optional isolated Demo mode
+- dry-run/action-preview controls for configured real workflows
 - rollback notes where possible
 - explicit warnings for external/destructive actions
 
@@ -298,7 +299,7 @@ Labs should not jump from prototype to full autonomy.
 Suggested maturity states:
 
 - **draft** — lab exists as a design/spec only
-- **simulated** — mock inputs/outputs, no external actions
+- **demo** — isolated synthetic walkthrough; never contributes to Standard operation
 - **supervised** — real work can be generated, but human review is required
 - **training** — approve/reject feedback is actively collected to shape output quality
 - **trusted** — agent can perform bounded routine work with audit logging
@@ -312,8 +313,8 @@ The first build should prove one loop:
 ```text
 Human creates quest
   → Orchestrator decomposes it
-  → Researcher gathers simulated findings
-  → Builder creates simulated output
+  → Researcher gathers attributable findings from configured sources
+  → Builder creates output through configured tools
   → Reviewer checks it
   → Approval gate appears if needed
   → Quest completes
@@ -334,7 +335,7 @@ Reference name from AndrooAGI: Ultron.
 
 Role: main coordinating agent that keeps the operation running, routes work, checks lab state, and escalates to the human.
 
-MVP behavior: deterministic orchestrator that moves a simulated work order between labs, plus a simple articulation flow that turns a human-described lab idea into a proposed room/agent/workflow blueprint.
+Initial behavior: deterministic orchestrator that moves a configured work order between labs, plus an articulation flow that turns a human-described lab idea into a proposed room/agent/workflow blueprint. Demo mode may run the isolated walkthrough.
 
 ### Research Agent / Research Lab
 
@@ -342,7 +343,7 @@ Reference name from AndrooAGI: Nova.
 
 Role: researches businesses, competitors, trends, products, and opportunities; converts market evidence into structured opportunity packets; sends those packets to production labs such as Forge.
 
-MVP behavior: produces a mock Etsy opportunity packet with source evidence, product concept, keywords, adaptation angle, risk flags, confidence, and handoff target.
+Initial behavior: produces an Etsy opportunity packet only from configured, attributable evidence. If evidence is unavailable, Nova blocks with a setup requirement. Demo mode may use isolated synthetic evidence.
 
 ### Factory Agent / Factory Lab
 
@@ -350,7 +351,7 @@ Reference name from AndrooAGI: Forge.
 
 Role: turns research into listings/products/assets and connects to fulfillment/storefront platforms such as Printify/Etsy.
 
-MVP behavior: creates a mock product/listing packet from research.
+Initial behavior: creates a product/listing packet from a valid opportunity packet, preserving provenance and honest publish/fulfillment state.
 
 ### Design Agent / Design Studio
 
@@ -358,7 +359,7 @@ Reference name from AndrooAGI: Pixel.
 
 Role: creates visual assets, designs station/room visuals, and handles customer-order creative work such as Fiverr thumbnails.
 
-MVP behavior: creates a mock thumbnail/product visual candidate and sends it to review.
+Initial behavior: uses configured rendering/image tools to create a visual candidate and sends it to review; without a renderer it blocks or creates only a clearly identified user-requested local draft.
 
 ### Communications Agent / Communications Deck
 
@@ -372,11 +373,11 @@ MVP behavior: simulates an inbound customer/comment signal and routes it into th
 
 Role: checks quality, risk, policy, customer requirements, and acceptance criteria before delivery or publishing.
 
-MVP behavior: simulated pass/fail review with notes and approval gate.
+Initial behavior: pass/fail review of actual workflow outputs with notes, provenance, and an approval gate; Demo review remains isolated.
 
 ## Orchestration model
 
-Use an event-driven contract even in the mock prototype.
+Use an event-driven contract in both Standard and Demo modes.
 
 Core objects:
 
@@ -391,7 +392,7 @@ ApprovalRequest
 Event
 ```
 
-The frontend can start with mock state, but should behave as if live events are coming from a backend.
+Standard mode starts with empty operational collections. Events come from real/user actions and configured adapters. Demo fixtures are available only through the isolated Demo adapter.
 
 ## Design direction
 

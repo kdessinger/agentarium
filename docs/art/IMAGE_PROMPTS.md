@@ -122,7 +122,7 @@ Shared visual style for all Agentarium concept backgrounds:
 - no real brand logos, no copyrighted franchise marks, no Star Trek insignia, no readable fake company names
 - show tiny generic AI agent sprite silhouettes or placeholder character positions only when useful; final animated sprites will be layered later
 
-Create Nova's Research and Design Lab as a pixel-art spaceship room for market intelligence. It has observatory-style windows, data telescopes, research terminals, trend graphs, product mood boards, evidence cards, and a central holographic opportunity-packet table. Nova's station should look like it studies successful market patterns and produces original opportunity packets for Forges. Include mock Etsy/product research vibes without real logos or readable store names. Show a handoff chute/light path leaving toward the Etsy Forge. Intelligent, curious, bright cyan/violet lighting, pixel-art diorama interior.
+Create Nova's Research and Design Lab as a pixel-art spaceship room for market intelligence. It has observatory-style windows, data telescopes, research terminals, trend graphs, product mood boards, evidence cards, and a central holographic opportunity-packet table. Nova's station should look like it studies successful market patterns and produces original opportunity packets for Forges. Include marketplace/product-research visual language without real logos or readable store names. Show a handoff chute/light path leaving toward the Etsy Forge. Intelligent, curious, bright cyan/violet lighting, pixel-art diorama interior.
 ```
 
 ### Etsy Forge
@@ -144,7 +144,7 @@ Shared visual style for all Agentarium concept backgrounds:
 - no real brand logos, no copyrighted franchise marks, no Star Trek insignia, no readable fake company names
 - show tiny generic AI agent sprite silhouettes or placeholder character positions only when useful; final animated sprites will be layered later
 
-Create the Etsy Forge room as an income-producing factory module inside Agentarium. This room turns Nova opportunity packets into mock product/listing packets. Show conveyor belts, product mockup stations, listing preview monitors, packaging/fulfillment machinery, Printify-like production machines without logos, and a guarded external-publishing portal that is visibly locked/approval-gated. Use amber industrial light, cyan status strips, tiny product silhouettes, and clear space for Forge agent sprites. No real Etsy logo, no readable text, no fake revenue. Pixel-art factory room, lively but supervised.
+Create the Etsy Forge room as an income-producing factory module inside Agentarium. This room turns Nova opportunity packets into draft product/listing packets. Show conveyor belts, product mockup stations, listing preview monitors, packaging/fulfillment machinery, Printify-like production machines without logos, and a guarded external-publishing portal that is visibly locked/approval-gated. Use amber industrial light, cyan status strips, tiny product silhouettes, and clear space for Forge agent sprites. No real Etsy logo, no readable text, no fake revenue. Pixel-art factory room, lively but supervised.
 ```
 
 ### Fiverr Forge
@@ -342,7 +342,7 @@ Shared visual style for all Agentarium concept backgrounds:
 - no real brand logos, no copyrighted franchise marks, no Star Trek insignia, no readable fake company names
 - show tiny generic AI agent sprite silhouettes or placeholder character positions only when useful; final animated sprites will be layered later
 
-Create the Security Room guarding the whole Agentarium ship. Pixel-art sci-fi security operations center with shield generators, permission maps, locked credential vault doors, threat radar, firewall holograms, camera feeds as abstract tiles, and approval gate indicators. Security agent station should look vigilant and calm. Use red/orange caution lights balanced with blue shield glow. No scary hacker clichés, no readable text, no real credentials. Clear status: simulation-only, no live adapters connected, shown through icons not text.
+Create the Security Room guarding the whole Agentarium ship. Pixel-art sci-fi security operations center with shield generators, permission maps, locked credential vault doors, threat radar, firewall holograms, camera feeds as abstract tiles, and approval gate indicators. Security agent station should look vigilant and calm. Use red/orange caution lights balanced with blue shield glow. No scary hacker clichés, no readable text, no real credentials. Include abstract icons for connector health, permissions, and approval-gate status without claiming a connection or result that is not present.
 ```
 
 ### Communications Room

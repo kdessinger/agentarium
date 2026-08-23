@@ -36,7 +36,7 @@ It must include:
 - station/room inventory
 - core agents and responsibilities
 - event/state contracts
-- mock data requirements
+- Standard/Demo data-boundary and provenance requirements
 - UI/UX requirements
 - full-viewport requirement
 - orchestration/articulation console behavior

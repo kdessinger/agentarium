@@ -4,7 +4,7 @@
 
 **Goal:** Turn the current Agentarium prototype into a resumable first-run commissioning experience that interviews the installer, independently selects visual style and world template, builds an approved configuration from matching art/placeholders and declarative manifests, and presents the completed world.
 
-**Architecture:** Add a versioned commissioning domain beside the existing simulation domain. The builder is a deterministic state machine backed by Zustand persistence: interview → blueprint review → bounded build jobs → QA → final presentation. Phase 1 uses bundled concept art and local manifests; provider/model/image adapters remain declared but disconnected until separately approved.
+**Architecture:** Add a versioned commissioning domain beside the operational domain. The builder is a deterministic state machine backed by Zustand persistence: interview → blueprint review → bounded build jobs → QA → final presentation. Standard mode starts with empty operational state and real adapter boundaries; optional Demo mode uses a separately partitioned non-networked fixture adapter.
 
 **Tech Stack:** Existing Vite + React 19 + TypeScript + Zustand + Vitest + Playwright; CSS sprite/background layers; browser localStorage for the local prototype.
 
@@ -21,7 +21,7 @@
 
 **Steps:**
 1. Write failing schema/default-state tests.
-2. Add `CommissioningSpec`, `BuildPlan`, `BuildJob`, `GeneratedAsset`, and `Hotspot` types.
+2. Add `InstallationMode`, `DataClass`, `Provenance`, `CommissioningSpec`, `BuildPlan`, `BuildJob`, `GeneratedAsset`, and `Hotspot` types.
 3. Add schema version `1` and deterministic IDs.
 4. Run `npm test -- commissioningEngine.test.ts` and verify pass.
 5. Commit: `feat: define commissioning contracts`.
@@ -76,17 +76,18 @@
 - Test: `app/src/lib/commissioningQuestions.test.ts`
 
 **Steps:**
-1. Write tests for six visual styles, Pixel Art enable/disable behavior, ten world templates, Custom Theme handling, required interview sections, and Forge classification.
-2. Encode `Pixel Art`, `Illustrated 2D`, `Isometric 3D`, `Cinematic/Realistic`, `Clean Vector/Graphic`, and `Custom Visual Style` independently from world templates.
-3. Make visual presentation the first interview decision. Pixel Art must be selectable for every template; when selected, ask 8-bit, 16-bit, modern high-detail, or custom fidelity.
-4. Verify switching visual style preserves topology, rooms, agents, businesses, workflows, memory, and approvals while scheduling only the affected visual assets for replacement.
-5. Encode `Space Station`, `Spaceship`, `Cruise Ship`, `Underground Bunker`, `Skyscraper`, `Resort`, `Sky Ship`, `Battleship`, `Modern Corporate Office`, and `Custom Theme` as typed templates with topology, movement, terminology, material, exterior, and world defaults.
-6. Build accessible illustrated style cards followed by the template-card chooser; selecting a template shows a topology/terminology preview before confirmation.
-7. Ensure `Custom Theme` collects setting, world context, layout logic, command area, movement system, materials, mood, and landmarks, then asks the user to confirm the interpretation.
-8. Ask palette, rooms, and accessibility after style and world template are confirmed.
-9. Add dedicated masked credential-intent controls that never store raw secrets.
-10. Add back/edit and assumptions/open-questions review.
-11. Verify and commit: `feat: add commissioning interview`.
+1. Write tests for explicit Standard/Demo selection, Standard default, six visual styles, Pixel Art enable/disable behavior, ten world templates, Custom Theme handling, required interview sections, and Forge classification.
+2. Encode Standard and Demo as mutually exclusive installation modes. Standard starts empty; Demo is synthetic, non-networked, visibly labelled, namespaced, and purgeable.
+3. Encode `Pixel Art`, `Illustrated 2D`, `Isometric 3D`, `Cinematic/Realistic`, `Clean Vector/Graphic`, and `Custom Visual Style` independently from world templates.
+4. Make visual presentation the first interview decision, followed immediately by operating mode. Pixel Art must be selectable for every template.
+5. Verify switching visual style preserves topology, rooms, agents, businesses, workflows, memory, and approvals.
+6. Encode all ten world templates with topology, movement, terminology, material, exterior, and world defaults.
+7. Build accessible style cards and template cards with previews.
+8. Confirm Custom Theme interpretation.
+9. Ask palette, rooms, and accessibility after style/world confirmation.
+10. Add masked credential-intent controls that never store raw secrets.
+11. Add back/edit and assumptions/open-questions review.
+12. Verify and commit: `feat: add commissioning interview`.
 
 ### Task 5: Generate and approve a build blueprint
 
@@ -99,8 +100,8 @@
 
 **Steps:**
 1. Write deterministic build-plan tests.
-2. Generate room profiles and adjacency from answers.
-3. Generate provider/model intent without claiming connections exist.
+2. Generate room profiles and adjacency from answers; Standard operational collections remain empty.
+3. Generate provider/model intent without claiming connections exist; absent dependencies become explicit setup requirements.
 4. Show revise/approve/export/cancel actions.
 5. Prevent jobs from running before approval.
 6. Verify and commit: `feat: add commissioning blueprint approval`.
@@ -164,7 +165,7 @@
 
 ### Task 9: Harden and verify
 
-**Objective:** Prove local/offline commissioning, recovery, accessibility, and safety boundaries.
+**Objective:** Prove local/offline commissioning, Standard/Demo data isolation, recovery, accessibility, and safety boundaries.
 
 **Files:**
 - Modify: `app/tests/commissioning.smoke.spec.ts`
@@ -184,13 +185,15 @@ npm run test:e2e
 **Manual verification:**
 
 1. Clear commissioning state and reload.
-2. Complete all four interview sections.
+2. Complete the interview in Standard mode.
 3. Revise one answer and approve the plan.
 4. Pause/reload/resume the build.
 5. Fail and retry one local room-art job.
 6. Finish and open one ship hotspot/room.
 7. Recommission one room without replacing the active ship before approval.
-8. Confirm browser network log shows no external provider call.
-9. Repeat with keyboard-only and reduced motion.
+8. Confirm Standard contains zero synthetic records and missing connectors produce honest blocked/unconfigured states.
+9. Commission a separate Demo workspace; verify namespaced synthetic data, persistent banner, and zero production adapter calls.
+10. Purge Demo and verify Standard state is unchanged.
+11. Repeat with keyboard-only and reduced motion.
 
 **Commit:** `test: verify self-building commissioning flow`.

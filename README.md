@@ -28,6 +28,42 @@ This project is not just a chatbot with cute graphics. It is a control surface f
 
 ## Working principle
 
-Start with a beautiful fake-but-honest simulation, then replace simulated agents with real agents one boundary at a time.
+Start with a clean Standard installation, explicit adapter boundaries, and supervised actions. Standard mode must not fabricate activity while providers, tools, or integrations are being configured. Optional Demo mode is a separate synthetic walkthrough for evaluation and training.
 
-Do not begin by building a giant autonomous swarm. Begin with three agents, one orchestrator, visible messages, quest state, and a replayable activity log.
+Do not begin by building a giant autonomous swarm. Begin with a few configured agents, one orchestrator, visible messages, quest state, approval gates, provenance, and a replayable activity log.
+
+## Phase 1 prototype
+
+The legacy browser prototype lives in `app/`. Its current deterministic fixture flow should be treated as **Demo mode only**. It is not the Standard-mode data model. The next implementation phase must add first-run Standard/Demo commissioning, empty Standard operational state, provenance, real adapter boundaries, and strict fixture isolation.
+
+### Run locally
+
+```bash
+cd app
+npm install
+npm run dev -- --host 0.0.0.0
+```
+
+Vite prints the local URL (normally `http://localhost:5173`).
+
+### Verify
+
+```bash
+cd app
+npm test
+npm run build
+npm run lint
+```
+
+### Manual smoke procedure
+
+1. Load the app and confirm the station map fills the available viewport.
+2. Select Nova Room and Nova; confirm room and agent details appear in the 2D inspector.
+3. Treat the existing seeded vision and records as the legacy isolated Demo walkthrough.
+4. Inspect the ordered tasks and start the Demo walkthrough.
+5. Watch the Ultron → Nova → Etsy Forge → Pixel → Governance handoffs and confirm each fixture is visibly Demo-only.
+6. At the approval gate, confirm the Demo walkthrough pauses and cannot perform an external action.
+7. Approve and confirm the quest completes while Media Bay remains blocked from external delivery.
+8. Reset, repeat, deny, and confirm the quest blocks instead of completing.
+9. Use Replay to move backward and forward, then return to the unchanged live state.
+10. Repeat at a narrow viewport and with reduced motion enabled.
