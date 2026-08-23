@@ -67,16 +67,22 @@
 
 **Files:**
 - Create: `app/src/lib/commissioningQuestions.ts`
+- Create: `app/src/lib/worldTemplates.ts`
+- Create: `app/src/components/commissioning/WorldTemplateChooser.tsx`
 - Create: `app/src/components/commissioning/InterviewFlow.tsx`
 - Create: `app/src/components/commissioning/AnswerEditor.tsx`
 - Test: `app/src/lib/commissioningQuestions.test.ts`
 
 **Steps:**
-1. Write tests for required sections and Forge classification.
-2. Encode strong defaults with conditional follow-ups.
-3. Add dedicated masked credential-intent controls that never store raw secrets.
-4. Add back/edit and assumptions/open-questions review.
-5. Verify and commit: `feat: add commissioning interview`.
+1. Write tests for the nine required world templates, Custom Theme handling, required interview sections, and Forge classification.
+2. Encode `Space Station`, `Spaceship`, `Cruise Ship`, `Underground Bunker`, `Skyscraper`, `Resort`, `Sky Ship`, `Battleship`, and `Custom Theme` as typed templates with topology, movement, terminology, material, exterior, and art-direction defaults.
+3. Build an accessible illustrated template-card chooser; selecting a card shows a topology/terminology preview before confirmation.
+4. Ensure `Custom Theme` collects setting, world context, layout logic, command area, movement system, materials, mood, and landmarks, then asks the user to confirm the interpretation.
+5. Ask pixel-art style, palette, rooms, and accessibility only after the world template is confirmed.
+6. Encode strong defaults with conditional follow-ups.
+7. Add dedicated masked credential-intent controls that never store raw secrets.
+8. Add back/edit and assumptions/open-questions review.
+9. Verify and commit: `feat: add commissioning interview`.
 
 ### Task 5: Generate and approve a build blueprint
 

@@ -117,7 +117,7 @@ The current dashboard-like prototype should be treated as a state-contract proof
 
 ## Self-building commissioning direction
 
-Kenn wants Agentarium to become a self-building application. On first startup, a small animated Builder Agent should interview the installer using in-world chat bubbles. The interview covers theme/world choices, agent purpose/provider/model/tool/permission choices, business/Forge workflows, and the remaining governance/installation questions.
+Kenn wants Agentarium to become a self-building application. On first startup, a small animated Builder Agent should interview the installer using in-world chat bubbles. The first question is a visual world-template choice—Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, or a Custom Theme—not a blank-page styling question. That choice drives the world topology, movement metaphor, naming, materials, exterior setting, and generated art prompts. The interview then covers agent purpose/provider/model/tool/permission choices, business/Forge workflows, and the remaining governance/installation questions.
 
 The system then shows a reviewable blueprint. After approval, bounded background builder agents visibly create/select the ship and room art, build declarative agent/workflow manifests, validate safety boundaries, and assemble the configured application. The completed ship is then presented to the owner.
 

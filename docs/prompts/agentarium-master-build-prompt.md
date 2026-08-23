@@ -1152,18 +1152,95 @@ The interview is adaptive, but it must cover these sections and produce structur
 
 ### Q1 — Theme and world questions
 
-Ask enough to define a coherent visual system:
+Begin with a **visual world-template chooser**, not an open-ended design questionnaire. The Builder Agent should say something close to: “First, what kind of world should your Agentarium live in?” Present large illustrated choice cards with a short description and a small topology preview.
 
-- ship/station name
-- overall metaphor: starship, orbital station, carrier, exploratory vessel, or custom
+Required starting choices:
+
+1. **Space Station** — orbital hub, rings/spokes, docking structures, connected laboratory modules.
+2. **Spaceship** — a vessel traveling through space, longitudinal decks, corridors, engineering sections, and The Bridge. This is the recommended/default Agentarium template and matches the bundled concept art.
+3. **Cruise Ship** — ocean-going decks, bridge, atrium, cabins, entertainment areas, service corridors, and engine spaces.
+4. **Underground Bunker** — subterranean levels, tunnels, hardened doors, command center, utilities, and secure specialist chambers.
+5. **Skyscraper** — stacked floors, elevators, executive command level, departments, mechanical floors, and a city view.
+6. **Resort** — a campus of connected buildings, paths, villas, studios, operations lodge, recreation, and landscaped shared areas.
+7. **Sky Ship** — a large flying vessel above the clouds, decks, engine/balloon or anti-gravity systems, helm, observation spaces, and aerial docks.
+8. **Battleship** — armored ocean vessel, bridge, combat information center, deck machinery, engineering, communications, and compartmentalized operations.
+9. **Custom Theme** — the installer describes any original setting, structure, geography, and naming language.
+
+Do not treat these as color skins over the same spaceship. A selected template must drive:
+
+- world silhouette and map geometry
+- vertical vs horizontal organization
+- room adjacency and travel routes
+- corridor, elevator, tunnel, path, deck, or docking metaphors
+- command-room terminology and other world-facing labels
+- exterior environment, windows/views, materials, machinery, lighting, and ambient effects
+- the whole-world image prompt and every room-image prompt
+
+Preserve stable functional IDs and operational contracts underneath the theme. For example, the top-level command role can remain `command_room` internally while the displayed room may be **The Bridge**, **Command Center**, **Executive Command Floor**, **Operations Lodge**, or a custom name. Forges remain revenue-producing operational units even if the selected theme presents them as factories, workshops, studios, kitchens, dry docks, or other setting-appropriate spaces.
+
+After the installer chooses a template:
+
+1. Show a concise preview of its proposed geography and terminology.
+2. Let the installer accept it, adjust it, or return to the template gallery.
+3. If `Custom Theme` is selected, ask for the setting, exterior/world context, layout logic, central command area, movement system, materials, mood, and any must-have landmarks. Summarize the interpretation for confirmation before proceeding.
+4. Ask for the world/vessel/property name.
+5. Then ask the remaining visual questions:
+   - pixel-art era/default fidelity (`SNES-inspired 16-bit` is the recommended default)
+   - palette and mood
+   - desired rooms and any custom rooms
+   - whether the installer prefers cozy, industrial, military-clean, scientific, whimsical, luxurious, natural, or mixed interiors
+   - avatar style and the owner's usual command-room location
+   - motion level, sound preference, accessibility needs, contrast, color-blind support, and reduced-motion preference
+   - whether to use bundled art, generate new art, or start with placeholders and regenerate room-by-room later
+
+The bundled art is the **Spaceship** starter set. Other templates must not silently reuse spaceship art as if it matched. If remote image generation is not configured/approved, use clearly labelled local placeholder scenes and retain the complete generated prompts for later rendering.
+
+Suggested contract:
+
+```ts
+type WorldTemplateId =
+  | 'space_station'
+  | 'spaceship'
+  | 'cruise_ship'
+  | 'underground_bunker'
+  | 'skyscraper'
+  | 'resort'
+  | 'sky_ship'
+  | 'battleship'
+  | 'custom'
+
+interface WorldThemeAnswers {
+  templateId: WorldTemplateId
+  customThemeDescription?: string
+  worldName: string
+  commandRoomDisplayName: string
+  movementMetaphor: 'corridors' | 'decks' | 'elevators' | 'tunnels' | 'paths' | 'custom'
+  layoutPreference: string
+  pixelEra: string
+  palette: string[]
+  mood: string[]
+  roomIds: string[]
+  artSource: 'bundled' | 'generate' | 'placeholders_then_generate'
+  accessibility: {
+    reducedMotion: boolean
+    highContrast: boolean
+    colorBlindMode?: string
+  }
+}
+```
+
+Ask enough to define a coherent visual system, but do not make the user design architecture from a blank page. The template gallery supplies strong defaults; the interview asks only the decisions that materially personalize them.
+
+- world/vessel/property name
+- selected world template and confirmed topology
 - pixel-art era/default fidelity (`SNES-inspired 16-bit` is the recommended default)
 - palette and mood
-- hull silhouette and ship geography preference
+- silhouette/geography preference appropriate to the selected template
 - desired rooms and any custom rooms
-- whether the installer prefers cozy, industrial, military-clean, scientific, whimsical, or mixed interiors
-- avatar style and whether the owner avatar usually appears on The Bridge
+- whether the installer prefers cozy, industrial, military-clean, scientific, whimsical, luxurious, natural, or mixed interiors
+- avatar style and where the owner usually appears in the selected template's command area
 - motion level, sound preference, accessibility needs, contrast, color-blind support, and reduced-motion preference
-- whether to use bundled Agentarium art, generate new art, or start bundled and regenerate room-by-room later
+- whether to use matching bundled art when available, generate new art, or use labelled placeholders and regenerate room-by-room later
 
 Do not ask for dozens of low-value cosmetic choices up front. Offer strong defaults and allow later editing.
 
@@ -1405,19 +1482,20 @@ When all required jobs pass QA:
 The self-building flow is complete only if all are true:
 
 1. A fresh install launches the animated commissioning guide instead of an empty dashboard.
-2. Theme, agent, business/Forge, and governance questions produce a valid versioned `CommissioningSpec`.
-3. The installer can revise answers before build approval.
-4. Background builder characters correspond one-to-one with inspectable `BuildJob` records.
-5. The local/offline path assembles a ship using bundled art without any external call.
-6. The art pipeline covers one ship background and every selected room background.
-7. Whole-ship hotspots open the correct room views.
-8. Generated agent manifests preserve provider/model intent without claiming credentials are configured.
-9. Refresh/crash resumes the commissioning flow without losing completed answers/jobs.
-10. The build can pause, cancel, retry failed jobs, and replace one room asset without rebuilding everything.
-11. Final QA runs before status changes to `complete`.
-12. The completed ship is presented with a clear report of simulated, configured, and still-unconfigured capabilities.
-13. No secret appears in chat history, prompts, logs, generated files, or screenshots.
-14. Paid/remote generation and external integrations remain explicitly approval-gated.
+2. Theme, world-template, agent, business/Forge, and governance questions produce a valid versioned `CommissioningSpec`.
+3. The world-template chooser includes Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, and Custom Theme; the selected template changes topology, terminology, movement, and art prompts rather than acting as a color skin.
+4. The installer can revise answers before build approval.
+5. Background builder characters correspond one-to-one with inspectable `BuildJob` records.
+6. The local/offline Spaceship path assembles a ship using bundled art without any external call; other unrendered templates use honest placeholders rather than mismatched spaceship art.
+7. The art pipeline covers one whole-world background and every selected room background.
+8. Whole-world hotspots open the correct room views.
+9. Generated agent manifests preserve provider/model intent without claiming credentials are configured.
+10. Refresh/crash resumes the commissioning flow without losing completed answers/jobs.
+11. The build can pause, cancel, retry failed jobs, and replace one room asset without rebuilding everything.
+12. Final QA runs before status changes to `complete`.
+13. The completed world is presented with a clear report of simulated, configured, and still-unconfigured capabilities.
+14. No secret appears in chat history, prompts, logs, generated files, or screenshots.
+15. Paid/remote generation and external integrations remain explicitly approval-gated.
 
 # 13. Acceptance criteria and verification
 

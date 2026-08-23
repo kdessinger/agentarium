@@ -145,7 +145,7 @@ Install
 
 Interview areas:
 
-1. **Theme/world** — ship name, pixel-art style, palette, mood, rooms, geography, accessibility, and bundled-vs-generated art.
+1. **Theme/world** — begin with an illustrated world-template chooser: Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, or Custom Theme. The selection drives topology, movement, terminology, materials, exterior setting, and art prompts; then ask the world name, pixel-art style, palette, mood, rooms, accessibility, and bundled-vs-generated art.
 2. **Agents** — name, purpose, room, provider, model/fallback, tools, permissions, memory, autonomy level, subagents, budget, and success measures.
 3. **Businesses/Forges** — customer, sellable output, inputs/outputs, production and QA agents, external integration intent, approvals, metrics, and risks.
 4. **Operations/governance** — storage, backup, privacy, audit/replay, deployment intent, notification channels, spend limits, credential handling, retries, and approval policy.
