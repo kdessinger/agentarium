@@ -46,6 +46,8 @@ Agent View
 - **Room View** zooms into one room, showing its profile, interior scene, agents/subagents, tools, queues, packets, and room-specific work state.
 - **Agent View** opens a character/profile view for one agent, including role, status, skills, permissions, current task, recent events, subagents where applicable, and future functionality controls.
 
+Room View also branches to **Instrument View** when the operator selects a declared physical console, monitor, terminal, or other workstation inside a room. Instrument View is contextual rather than a fourth linear agent zoom: it opens the real operational/recreational surface owned by that room, preserves provenance/availability/permissions/audit state, and returns the operator to the exact room context. See `docs/plans/2026-09-18-instrument-view-and-the-arcade.md` for the accepted design direction, including The Bridge’s Spatial Intelligence Console and The Arcade’s isolated external WINDOWS93 terminal.
+
 Every animation must still map back to application state/events. The world is the interface, not decoration.
 
 Minimum canvas elements:
