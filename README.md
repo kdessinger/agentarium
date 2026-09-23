@@ -101,3 +101,7 @@ These commands prove the current browser prototype and commissioning lane only. 
 11. In Demo, choose Leave Demo and verify confirmation offers to purge Demo while preserving Standard.
 
 Implementation boundaries and verified behavior are documented in `app/IMPLEMENTATION_NOTES.md`.
+
+## License
+
+Agentarium is released under the [MIT License](LICENSE). You may use, install, modify, and redistribute it, including commercially, provided the copyright and license notice are preserved.
