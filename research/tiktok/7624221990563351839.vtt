@@ -1,0 +1,248 @@
+WEBVTT
+
+
+00:00:00.060 --> 00:00:02.260
+You are looking at a living,
+
+00:00:02.261 --> 00:00:06.601
+breathing, interactive ecosystem that I built for my AI agents
+
+00:00:06.620 --> 00:00:08.900
+so that I could gamify my entire life
+
+00:00:08.901 --> 00:00:10.561
+and all my businesses and everything.
+
+00:00:11.040 --> 00:00:13.420
+And within this little ecosystem,
+
+00:00:13.421 --> 00:00:17.241
+we built these two factory rooms that run autonomous businesses.
+
+00:00:17.420 --> 00:00:21.440
+And the first autonomous business we started was an Etsy store.
+
+00:00:21.441 --> 00:00:24.261
+On this conveyor belt here is a representation of that Etsy store.
+
+00:00:24.262 --> 00:00:27.421
+We could actually access the Etsy store and see how much we've made
+
+00:00:27.422 --> 00:00:30.361
+and manage the store from this little dashboard here.
+
+00:00:30.420 --> 00:00:34.420
+And yes, we have about 40 orders on the Etsy store so far.
+
+00:00:34.421 --> 00:00:36.461
+We're just about to hit $2,000 in revenue.
+
+00:00:36.462 --> 00:00:39.701
+And the biggest question I've been asked has been about the Etsy store
+
+00:00:39.702 --> 00:00:43.081
+actually. And I want to go over how you guys at home
+
+00:00:43.100 --> 00:00:45.880
+can build your own autonomous Etsy store that runs
+
+00:00:46.340 --> 00:00:48.640
+entirely on its own with your AI agents.
+
+00:00:48.700 --> 00:00:52.260
+So what you're gonna need first is AI agents.
+
+00:00:52.261 --> 00:00:53.461
+You're gonna need about three.
+
+00:00:53.462 --> 00:00:56.601
+I recommend at least having about three AI agents.
+
+00:00:57.340 --> 00:00:59.740
+So let me start from step 1,
+
+00:00:59.741 --> 00:01:02.381
+research agent. This is Nova.
+
+00:01:02.382 --> 00:01:05.201
+Nova hangs out in his little research lab
+
+00:01:05.319 --> 00:01:08.260
+and all he does is throughout the day,
+
+00:01:08.261 --> 00:01:10.301
+he'll do research on Etsy,
+
+00:01:10.302 --> 00:01:12.741
+on products that are performing well on Etsy,
+
+00:01:12.742 --> 00:01:14.941
+on stores that are performing well on Etsy
+
+00:01:14.942 --> 00:01:17.781
+and how we can take inspiration from those stores
+
+00:01:17.782 --> 00:01:20.281
+and apply it to our own Etsy store. Right?
+
+00:01:20.380 --> 00:01:24.760
+So he'll take that research and he'll Bring it over to forge over here
+
+00:01:25.620 --> 00:01:33.640
+and forge has access to Printify and Nano Banana Pro.
+
+00:01:33.720 --> 00:01:36.700
+So you're gonna need Nano Banana Pro which is Google,
+
+00:01:36.701 --> 00:01:39.781
+which is Gemini which will cost you about $20 a month.
+
+00:01:39.782 --> 00:01:44.361
+This gives your agent access to actually design products.
+
+00:01:44.660 --> 00:01:48.380
+So that is step one step two is actually gonna be an Etsy store.
+
+00:01:48.381 --> 00:01:52.801
+This will cost you about $30 to start a seller account on Etsy
+
+00:01:53.140 --> 00:01:56.480
+and you're gonna need a Printify account.
+
+00:01:56.660 --> 00:02:00.680
+Printify has all of these products right here
+
+00:02:01.060 --> 00:02:05.300
+and you can have your agent slap your
+
+00:02:05.301 --> 00:02:10.141
+or the designs it creates on these templates here
+
+00:02:10.142 --> 00:02:12.021
+in which Printify will actually
+
+00:02:12.022 --> 00:02:14.421
+when you get an order on your Etsy store
+
+00:02:14.422 --> 00:02:16.381
+will print your design on
+
+00:02:16.382 --> 00:02:21.201
+that your AI agent made and ship it out to your customer for you right?
+
+00:02:21.500 --> 00:02:25.880
+And all you have to do is connect your Printify API key to your agent,
+
+00:02:25.900 --> 00:02:28.820
+connect your Etsy API key to your agent
+
+00:02:28.821 --> 00:02:30.681
+to your main factory agent
+
+00:02:30.780 --> 00:02:34.740
+and then that is essentially all it needs to start creating products
+
+00:02:34.980 --> 00:02:40.260
+So Etsy Printify and then Gemini Nano Banana Pro to create the designs
+
+00:02:40.261 --> 00:02:43.461
+right? And then you're probably asking what is the third agent?
+
+00:02:43.462 --> 00:02:45.021
+Do you have research agent?
+
+00:02:45.022 --> 00:02:48.841
+You have the agent that makes the designs and puts it on Etsy
+
+00:02:49.200 --> 00:02:51.380
+over here we have the media agent
+
+00:02:51.381 --> 00:02:53.421
+which pumps out TikToks all day
+
+00:02:53.422 --> 00:02:56.681
+and actually helps me with my YouTube channel and stuff like that
+
+00:02:56.860 --> 00:03:02.540
+but forge Will create the product photos from these templates
+
+00:03:02.541 --> 00:03:04.561
+and he'll take these template photos.
+
+00:03:04.940 --> 00:03:07.100
+Not exactly these. Usually they're like the empty,
+
+00:03:07.101 --> 00:03:08.421
+like there's no model on them.
+
+00:03:08.422 --> 00:03:13.181
+Usually he takes like we take these usually so that it looks clean,
+
+00:03:13.182 --> 00:03:13.741
+right?
+
+00:03:13.742 --> 00:03:18.621
+And he'll take these product photos he creates and give them to Pixel
+
+00:03:18.622 --> 00:03:22.801
+and Pixel will actually curate slideshows and post it on TikTok.
+
+00:03:23.440 --> 00:03:28.380
+So that is essentially all you need to have an entirely
+
+00:03:28.381 --> 00:03:32.541
+autonomous Etsy store. The only thing I would recommend other than that
+
+00:03:32.542 --> 00:03:34.661
+is to create this system here,
+
+00:03:34.662 --> 00:03:36.661
+which I created when I first started the Etsy store.
+
+00:03:36.662 --> 00:03:38.201
+I don't really use this anymore,
+
+00:03:38.260 --> 00:03:42.340
+but forge, when he started designing in his early career,
+
+00:03:42.341 --> 00:03:45.701
+he was trash. His designs looked terrible.
+
+00:03:45.702 --> 00:03:47.941
+So what I did is I built this system,
+
+00:03:47.942 --> 00:03:49.501
+this approval reject system,
+
+00:03:49.502 --> 00:03:52.921
+a feedback system. So he would show me a design.
+
+00:03:53.100 --> 00:03:54.780
+I would either say approve,
+
+00:03:54.781 --> 00:03:57.481
+I like it or reject. This shit is garbage.
+
+00:03:57.540 --> 00:03:59.660
+And I did this a few hundred times with him.
+
+00:03:59.661 --> 00:04:01.281
+It took about two or three days.
+
+00:04:01.300 --> 00:04:01.980
+And now
+
+00:04:01.981 --> 00:04:05.181
+he's at the point where I completely trust him to make products.
+
+00:04:05.182 --> 00:04:08.341
+His products are great. So that's what I would recommend doing
+
+00:04:08.342 --> 00:04:11.681
+is definitely setting up some sort of system at first
+
+00:04:11.700 --> 00:04:17.300
+so that you can train your agent to actually produce what you want.
+
+00:04:17.301 --> 00:04:19.530
+And yeah, that's how you start up your own Etsy store.

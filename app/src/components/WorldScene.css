@@ -1,0 +1,196 @@
+/* World Scene - Game-like pixel-art experience */
+
+.world-scene-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 120px);
+  min-height: 500px;
+  overflow: hidden;
+  background: #030a11;
+  cursor: crosshair;
+}
+
+.world-scene-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ship-background {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Room glow animations */
+.room-glow {
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Agent sprite group */
+.agent-sprite-group {
+  transition: transform 0.1s ease-out;
+}
+
+.agent-sprite-group:hover {
+  filter: brightness(1.3);
+}
+
+.agent-label {
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  opacity: 0.9;
+}
+
+/* Flow particles */
+.flow-particle {
+  pointer-events: none;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+/* Room hotspot areas */
+.room-hotspot-area {
+  transition: fill 0.2s ease;
+}
+
+.room-hotspot-area:hover {
+  fill: rgba(6, 182, 212, 0.08);
+}
+
+.room-hotspot-control {
+  position: absolute;
+  z-index: 7;
+  padding: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+}
+
+.room-hotspot-control:hover,
+.room-hotspot-control:focus-visible {
+  border-color: rgba(34, 211, 238, 0.72);
+  background: rgba(6, 182, 212, 0.08);
+  outline: none;
+}
+
+/* Hovered room highlight */
+.room-tooltip {
+  pointer-events: none;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+}
+
+.room-card {
+  transition: filter 0.15s ease;
+}
+
+.room-card:hover {
+  filter: brightness(1.2);
+}
+
+/* Status colors for glows */
+.status-glow-working { fill: #06b6d4; }
+.status-glow-blocked { fill: #f97316; }
+.status-glow-needs-approval { fill: #8b5cf6; }
+.status-glow-completed { fill: #22c55e; }
+.status-glow-failed { fill: #ef4444; }
+.status-glow-idle { fill: #94a3b8; }
+
+/* Room Diorama */
+.room-diorama {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 120px);
+  min-height: 500px;
+  overflow: hidden;
+  background: #030a11;
+}
+
+.room-diorama-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.room-background-img {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.room-ambient-glow {
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.room-agent-sprite {
+  transition: transform 0.1s ease-out;
+}
+
+.room-agent-sprite:hover {
+  filter: brightness(1.4);
+}
+
+.room-info-overlay {
+  pointer-events: none;
+}
+
+.diorama-back {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+}
+
+/* Scanline effect overlay */
+.world-scene-container::after,
+.room-diorama::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Subtle vignette */
+.world-scene-container::before,
+.room-diorama::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(3, 10, 17, 0.5) 100%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Mobile adaptations */
+@media (max-width: 768px) {
+  .world-scene-container,
+  .room-diorama {
+    height: calc(100vh - 100px);
+  }
+  
+  .agent-label {
+    font-size: 8px;
+  }
+  
+  .room-info-overlay text {
+    font-size: 9px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .room-glow,
+  .flow-particle,
+  .agent-sprite-group,
+  .room-agent-sprite {
+    animation: none !important;
+    transition: none !important;
+  }
+}

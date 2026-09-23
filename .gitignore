@@ -1,0 +1,33 @@
+# dependencies
+node_modules/
+.venv/
+venv/
+
+# builds
+.next/
+dist/
+build/
+coverage/
+test-results/
+playwright-report/
+visual-evidence/
+
+# env/secrets
+.env
+.env.*
+!.env.example
+
+# local/editor
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# generated/cache
+.cache/
+.tmp/
+__pycache__/
+.pytest_cache/
+
+# preserved local prototypes (not active source)
+legacy/

@@ -1,0 +1,215 @@
+WEBVTT
+
+
+00:00:00.260 --> 00:00:07.400
+This is my interactive AI agent ecosystem dungeon in space
+
+00:00:07.820 --> 00:00:11.480
+that I have all of my AI agents living inside of.
+
+00:00:11.540 --> 00:00:14.520
+And I organize them in all these different rooms.
+
+00:00:14.700 --> 00:00:16.700
+For example, we have the two factory rooms
+
+00:00:16.701 --> 00:00:19.181
+where they're running their own autonomous businesses out of.
+
+00:00:19.182 --> 00:00:20.221
+And this conveyor belt
+
+00:00:20.222 --> 00:00:23.161
+is a representation of the Etsy store it started
+
+00:00:23.220 --> 00:00:27.020
+that it's almost made $2,000 on and everything.
+
+00:00:27.021 --> 00:00:28.301
+I don't do any work for this.
+
+00:00:28.302 --> 00:00:32.061
+It runs itself. Inside of these two rooms here we have an a.
+
+00:00:32.062 --> 00:00:35.541
+We have an AI research agent that's constantly doing research,
+
+00:00:35.542 --> 00:00:36.101
+for example,
+
+00:00:36.102 --> 00:00:39.261
+on the autonomous businesses that it started and its competitors,
+
+00:00:39.262 --> 00:00:42.101
+to see what inspiration we could take from the competitors
+
+00:00:42.102 --> 00:00:43.821
+and how we can apply it to our own
+
+00:00:43.822 --> 00:00:45.181
+autonomous businesses that we build.
+
+00:00:45.182 --> 00:00:49.461
+We have a whole bunch of crazy ass shit going on
+
+00:00:49.462 --> 00:00:51.901
+in this entire station here.
+
+00:00:51.902 --> 00:00:54.141
+And in this video in particular,
+
+00:00:54.142 --> 00:00:56.821
+I actually want to focus on this room here,
+
+00:00:56.822 --> 00:00:57.941
+which is the armoury room.
+
+00:00:57.942 --> 00:01:03.701
+And this is where my agent builds and manages its own skills
+
+00:01:03.702 --> 00:01:07.421
+on Openclap. And we're gonna open up the terminal here
+
+00:01:07.422 --> 00:01:08.741
+and you're gonna see actually
+
+00:01:08.742 --> 00:01:12.021
+all of the accounts and API keys I have connected,
+
+00:01:12.022 --> 00:01:14.581
+like my YouTube channel, the Etsy store is connected.
+
+00:01:14.582 --> 00:01:15.941
+And I could just in one place,
+
+00:01:15.942 --> 00:01:19.021
+see everything that's attached to my AI agents
+
+00:01:19.022 --> 00:01:20.401
+and what they have access to.
+
+00:01:20.420 --> 00:01:25.340
+And in the skills tab, we have all of the skills that it Has built
+
+00:01:25.341 --> 00:01:27.661
+and rather replicated would be a better word.
+
+00:01:27.662 --> 00:01:28.741
+And we could craft. Like,
+
+00:01:28.742 --> 00:01:30.781
+if I wanted to build my own skill myself,
+
+00:01:30.782 --> 00:01:32.481
+I could literally just, like,
+
+00:01:32.820 --> 00:01:34.580
+you know, choose what type of skill it is,
+
+00:01:34.581 --> 00:01:35.701
+give it a name, description,
+
+00:01:35.702 --> 00:01:37.461
+and have it build that out for me.
+
+00:01:37.462 --> 00:01:40.921
+But the main system we have here is.
+
+00:01:41.180 --> 00:01:42.540
+This is clawhub, right?
+
+00:01:42.541 --> 00:01:44.301
+This essentially is a website
+
+00:01:44.302 --> 00:01:45.641
+you can go on
+
+00:01:46.140 --> 00:01:51.100
+to download skills that are made by other people on Openclaw.
+
+00:01:51.101 --> 00:01:53.201
+So these are all different skills
+
+00:01:53.220 --> 00:01:55.220
+that you can download for your AI agent
+
+00:01:55.221 --> 00:01:57.221
+that was made by somebody else.
+
+00:01:57.222 --> 00:01:59.021
+And the issue with this site here is
+
+00:01:59.022 --> 00:02:00.941
+you can't trust any of these skills,
+
+00:02:00.942 --> 00:02:04.821
+and you can't trust any of the people that uploaded these skills,
+
+00:02:04.822 --> 00:02:06.301
+because you might get hacked.
+
+00:02:06.302 --> 00:02:10.601
+There might be some malware in the skill files that you're downloading.
+
+00:02:11.059 --> 00:02:13.860
+And I found a way to combat this,
+
+00:02:13.861 --> 00:02:16.001
+in which I figured I would share with you guys,
+
+00:02:16.140 --> 00:02:20.500
+because I have my agent download these skills,
+
+00:02:20.501 --> 00:02:21.301
+and you're probably like, oh,
+
+00:02:21.302 --> 00:02:22.061
+that's unsafe. No,
+
+00:02:22.062 --> 00:02:24.361
+it's not. I don't install the skill,
+
+00:02:24.440 --> 00:02:29.520
+I download it. I have the agent look through the internals of the skill,
+
+00:02:29.540 --> 00:02:31.660
+and we simply replicate that skill
+
+00:02:31.661 --> 00:02:36.361
+rather than actually installing the skill made by whoever it is.
+
+00:02:36.420 --> 00:02:40.940
+So all the skills we have that my openclaw runs on
+
+00:02:40.941 --> 00:02:43.741
+is just replicated from other people on clawhub.
+
+00:02:43.742 --> 00:02:44.501
+And this isn't, like,
+
+00:02:44.502 --> 00:02:46.581
+bad or anything. All these skills are free.
+
+00:02:46.582 --> 00:02:47.821
+And you can't trust them anyway,
+
+00:02:47.822 --> 00:02:50.581
+so I would highly recommend,
+
+00:02:50.582 --> 00:02:53.581
+if you are to get any skills on clawhub,
+
+00:02:53.582 --> 00:02:56.421
+to just have your agent just replicate the skill
+
+00:02:56.422 --> 00:02:58.181
+rather than actually install it.
+
+00:02:58.182 --> 00:03:01.341
+Because I do not trust any of these people here,
+
+00:03:01.342 --> 00:03:02.981
+and I recommend you don't either.
+
+00:03:02.982 --> 00:03:04.819
+So I figured I'd give you guys some tips on that.
