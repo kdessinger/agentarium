@@ -19,7 +19,7 @@ try {
 const browser = await chromium.launch({ headless: true })
 
 async function commission(page) {
-  await page.getByRole('button', { name: /Press any key to begin/i }).click()
+  await page.getByRole('button', { name: /Begin Agentarium commissioning/i }).click()
   await page.getByRole('tab', { name: '02 Connect Intelligence' }).click()
   await page.getByRole('button', { name: 'Continue without connection' }).click()
   await page.getByRole('button', { name: 'Continue to Governance' }).click()

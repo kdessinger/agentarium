@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
 })
 
 async function enterSetup(page: import('@playwright/test').Page) {
-  await page.getByRole('button', { name: /Press any key to begin/i }).click()
+  await page.getByRole('button', { name: /Begin Agentarium commissioning/i }).click()
   await expect(page.getByRole('heading', { name: 'Create Your Orchestrator' })).toBeVisible()
 }
 
@@ -39,13 +39,6 @@ test('world-template commissioning shows representative thumbnails and a custom-
   await page.getByRole('button', { name: 'Spaceship' }).click()
   await expect(page.getByRole('img', { name: /Spaceship concept preview/ })).toBeVisible()
   await expect(page.locator('.selected-world-preview')).toContainText('Spaceship')
-})
-
-test('fresh startup is a title threshold without setup questions', async ({ page }) => {
-  await expect(page.getByRole('heading', { name: 'Agentarium' })).toBeVisible()
-  await expect(page.getByText('Gamified AI Agent Harness')).toBeVisible()
-  await expect(page.getByText('Press any key to begin')).toBeVisible()
-  await expect(page.getByRole('textbox')).toHaveCount(0)
 })
 
 test('first setup surface creates one Orchestrator without exposing the full crew', async ({ page }) => {

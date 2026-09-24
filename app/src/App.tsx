@@ -25,7 +25,8 @@ import { exportDraft, importDraft, loadWorkspace, restartWithBackup, saveWorkspa
 import { getAgentPortraitPath, getAgentWorkItems, getRoomWorkItems, type RoomWorkItem } from './lib/presentation'
 import { deriveFeedbackLoop } from './lib/feedbackLoop'
 import { FeedbackLoopPanel } from './components/FeedbackLoopPanel'
-import { AgentariumTitleScreen, OrchestratorSetup } from './components/OnboardingSetup'
+import { AgentariumTitleScreen } from './components/AgentariumTitleScreen'
+import { OrchestratorSetup } from './components/OnboardingSetup'
 
 const DRAFT_MODE_KEY = 'agentarium:commissioning-current-mode'
 const draftKeyFor = (mode: InstallationMode) => `agentarium:${mode}:commissioning:v2`

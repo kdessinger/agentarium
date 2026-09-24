@@ -36,6 +36,7 @@ A newer test result can update `qa/STATUS.md`; it does not silently change a pro
 | `../PRODUCT_BLUEPRINT.md` | Product vision, mechanics, surfaces, long-term direction |
 | `../ARCHITECTURE.md` | Target architecture and contracts |
 | `COMMAND_SHELL_AND_CREW_SPEC.md` | Approved post-wake shell, Captain, Crew Roster, Agent Profile, recruitment, memory, growth, and import contract |
+| `TITLE_SCREEN_SPEC.md` | Locked design language and honesty rules for the fresh-install title screen |
 | `WORKSPACE_MAP.md` | Current high-level repository map |
 | `prompts/agentarium-master-build-prompt.md` | Detailed living build contract |
 | `../app/IMPLEMENTATION_NOTES.md` | Current browser-prototype behavior and storage details |

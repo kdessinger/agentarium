@@ -6,10 +6,11 @@ test.beforeEach(async ({ page }) => {
   await page.reload()
 })
 
-test('fresh install opens with a single cinematic invitation', async ({ page }) => {
-  await expect(page.getByRole('heading', { name: 'Agentarium' })).toBeVisible()
-  await expect(page.getByText('Gamified AI Agent Harness')).toBeVisible()
-  await expect(page.getByText('Press any key to begin')).toBeVisible()
+test('fresh install opens with the locked synthwave title screen', async ({ page }) => {
+  await expect(page.getByRole('heading', { name: 'AGENTARIUM' })).toBeVisible()
+  await expect(page.getByText('GAMIFIED AI AGENT COMMAND SYSTEM')).toBeVisible()
+  await expect(page.getByText('COMMAND THE UNKNOWN')).toBeVisible()
+  await expect(page.getByRole('button', { name: /Begin Agentarium commissioning/i })).toBeVisible()
   await expect(page.getByRole('textbox')).toHaveCount(0)
   await expect(page.getByText('Ultron', { exact: true })).toHaveCount(0)
 })

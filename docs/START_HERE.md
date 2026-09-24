@@ -47,6 +47,7 @@ See `../qa/STATUS.md` for evidence and exact scope. Never convert a lane-level P
 9. `../CONTEXT.md`, `../PRODUCT_BLUEPRINT.md`, and `../ARCHITECTURE.md` - deeper product context and target architecture.
 10. `prompts/agentarium-master-build-prompt.md` - detailed build contract.
 11. `COMMAND_SHELL_AND_CREW_SPEC.md` - approved post-wake command shell and Crew system.
+12. `TITLE_SCREEN_SPEC.md` - approved title-screen design language.
 
 `INDEX.md` classifies every other document as living authority, supporting specification, plan, evidence, runbook, reference, or archive.
 

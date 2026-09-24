@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
+import { useMemo, useRef, useState, type CSSProperties } from 'react'
 import type { AgentDefinition, CommissioningDraft, InstallationMode } from '../lib/commissioning'
 
 const ORCHESTRATOR_PERSONALITIES = [
@@ -64,28 +64,6 @@ const PERSONALITY_LINES: Record<OrchestratorPersonality, string> = {
   'Witty / Funny': 'You bring the mission. I’ll bring the crew—and keep the chaos on a short leash.',
   'Technical / Scientific': 'I’ll decompose the objective, test assumptions, and preserve evidence through every handoff.',
   Bold: 'Point me at the mission. I’ll create momentum while respecting every hard boundary.',
-}
-
-export function AgentariumTitleScreen({ onEnter }: { onEnter: () => void }) {
-  useEffect(() => {
-    const enter = (event: KeyboardEvent) => {
-      if (event.metaKey || event.ctrlKey || event.altKey || event.key === 'Tab') return
-      onEnter()
-    }
-    window.addEventListener('keydown', enter, { once: true })
-    return () => window.removeEventListener('keydown', enter)
-  }, [onEnter])
-
-  return <main className="agentarium-title-screen" onClick={onEnter}>
-    <div className="title-stars" aria-hidden="true" />
-    <div className="title-horizon" aria-hidden="true"><i /><i /><i /></div>
-    <section className="title-lockup">
-      <span className="title-kicker">Welcome to</span>
-      <h1>Agentarium</h1>
-      <p>Gamified AI Agent Harness</p>
-      <button type="button" onClick={(event) => { event.stopPropagation(); onEnter() }}><span aria-hidden="true" />Press any key to begin</button>
-    </section>
-  </main>
 }
 
 type Props = {

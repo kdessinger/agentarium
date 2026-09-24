@@ -111,3 +111,9 @@ After commissioning, Agentarium uses a persistent operating shell with global st
 The human role is **Captain**. The central coordinating role is **Orchestrator**. Crew management uses **Crew Roster**, **Recruitment Bay**, and **Agent Profile**. Agent level records verified experience and never grants authority. Cinematic Mode may hide management chrome but never critical safety, approval, cost, failure, or emergency-pause state.
 
 The approved detailed contract is `COMMAND_SHELL_AND_CREW_SPEC.md`. Work, Build, and System contents remain open until their dedicated review; implementation must not guess them prematurely.
+
+## D-014 - Title screen uses the locked vibe-coded design language
+
+**Status:** locked
+
+Fresh-install introduction renders the synthwave-style title screen from `TITLE_SCREEN_SPEC.md`. The monumental `AGENTARIUM` wordmark, sun, perspective grid, top system rail, side `AGENT SCAN` and `UPLINK` panels, centered command panel with corner brackets, blinking cursor, and arcade footer are the approved design language. The side panels are pure fiction and must remain decorative; they must never claim real metrics, providers, or system state. A single `Begin` control opens the Orchestrator setup shell from D-012.
