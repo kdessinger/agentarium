@@ -1056,11 +1056,87 @@ Do not create all components merely to satisfy the directory sketch. Keep units 
 
 # 12.5 Self-building first-run commissioning system
 
-Agentarium should become a **self-building application** in a controlled, configuration-driven sense. On first startup it interviews the installer, produces a reviewable ship blueprint, spawns bounded builder jobs, assembles art and agent manifests, and then presents the commissioned application.
+Agentarium's first-run experience is the Captain's introduction to the product, not a setup wizard. It opens with a locked cinematic title screen, transitions into an embedded Orchestrator commissioning shell, and never dumps an unconfigured crew onto the user. Everything that follows must preserve that sequence and the locked design language.
 
-Do **not** implement uncontrolled self-modifying source code. The builder may generate configuration, manifests, art assets, room topology, hotspot maps, agent definitions, workflow definitions, and local project data. It must not silently rewrite the core runtime, install arbitrary packages, fetch skills, expose secrets, spend money, or call external services without a visible approval step.
+The first-run experience is controlled and configuration-driven, not uncontrolled self-modifying code. Builder jobs may generate configuration, manifests, art assets, room topology, hotspot maps, agent definitions, workflow definitions, and local project data. They must not silently rewrite the runtime, install arbitrary packages, fetch skills, expose secrets, spend money, or call external services without a visible approval step.
 
-## 12.5.1 First-run detection and resumability
+## 12.5.1 Locked design language and first-run sequencing
+
+**Decision authority:** `DECISIONS.md` D-012, D-013, D-014. **Design authority:** `TITLE_SCREEN_SPEC.md`, `COMMAND_SHELL_AND_CREW_SPEC.md`.
+
+The approved first-run order is:
+
+```text
+title screen (locked synthwave design)
+  -> Orchestrator commissioning (appearance, name, personality, working style, atmosphere/effects)
+  -> optional intelligence connection (OAuth, API key, or local runtime)
+  -> assemble/activate starter crew templates
+  -> launch first mission
+```
+
+The title screen is the gate. It must:
+
+- Render the locked synthwave design: monumental `AGENTARIUM` wordmark, striped sun, perspective wireframe grid, top system rail, side `AGENT SCAN` and `UPLINK` terminals, central command panel with corner brackets, blinking cursor, and arcade footer.
+- Contain no questions, no forms, no mode selection, no crew roster, no real metrics.
+- Present a single `Begin` control that opens the Orchestrator setup shell. That control must be a real semantic button, support mouse, keyboard (`Enter`/`Space`), touch, and gamepad activation, and ignore modifier-only and repeated keypresses.
+- Respect `prefers-reduced-motion` for blinking, scanline, and star animations.
+- Treat the side `AGENT SCAN` and `UPLINK` panels as **pure fiction** — decorative atmosphere only, never exposed as live metrics, never read from real state, never animated as if they reflected truth.
+
+## 12.5.2 Orchestrator commissioning (D-012)
+
+The first real setup surface creates exactly one Orchestrator before the user meets the broader crew.
+
+- The commissioning environment is an embedded tabbed shell: `01 Your Orchestrator` and `02 Connect Intelligence`. The user never leaves the page between these two sections.
+- The Orchestrator is identified by appearance, name, personality, and working style.
+- Personality options (locked): Professional, Empathetic / Friendly, Direct / Blunt, Witty / Funny, Technical / Scientific, Bold.
+- Working-style options (locked): Supervised (recommended), Trusted, Custom.
+- Appearance selection offers a curated starter collection of portraits, with a large preview and a small gallery. The selected appearance persists across the application.
+- The interface supports atmosphere choices (cyan, emerald, amber, violet, crimson, monochrome), CRT scanlines toggle, and ambient effects toggle. All are reversible.
+- The Orchestrator must not be presented as a generic system agent. It is a character the Captain commissions; the interface should reflect that.
+
+**Restore Agentarium** is a visible secondary action during initial setup. A JSON backup can be imported and validated before loading. Standard remains the clean default; **Explore Demo World** is a secondary setup action, not a dedicated mode-selection page. Standard and Demo commissioning drafts remain isolated.
+
+## 12.5.3 Intelligence provider selection (D-012)
+
+Selecting an intelligence provider is optional during first-run. The user can proceed without one and configure it later.
+
+- The provider catalog includes OpenAI, Anthropic, OpenRouter, Google Gemini, xAI, Kimi, Groq, Mistral, DeepSeek, Ollama, LM Studio, and Custom Endpoint.
+- Each provider card shows its intended method: OAuth connector, API key connector, or local runtime.
+- Selecting a provider opens an embedded detail panel; the user never leaves the setup page.
+- The prototype must not claim sign-in, credential custody, validation, or connection until its adapter genuinely implements and verifies those capabilities.
+- The current browser prototype does not store provider secrets or perform OAuth. A dedicated secure connector must be installed before any provider is marked connected.
+
+## 12.5.4 Post-wake command environment (D-013)
+
+After the Orchestrator is commissioned and intelligence is connected, Agentarium transitions into a persistent command environment. The user role is **Captain**. The central coordinating role is **Orchestrator**.
+
+The shell contains:
+
+- **Top:** global status, instruments, connection health, automation state, pending approvals, budget state, emergency pause, and an **Add Instrument** control.
+- **Left:** Crew Roster, Projects, Sessions, search, and filters. Agents, projects, sessions, and runs are visually distinct.
+- **Center:** the living world, which is the primary interface and must represent validated operational events.
+- **Right:** communications, approvals, attachments, voice controls, model in use, and a link to the underlying event log.
+- **Bottom:** Crew / Work / Build / System navigation and a scoped context meter.
+
+The Crew area is organized as **Crew Roster**, **Recruitment Bay**, and **Captain**. Each crew member has an **Agent Profile** with tabs: Overview, Growth, Work Record, Memory, Settings.
+
+**Cinematic Mode** expands the world and hides management chrome while preserving emergency pause, agent state, critical approval, safety, cost, and failure notices, and `Escape` exit.
+
+**Growth** records verified experience, never authority. Leveling must not silently grant tools, credentials, spending, publishing, destructive access, or unattended autonomy.
+
+**Memory** proposals support reflection on/off, task-completion and correction-driven reflection, Keep/Edit/Discard/Never Suggest Again, provenance, receipt/undo, sensitivity classification, and scope (agent, project, room, system).
+
+**While I'm Away** must be explicitly scoped: projects, tools, external communication, time window, budget, maximum work, stop conditions, approval requirements, and report destination.
+
+**Recruitment Bay** organizes templates into categories: Leadership, Research and Intelligence, Marketing and Creative, Engineering, Operations, Personal. Templates begin as **Available**, not unconfigured.
+
+**Hermes/OpenClaw import** must enumerate detected profiles, preview mappings, state what will and will not be imported, preserve the source installation, avoid importing credentials silently, avoid starting agents automatically, and support rollback.
+
+**Captain profile** contains About You, Goals, Ambitions, Preferences, Standing Orders, Schedule, Agent Briefing, Sources, and World Record. The Agent Briefing answers "What does this agent currently know about me?" with provenance and exclusion controls.
+
+The full post-wake contract is locked in `COMMAND_SHELL_AND_CREW_SPEC.md`.
+
+## 12.5.5 First-run detection and resumability
 
 Persist a versioned local commissioning record. On launch:
 
@@ -1114,473 +1190,61 @@ interface ArticulationAnswers {
 }
 ```
 
-## 12.5.2 Animated installer guide
-
-> **Supersession notice:** D-012 replaces the historical purpose-first opening below with the title threshold and embedded Orchestrator/intelligence commissioning shell. D-013 and `docs/COMMAND_SHELL_AND_CREW_SPEC.md` govern the post-wake command environment, Captain terminology, Crew Roster, Agent Profile, world choice, context meter, Cinematic Mode, recruitment, memory, growth, and import. Retain the material below only as rationale where it does not conflict.
-
-The first screen should not be a conventional setup wizard card. **Ultron / the Steward** appears inside a neutral unfinished construction environment and begins with the owner's purpose, desired outcomes, operating boundaries, and preferred working relationship. Ultron is the conversational commissioning guide because the product begins with the founder-to-orchestrator relationship; Builder workers appear only after the owner approves the blueprint. Before a visual style is selected, use a clean style-neutral steward presentation. After the operating model is understood and a style is selected, the environment may preview/adopt that style. `CommissioningGuide` may remain the internal component name, but the displayed role is the commissioned steward (default `Ultron`).
-
-Behavior:
-
-- The agent enters the scene, notices the installer, and opens a chat bubble over its head.
-- Questions appear conversationally, one decision-sized prompt at a time.
-- A compact transcript/history remains available so the installer can revise earlier answers.
-- Keyboard, mouse, and touch controls all work.
-- `prefers-reduced-motion` replaces entrance/build animations with immediate state changes.
-- The guide explains why sensitive questions are needed and never asks the installer to paste raw secrets into an ordinary chat bubble.
-- Provider credentials, if enabled in a future live mode, use dedicated masked credential fields and secure storage adapters; they are never written into generated prompts, logs, screenshots, or repo files.
-
-The guide is warm, competent, and lightly personable. It must not be childish, obsequious, or verbose.
-
-## 12.5.3 Interview sequence
-
-The interview is adaptive, but it must cover these sections and produce structured answers.
-
-The canonical first-run order is:
-
-```text
-1. Owner → steward articulation
-2. Standard or Demo operating boundary
-3. Agent roster and responsibilities
-4. Forges / revenue-producing operations
-5. Governance and installation boundaries
-6. Visual presentation style
-7. World template and world name
-8. Inspect and approve the complete blueprint
-9. Run inspectable local build jobs and approve final presentation
-```
-
-Do not lead with cosmetic choices. The operation must make sense before the product asks how it should look or what kind of world should contain it. Reordering this flow is a cross-cutting change: update the visible prompt, rendered panel, back/continue controls, progress meter, persisted step recovery, import/reset behavior, E2E helpers, and visual-capture scripts together. Copy changes without matching state/render changes are a failed implementation.
-
-### Owner-to-steward articulation (step 1)
-
-Ultron begins with language close to:
-
-> **“Tell me what we’re building together.”**
-
-Capture and persist the owner's name or call sign, steward name, mission/vision, desired outcomes, non-negotiable operating boundaries, and preferred working style. Treat this saved answer set as the owner-to-Ultron orchestration charter. Require a meaningful mission before continuing. The blueprint must show these answers before topology or art direction so the user can verify that the world expresses the intended operation.
-
-### Visual presentation style (step 6)
-
-Ask this only after articulation, operating mode, agents, Forges, and governance are understood, and before the world-template question:
-
-> **“How should your Agentarium look?”**
-
-**Pixel art must be optional and available for every world template.** It is a presentation choice, not a property of the Spaceship theme and not a requirement of Agentarium.
-
-Offer these starting choices as preview cards:
-
-1. **Pixel Art** — retro game presentation. If selected, ask for an era/fidelity such as 8-bit, 16-bit/SNES-inspired, high-detail modern pixel art, or custom. The bundled Agentarium spaceship art uses high-detail 16-bit/SNES-inspired pixel art.
-2. **Illustrated 2D** — polished hand-drawn/digital illustration with layered backgrounds and animated overlays.
-3. **Isometric 3D** — rendered miniature/diorama spaces with 3D characters and camera movement.
-4. **Cinematic / Realistic** — detailed concept-art or realistic environments with restrained interface overlays.
-5. **Clean Vector / Graphic** — crisp shapes, diagrams, strong silhouettes, and lightweight animation.
-6. **Custom Visual Style** — installer describes an original art direction or supplies reference images.
-
-For every choice, show the same small sample scene or topology in each visual style so the installer is choosing an art treatment rather than accidentally changing the world architecture.
-
-The installer can also toggle **Pixel Treatment** on or off later in the style editor. Turning it on applies pixel-grid, palette, sprite, and animation conventions to the currently selected world template. Turning it off preserves the world topology and operational configuration and asks the installer to select the replacement presentation style. Changing presentation style must not recreate agents, businesses, rooms, memory, workflows, or approvals.
-
-Suggested contract:
-
-```ts
-type VisualStyleId =
-  | 'pixel_art'
-  | 'illustrated_2d'
-  | 'isometric_3d'
-  | 'cinematic_realistic'
-  | 'clean_vector'
-  | 'custom'
-
-interface VisualStyleAnswers {
-  styleId: VisualStyleId
-  pixelArtEnabled: boolean
-  pixelEra?: '8_bit' | '16_bit' | 'modern_high_detail' | 'custom'
-  customStyleDescription?: string
-  referenceAssetIds: string[]
-  palette: string[]
-  mood: string[]
-  animationLevel: 'none' | 'subtle' | 'active'
-  soundEnabled: boolean
-  reducedMotion: boolean
-  highContrast: boolean
-  colorBlindMode?: string
-}
-```
-
-The selected visual style drives the shared style bible, whole-world image prompt, room-image prompts, agent rendering method, animation language, camera treatment, and asset QA. It does **not** alter room IDs, topology, Forge classification, agent responsibilities, or operational contracts.
-
-### Operating mode and data policy (step 2)
-
-Ask immediately after owner-to-steward articulation:
-
-> **“Will this installation use real operational data, or should I create an isolated demonstration world?”**
-
-Choices:
-
-1. **Standard mode — recommended/default**
-   - starts with no operational data
-   - uses only user-entered data and configured real providers/tools/integrations
-   - shows honest empty/unconfigured/error states
-   - never loads Demo fixtures
-
-2. **Demo mode**
-   - loads an isolated synthetic walkthrough for training, screenshots, and evaluation
-   - performs no external actions
-   - shows a persistent Demo banner
-   - can be purged completely
-   - never contributes to Standard memory, analytics, maturity, XP, budgets, or decisions
-
-Do not preselect Demo mode. Record an explicit answer. Before confirming Demo mode, explain that all visible operational records will be synthetic. Before switching an existing Standard installation to Demo, create a separate Demo workspace/partition; never replace or mix the Standard dataset.
-
-### Theme and world questions (step 7)
-
-Begin this section with a **visual world-template chooser**, not an open-ended design questionnaire. Ultron should say something close to: “What kind of world should contain this operation?” Present large illustrated choice cards with a short description and a small topology preview.
-
-Every world-template card must include a representative thumbnail, and selecting/clicking a template must update a larger adjacent preview with its topology, movement metaphor, command-area terminology, materials, and selected visual style. The preview should make the choice understandable before the installer commits; two-letter glyphs, text-only cards, or the same image reused across themes are insufficient.
-
-Display this note prominently above or beside the chooser:
-
-> **Each commissioned world is custom and unique.** These thumbnails show a possible direction—not the exact world that will be created for you.
-
-Preview images are inspiration/communication aids, not locked blueprints. The commissioned renderer must create a new world from the installer's selected template, visual style, answers, room roster, topology, name, and art direction. It must not silently clone the thumbnail, reuse another customer's rendered world, or imply that every installation of a template will look identical. Bundled art remains an explicitly identified exception where the user chooses the bundled starter asset set.
-
-Required starting choices:
-
-1. **Modern Corporate Office** — contemporary headquarters with reception, executive command suite, open-plan departments, conference rooms, creative studios, operations center, secure IT/server areas, employee lounge, elevators, and city/campus views. This is the recommended/default Agentarium template.
-2. **Space Station** — orbital hub, rings/spokes, docking structures, connected laboratory modules.
-3. **Spaceship** — a vessel traveling through space, longitudinal decks, corridors, engineering sections, and The Bridge. This matches the bundled concept art.
-4. **Cruise Ship** — ocean-going decks, bridge, atrium, cabins, entertainment areas, service corridors, and engine spaces.
-5. **Underground Bunker** — subterranean levels, tunnels, hardened doors, command center, utilities, and secure specialist chambers.
-6. **Skyscraper** — stacked floors, elevators, executive command level, departments, mechanical floors, and a city view.
-7. **Resort** — a campus of connected buildings, paths, villas, studios, operations lodge, recreation, and landscaped shared areas.
-8. **Sky Ship** — a large flying vessel above the clouds, decks, engine/balloon or anti-gravity systems, helm, observation spaces, and aerial docks.
-9. **Battleship** — armored ocean vessel, bridge, combat information center, deck machinery, engineering, communications, and compartmentalized operations.
-10. **Custom Theme** — the installer describes any original setting, structure, geography, and naming language.
-
-Do not treat these as color skins over the same spaceship. A selected template must drive:
-
-- world silhouette and map geometry
-- vertical vs horizontal organization
-- room adjacency and travel routes
-- corridor, elevator, tunnel, path, deck, or docking metaphors
-- command-room terminology and other world-facing labels
-- exterior environment, windows/views, materials, machinery, lighting, and ambient effects
-- the whole-world image prompt and every room-image prompt
-
-Preserve stable functional IDs and operational contracts underneath the theme. For example, the top-level command role can remain `command_room` internally while the displayed room may be **The Bridge**, **Command Center**, **Executive Command Floor**, **Operations Lodge**, or a custom name. Forges remain revenue-producing operational units even if the selected theme presents them as factories, workshops, studios, kitchens, dry docks, or other setting-appropriate spaces.
-
-After the installer chooses a template:
-
-1. Show a concise preview of its proposed geography and terminology.
-2. Let the installer accept it, adjust it, or return to the template gallery.
-3. If `Custom Theme` is selected, ask for the setting, exterior/world context, layout logic, central command area, movement system, materials, mood, and any must-have landmarks. Summarize the interpretation for confirmation before proceeding.
-4. Ask for the world/vessel/property name.
-5. Then ask the remaining world-specific questions. Do not ask for pixel-art fidelity here; that belongs to the visual-presentation section (step 6) and applies equally to every template:
-   - desired rooms and any custom rooms
-   - whether the installer prefers cozy, industrial, military-clean, scientific, whimsical, luxurious, natural, or mixed interiors
-   - avatar style and the owner's usual command-room location
-   - whether to use bundled art, generate new art, or start with placeholders and regenerate room-by-room later
-
-The bundled art is the **Spaceship + Pixel Art** starter set. Other world/style combinations must not silently reuse that art as if it matched. If remote image generation is not configured/approved, use clearly labelled local placeholder scenes and retain the complete generated prompts for later rendering.
-
-Suggested contract:
-
-```ts
-type WorldTemplateId =
-  | 'space_station'
-  | 'spaceship'
-  | 'cruise_ship'
-  | 'underground_bunker'
-  | 'skyscraper'
-  | 'resort'
-  | 'sky_ship'
-  | 'battleship'
-  | 'modern_corporate_office'
-  | 'custom'
-
-interface WorldThemeAnswers {
-  templateId: WorldTemplateId
-  customThemeDescription?: string
-  worldName: string
-  commandRoomDisplayName: string
-  movementMetaphor: 'corridors' | 'decks' | 'elevators' | 'tunnels' | 'paths' | 'custom'
-  layoutPreference: string
-  roomIds: string[]
-  artSource: 'bundled' | 'generate' | 'placeholders_then_generate'
-  accessibility: {
-    reducedMotion: boolean
-    highContrast: boolean
-    colorBlindMode?: string
-  }
-}
-```
-
-Ask enough to define a coherent visual system, but do not make the user design architecture from a blank page. The template gallery supplies strong defaults; the interview asks only the decisions that materially personalize them.
-
-- world/vessel/property name
-- selected world template and confirmed topology
-- silhouette/geography preference appropriate to the selected template
-- desired rooms and any custom rooms
-- whether the installer prefers cozy, industrial, military-clean, scientific, whimsical, luxurious, natural, or mixed interiors
-- avatar style and where the owner usually appears in the selected template's command area
-- whether to use matching bundled art when available, generate new art, or use labelled placeholders and regenerate room-by-room later
-
-Do not ask for dozens of low-value cosmetic choices up front. Offer strong defaults and allow later editing.
-
-### Agent questions (step 3)
-
-For each agent ask or infer, then confirm:
-
-- name and visual identity
-- purpose and responsibilities
-- primary room
-- provider
-- preferred model and optional fallback model
-- tools/capabilities
-- permissions and prohibited actions
-- memory scope
-- autonomy level: demo-only, supervised, trusted, or bounded autonomous
-- approval triggers
-- expected inputs and outputs
-- subagents, if any
-- idle behavior and whether the agent may visit Ten Forward
-- cost/budget constraints
-- success measures
-
-Always include an owner/steward relationship. Ultron is the default Bridge steward, but the installer may rename the character without changing the steward role contract.
-
-### Business and Forge questions (step 4)
-
-For every proposed business ask:
-
-- business purpose and customer
-- whether it produces a sellable product/service (therefore a Forge) or only communicates/supports
-- inputs, outputs, and delivery destination
-- production agents and QA/review agents
-- research/evidence source intent
-- approval points
-- external integrations desired later
-- revenue/cost metrics the user wants to see
-- compliance, IP, privacy, safety, and brand risks
-- current maturity: idea, demo-only, supervised, trusted, or live
-
-Never infer that a Communications Room is a Forge. A Forge manufactures a sellable output or revenue-producing service; Communications routes messages/signals.
-
-### Operations, governance, and installation questions (step 5)
-
-Ask the remaining questions needed to build safely:
-
-- local-only, LAN, or future hosted deployment intent
-- single owner or future multi-user intent
-- data sensitivity and retention
-- local storage/backup/export preferences
-- audit/replay requirements
-- approval policy for external actions
-- budget/spend limits
-- credential-storage preference (without requesting credentials in chat)
-- desired integrations and whether each is unconfigured, read-only, supervised/gated-write, or disabled; Demo uses separate non-networked fixture adapters
-- notification channels
-- failure/retry behavior
-- maintenance window and update policy
-- telemetry/privacy choice
-- whether generated art and agent configurations require review individually or as a batch
-
-At the end, show an **Assumptions and Open Questions** page. Do not hide inferred defaults.
-
-## 12.5.4 Blueprint approval before building
-
-The interview output must become an inspectable `BuildPlan` before any background builder starts. Show:
-
-- ship name, theme, palette, and cross-section topology
-- room list with `Room Name`, `Type`, `Description`, and `Level`
-- spatial adjacency map
-- agent roster with provider/model intent and permission boundaries
-- Forge/business definitions
-- workflow routes and approval gates
-- art asset list
-- estimated external calls/cost if live generation is enabled
-- assumptions, unresolved questions, warnings, and non-goals
-
-Controls:
-
-```text
-Revise answers
-Approve commissioned build
-Approve selected paid/remote generation jobs
-Export commissioning spec
-Cancel safely
-```
-
-No builder job may move from `planned` to `running` until the relevant scope is approved.
-
-## 12.5.5 Builder animation and truthful progress
-
-After approval, transition to a ship-construction presentation. Show the guide agent at a console while small background builder agents spawn for bounded jobs.
-
-Example builder roles:
-
-- `TopologyBuilder` — creates ship geography and hotspot map
-- `ArtDirector` — enforces the shared visual style
-- `ShipArtist` — generates/selects the whole-ship cross-section background
-- `RoomArtist` — generates/selects each room background
-- `AgentArchitect` — writes agent manifests
-- `WorkflowArchitect` — writes routes, approvals, and Forge workflows
-- `SafetyInspector` — verifies permissions and external-action gates
-- `AssemblyAgent` — assembles the commissioned configuration
-- `QAAgent` — verifies asset coverage, navigation, and schema validity
-
-The builder animation can combine pixel-art construction activity with an optional ASCII build console. It must be truthful: every visible worker maps to a real `BuildJob`; progress reflects completed steps, not a fake timer.
-
-Example ASCII mode:
-
-```text
-        .-=================-.
-       /   AGENTARIUM OS     \
-      |  COMMISSIONING SHIP  |
-       \_____.--------._____/
-             | BUILD |
-
-[01/08] TopologyBuilder   COMPLETE
-[02/08] ArtDirector      COMPLETE
-[03/08] ShipArtist       RUNNING
-[04/08] RoomArtists      7/22
-[05/08] AgentArchitect   QUEUED
-[06/08] WorkflowBuilder  QUEUED
-[07/08] SafetyInspector  QUEUED
-[08/08] Assembly + QA    QUEUED
-```
-
-The user may pause, inspect, retry a failed job, replace one generated asset, or cancel. Completed successful jobs must not rerun unnecessarily.
-
-## 12.5.6 Art-generation pipeline
-
-Art generation is a first-class commissioning phase, not an afterthought.
-
-Repository sources of truth:
-
-- `docs/art/IMAGE_PROMPTS.md` — human-readable detailed prompts for worlds, rooms, and agents
-- `docs/art/image-prompt-manifest.json` — machine-readable prompt/asset manifest
-- `docs/art/CONCEPT_ART_ASSET_INDEX.md` — generated asset index
-- `assets/concept-art/ship/ship-overview-cross-section.png` — bundled whole-ship background
-- `assets/concept-art/rooms/*.png` — bundled room background plates
-- `assets/concept-art/agents/*.png` — bundled core-agent concept art / character portraits
-
-Agent art is a required first-class asset category, not a generic colored placeholder or initial letter. Build a shared **character bible** after the world style bible and before generating individual agents. The character bible must define common anatomy/proportions, pixel scale, outline weight, material language, lighting direction, portrait framing, sprite silhouette rules, and how role-specific colors remain distinguishable without breaking world consistency.
-
-For the bundled Spaceship + Pixel Art starter, generate and ship concept art for these nine core agents:
-
-1. `ultron` — Steward / Bridge orchestrator; authoritative but collaborative; navy, cyan, and restrained amber command accents.
-2. `nova` — Market Intelligence; observant, curious, analytical; cyan/violet research accents.
-3. `forge` — Production agent; sturdy, practical, supervised factory-builder; amber/orange industrial accents.
-4. `pixel` — Graphic Artist; expressive visual creator; violet/magenta/cyan creative accents.
-5. `vibes` — Music Artist; warm audio specialist; purple/teal equalizer-light accents.
-6. `developer` — App Builder; focused software engineer; blue/cyan technical accents.
-7. `security` — Security Officer; vigilant and calm, not hostile; red/orange caution plus blue shield accents.
-8. `cipher` — Communications router; agile signal operator; green/cyan signal accents.
-9. `governor` — Governance reviewer; measured, neutral, quality-focused; violet/amber approval accents.
-
-Each agent needs, at minimum:
-
-- one approved full-body or three-quarter character concept image with a clean, simple background or transparency suitable for extraction
-- one readable portrait crop for Agent View / roster UI
-- a stable silhouette and role palette that remains recognizable at small scale
-- explicit `agentId`, role, home room, source, prompt/provenance, dimensions, and approval status in the asset manifest
-- no copyrighted franchise resemblance, real company logo, readable fake brand, or visual language that implies domination, hostility, or servitude
-
-For implementation-ready sprite animation, either provide a sprite sheet or retain enough approved concept art to derive one later. A sprite-sheet specification should include consistent frame boxes for `idle`, `walk`, `working`, `blocked`, and `celebrating`, with facing-direction rules and an anchor point. Do not call an initial-letter circle or a recolored generic body “finished agent art.” If matching agent art is unavailable, show an honest named silhouette/placeholder and preserve the complete prompt; never silently reuse an unrelated agent.
-
-Generation order:
-
-1. Build the room roster and adjacency/topology graph.
-2. Create a shared art-direction/style bible from the independent visual-presentation answers plus the selected world template.
-3. Create the shared character bible and approved core-agent roster.
-4. Generate or select the geographically coherent whole-ship cross-section first.
-5. Generate/select room backgrounds using the same palette, lighting language, materials, camera language, room geography, and style-specific rules. Enforce pixel scale and sprite conventions only when Pixel Art is enabled.
-6. Generate/select one concept portrait/full-body asset for every selected agent, using the character bible and that agent's role/home-room palette.
-7. Validate that every room ID has exactly one background plate or an explicit placeholder, and every selected agent ID has exactly one approved concept asset or an explicit placeholder.
-8. Create normalized transparent hotspot polygons over the whole-ship image by tracing the actual rendered compartment walls/footprints. Do not distribute generic rectangles by room-list order. The image and controls must use one shared coordinate transform; `cover`/`slice` cropping, letterboxing, or responsive scaling must not shift controls away from their rooms.
-9. Create room-local sprite anchor points and interaction zones.
-10. Present world, room, and agent contact sheets/galleries for review. For the whole-world asset, include a QA capture with every hotspot boundary visible so alignment can be inspected directly against the art.
-11. Allow per-room and per-agent regenerate, replace, approve, or defer.
-12. Save provenance for every generated/imported asset.
-
-The whole-ship image is the navigational map. The room images are the Room View backgrounds. Generated labels inside images are never authoritative; real room names and controls must be accessible DOM/UI overlays.
-
-Suggested asset contract:
-
-```ts
-interface GeneratedAsset {
-  id: string
-  kind: 'ship_background' | 'room_background' | 'agent_concept' | 'agent_portrait' | 'agent_sprite_sheet' | 'effect_layer'
-  ownerId?: string
-  source: 'bundled' | 'generated' | 'uploaded' | 'placeholder'
-  promptId?: string
-  provider?: string
-  model?: string
-  seed?: string
-  path: string
-  width: number
-  height: number
-  status: 'planned' | 'running' | 'needs_review' | 'approved' | 'rejected' | 'failed'
-  createdAt: string
-  approvalEventId?: string
-}
-
-interface Hotspot {
-  id: string
-  targetType: 'room' | 'agent' | 'tool'
-  targetId: string
-  polygon: Array<{ x: number; y: number }> // normalized 0..1
-  label: string
-  enabled: boolean
-}
-```
-
-For the approved local prototype, the builder must work without external image generation by using the bundled concept-art assets. A future live image provider is optional and adapter-based. Before any paid/remote generation, show provider/model, image count, estimated cost if available, output destination, and an explicit approval action.
-
-Art consistency checks:
-
-- same ship/hull language across rooms
-- coherent selected visual style and palette across the whole world and rooms
-- when Pixel Art is enabled: coherent pixel era, grid/block scale, palette limits, sprite treatment, and nearest-neighbor rendering
-- when Pixel Art is disabled: no accidental pixelation, pixel-font requirement, or pixel-only animation assumption
-- no franchise logos or copied visual identity
-- no unreadable generated text used as UI
-- room purpose visually legible
-- critical controls not baked only into raster art
-- sufficient quiet space for sprites and overlays
-- usable crop at desktop and narrow viewport
-- room geography matches the ship overview well enough for navigation continuity
-
-## 12.5.7 Agent and workflow generation
-
-`AgentArchitect` produces declarative manifests, not executable arbitrary code. Each generated agent must have:
-
-- stable ID, name, role, room, level, and visual asset reference
-- provider/model intent (or `unconfigured`)
-- allowed tools and denied actions
-- memory scope
-- autonomy/maturity level
-- inputs, outputs, and handoff targets
-- approval triggers
-- budget/cost policy
-- fallback/error behavior
+## 12.5.6 Blueprint approval before building
+
+Before any build job runs, the user must review a concise blueprint that shows:
+
+- Installation mode
+- Orchestrator appearance, name, personality, and working style
+- Selected intelligence provider (or "Continue without connection")
+- Selected world template
+- Selected visual style
+- Chosen rooms and agents
+- Governance and safety boundaries
+- Bundled vs. generated assets
+- Any unconfigured or approval-gated items
+
+The user can revise answers before approving the blueprint. Approval is a single visible action, not a hidden state transition.
+
+## 12.5.7 Builder animation and truthful progress
+
+Background builder characters correspond one-to-one with inspectable `BuildJob` records. A builder moving across the screen means a real job is in flight; a builder stopping means a job completed, failed, or was canceled.
+
+- Build jobs must be resumable after refresh.
+- One failed room image must not destroy the whole build; use a clear placeholder and allow retry.
+- A failed provider call must preserve answers and completed assets.
+- The same build job must be idempotent or use a unique attempt ID.
+- Cancellation stops queued work and lets an in-flight safe job finish or abort cleanly.
+- A build log records job input summary, result, error, attempt count, and timestamps without secrets.
+
+## 12.5.8 Agent and workflow generation
+
+Generated agent manifests preserve:
+
+- Stable ID, name, role, room, level, and visual asset reference
+- Provider/model intent (or `unconfigured`)
+- Allowed tools and denied actions
+- Memory scope
+- Autonomy/maturity level
+- Inputs, outputs, and handoff targets
+- Approval triggers
+- Budget/cost policy
+- Fallback/error behavior
 
 The builder may generate declarative adapter configuration and, only in Demo mode, isolated synthetic packets. Standard mode starts with empty operational collections and no fixture adapter. The builder must not activate providers, tools, skills, credentials, or external writes merely because the interview named them; activation follows dedicated setup and approval.
 
-## 12.5.8 Final assembly and presentation
+## 12.5.9 Final assembly and presentation
 
 When all required jobs pass QA:
 
 1. Fade from the construction bay to the completed whole-ship cross-section.
-2. Bring the guide agent onto The Bridge.
+2. Bring the Orchestrator onto The Bridge.
 3. Present a concise commissioning report: installation mode, rooms built, agents configured, bundled/generated assets, configured/unconfigured/Demo-only capabilities, unresolved items, and safety gates.
 4. Offer a guided first tour: Bridge → one room → one agent → Archives → approval gate.
 5. Mark commissioning `complete` only after the final application loads and navigation smoke checks pass.
 6. Preserve a `Recommission` control in Settings for later theme/room/agent changes without erasing history.
 
-## 12.5.9 Failure and recovery behavior
+## 12.5.10 Failure and recovery behavior
 
 - One failed room image must not destroy the whole build; use a clear placeholder and allow retry.
 - A failed provider call must preserve answers and completed assets.
@@ -1590,27 +1254,30 @@ When all required jobs pass QA:
 - The user can export/import the versioned `CommissioningSpec`.
 - Recommissioning creates a draft revision and does not replace the current working ship until approved.
 
-## 12.5.10 Commissioning acceptance criteria
+## 12.5.11 Commissioning acceptance criteria
 
 The self-building flow is complete only if all are true:
 
-1. A fresh install launches the animated commissioning guide instead of an empty dashboard.
-2. The first interview decision records owner-to-steward articulation, requires a meaningful mission, and preserves the mission, desired outcomes, operating boundaries, and working style in the versioned `CommissioningSpec` and blueprint.
-3. The flow then records explicit Standard/Demo mode, agents, Forges, and governance before asking for visual presentation and world template. Pixel Art remains optional and works with every world template.
-4. The world-template chooser includes Modern Corporate Office first/default, then Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, and Custom Theme. Every option has a distinct representative thumbnail; selection updates a larger detail preview; the UI states that every commissioned rendering is custom and unique. The selected template changes topology, terminology, movement, and art prompts rather than acting as a color skin.
-5. Changing visual style preserves world topology, rooms, agents, businesses, workflows, memory, and approvals.
-6. The installer can revise answers before build approval.
-7. Background builder characters correspond one-to-one with inspectable `BuildJob` records.
-8. The local/offline Spaceship + Pixel Art path assembles a ship using bundled art without any external call; other unrendered world/style combinations use honest placeholders rather than mismatched art.
-9. The art pipeline covers one whole-world background and every selected room background.
-10. Whole-world hotspots open the correct room views.
-11. Generated agent manifests preserve provider/model intent without claiming credentials are configured.
-12. Refresh/crash resumes the commissioning flow without losing completed answers/jobs.
-13. The build can pause, cancel, retry failed jobs, and replace one room asset without rebuilding everything.
-14. Final QA runs before status changes to `complete`.
-15. The completed world is presented with a clear report of Standard/Demo mode, configured, unconfigured, gated-write, and disabled capabilities.
-16. No secret appears in chat history, prompts, logs, generated files, or screenshots.
-17. Paid/remote generation and external integrations remain explicitly approval-gated.
+1. A fresh install launches the locked synthwave title screen, not an empty dashboard.
+2. The title screen contains no questions, no forms, no mode selection, no crew roster, and no real metrics.
+3. The `Begin` control opens the Orchestrator commissioning shell and preserves the approved first-run order: Orchestrator identity -> optional intelligence connection -> crew templates -> first mission.
+4. The Orchestrator commissioning surface offers the locked personality choices, working-style choices, appearance collection, atmosphere choices, and restore/draft-import controls.
+5. The intelligence provider catalog opens an embedded detail panel without leaving the setup page and does not claim connection until the adapter verifies it.
+6. Standard is the clean default; Demo is a secondary action, isolated and visibly labeled.
+7. The post-wake command environment presents Crew / Work / Build / System navigation, Crew Roster, Recruitment Bay, Captain, Cinematic Mode, context meter, and scoped While I'm Away controls.
+8. Agent Growth records verified experience only and never grants authority.
+9. Memory proposals support Keep/Edit/Discard/Never Suggest Again with provenance and scope.
+10. Background builder characters correspond one-to-one with inspectable `BuildJob` records.
+11. The local/offline Spaceship + Pixel Art path assembles a ship using bundled art without any external call; other unrendered world/style combinations use honest placeholders.
+12. Changing visual style preserves world topology, rooms, agents, businesses, workflows, memory, and approvals.
+13. The installer can revise answers before build approval.
+14. Refresh/crash resumes the commissioning flow without losing completed answers/jobs.
+15. The build can pause, cancel, retry failed jobs, and replace one room asset without rebuilding everything.
+16. Final QA runs before status changes to `complete`.
+17. The completed world is presented with a clear report of Standard/Demo mode, configured, unconfigured, gated-write, and disabled capabilities.
+18. No secret appears in chat history, prompts, logs, generated files, or screenshots.
+19. Paid/remote generation and external integrations remain explicitly approval-gated.
+
 
 # 13. Acceptance criteria and verification
 
