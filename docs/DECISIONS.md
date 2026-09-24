@@ -16,7 +16,7 @@ Standard is default and starts without synthetic operational records. Demo is ex
 
 ## D-003 - Commissioning is purpose-first and orchestration-first
 
-**Status:** locked, supersedes visual-first commissioning language
+**Status:** superseded by D-012; retained as historical rationale
 
 Ultron introduces itself as Steward/Orchestrator and begins with what the owner wants to build, desired outcomes, operating boundaries, and working relationship. Canonical order:
 
@@ -33,6 +33,24 @@ owner <-> Ultron articulation
 ```
 
 Visuals never lead onboarding. The historical visual-first plan remains archived with a supersession notice.
+
+## D-012 - First-run commissioning begins as character creation
+
+**Status:** locked, supersedes D-003's canonical ordering while preserving its orchestration-first intent
+
+Fresh installation begins with a minimal Agentarium title threshold and no questions. The next persistent setup shell commissions one Orchestrator before exposing the broader crew: choose an original included appearance, name, personality, supervised working style, interface atmosphere/effects, and an optional intelligence provider. Identity and provider selection are embedded tabs in the same setup environment rather than separate route changes.
+
+Standard remains the clean default; isolated Demo is a secondary action, not a dedicated mode-selection page. Restore Agentarium is visible from first-run setup. Provider cards may describe intended OAuth, API-key, or local-runtime compatibility, but must not claim sign-in, credential custody, validation, or connection until its adapter genuinely implements and verifies those capabilities. The approved first-run order is:
+
+```text
+title threshold
+-> commission Orchestrator identity and working style
+-> optionally connect intelligence in the same setup shell
+-> assemble or activate starter crew templates
+-> launch the first mission
+```
+
+The title screen, artwork, terminology, copy, layout, and provider presentation remain Agentarium's own. Starnet is a completeness reference only under D-009.
 
 ## D-004 - Presentation is independent from operational topology
 

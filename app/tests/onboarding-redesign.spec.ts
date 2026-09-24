@@ -1,0 +1,66 @@
+import { expect, test } from '@playwright/test'
+
+test.beforeEach(async ({ page }) => {
+  await page.goto('/')
+  await page.evaluate(() => localStorage.clear())
+  await page.reload()
+})
+
+test('fresh install opens with a single cinematic invitation', async ({ page }) => {
+  await expect(page.getByRole('heading', { name: 'Agentarium' })).toBeVisible()
+  await expect(page.getByText('Gamified AI Agent Harness')).toBeVisible()
+  await expect(page.getByText('Press any key to begin')).toBeVisible()
+  await expect(page.getByRole('textbox')).toHaveCount(0)
+  await expect(page.getByText('Ultron', { exact: true })).toHaveCount(0)
+})
+
+test('entering setup keeps Orchestrator and Intelligence in one persistent shell', async ({ page }) => {
+  await page.keyboard.press('Enter')
+  await expect(page.getByRole('heading', { name: 'Create Your Orchestrator' })).toBeVisible()
+  await expect(page.getByRole('tab', { name: '01 Your Orchestrator' })).toHaveAttribute('aria-selected', 'true')
+  await expect(page.getByRole('tab', { name: '02 Connect Intelligence' })).toHaveAttribute('aria-selected', 'false')
+  await expect(page.getByRole('button', { name: 'Restore Agentarium' })).toBeVisible()
+
+  await page.getByRole('tab', { name: '02 Connect Intelligence' }).click()
+  await expect(page.getByRole('tab', { name: '01 Your Orchestrator' })).toHaveAttribute('aria-selected', 'false')
+  await expect(page.getByRole('tab', { name: '02 Connect Intelligence' })).toHaveAttribute('aria-selected', 'true')
+  await expect(page.getByText('Ultron', { exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Choose an intelligence provider' })).toBeVisible()
+})
+
+test('Orchestrator setup offers approved personality working-style and atmosphere choices', async ({ page }) => {
+  await page.keyboard.press('Enter')
+  for (const personality of ['Professional', 'Empathetic / Friendly', 'Direct / Blunt', 'Witty / Funny', 'Technical / Scientific', 'Bold']) {
+    await expect(page.getByRole('button', { name: personality })).toBeVisible()
+  }
+  for (const style of ['Supervised', 'Trusted', 'Custom']) {
+    await expect(page.getByRole('button', { name: new RegExp(style) })).toBeVisible()
+  }
+  await expect(page.getByRole('group', { name: 'Interface atmosphere' })).toBeVisible()
+  await expect(page.getByLabel('CRT scanlines')).toBeVisible()
+  await expect(page.getByLabel('Ambient effects')).toBeVisible()
+})
+
+test('provider catalog opens an honest embedded provider detail without claiming a connection', async ({ page }) => {
+  await page.keyboard.press('Enter')
+  await page.getByRole('tab', { name: '02 Connect Intelligence' }).click()
+  await expect(page.getByRole('button', { name: /^OpenAI —/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /^Anthropic —/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /^OpenRouter —/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /^Ollama —/ })).toBeVisible()
+
+  await page.getByRole('button', { name: /^OpenRouter —/ }).click()
+  await expect(page.getByRole('heading', { name: 'OpenRouter' })).toBeVisible()
+  await expect(page.getByText('API key connector', { exact: true })).toBeVisible()
+  await expect(page.getByText('Not connected')).toBeVisible()
+  await expect(page.getByText(/browser prototype does not store provider secrets/i)).toBeVisible()
+  await expect(page.getByText('Connected', { exact: true })).toHaveCount(0)
+  await page.getByRole('button', { name: 'All providers' }).click()
+  await expect(page.getByRole('heading', { name: 'Choose an intelligence provider' })).toBeVisible()
+})
+
+test('demo remains an optional secondary path rather than a standalone setup page', async ({ page }) => {
+  await page.keyboard.press('Enter')
+  await expect(page.getByRole('button', { name: 'Explore Demo World' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /operating boundary/i })).toHaveCount(0)
+})

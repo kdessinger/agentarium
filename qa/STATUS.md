@@ -1,6 +1,6 @@
 # QA Status
 
-**Last verified:** 2026-09-15
+**Last verified:** 2026-09-23
 **Artifact:** dirty working tree browser application under `app/`
 **Verdict scope:** Ultron-first commissioning and current browser-local spatial prototype
 
@@ -19,14 +19,14 @@ A PASS at one gate never implies a later gate.
 
 ## Executed evidence
 
-Run from `app/` after the owner-to-Ultron mission-exchange refinement:
+Run from `app/` after the title-threshold and Orchestrator/intelligence setup-shell refinement:
 
 | Command | Actual result |
 |---|---|
 | `npm test` | 5 files passed; 57 tests passed |
 | `npm run lint` | ESLint exited 0 |
-| `npm run build` | TypeScript + Vite production build exited 0; 28 modules transformed |
-| `npm run test:e2e` | 44 passed; 2 intentional desktop skips for narrow-only contracts |
+| `npm run build` | TypeScript + Vite production build exited 0; 30 modules transformed |
+| `npm run test:e2e` | 54 passed; 2 intentional desktop skips for narrow-only contracts |
 | `npm run visual:check` | desktop 1440x900 document 1440x900; narrow 390x844 document 390x844; World Overview reached |
 | `npx --yes impeccable@latest detect --json src` | `[]`, exit 0 |
 
@@ -50,6 +50,9 @@ Focused TDD evidence for the visual refinement:
 5. RED: the new desktop+narrow E2E contract found that the loop's current-stage detail was visually hidden.
 6. GREEN: the active stage now exposes its concrete blocker/approval detail, and the full feedback loop—stage, human gate, and learning return—passes on desktop and narrow widths.
 7. Added a narrow-width interaction contract: the Forge loop is compact and closed by default, opens only when requested, and returns room controls to the user after closing.
+8. Added five desktop+narrow first-run contracts before implementation: minimal title threshold, persistent Orchestrator/intelligence tabs, the approved personality/working-style/effects choices, honest provider detail state, and a secondary Demo path.
+9. RED: the old questionnaire/mode/roster opening failed every new first-run contract.
+10. GREEN: the new shell passes those contracts on both viewport classes; a narrow follow-up caught and fixed hidden effects/Demo controls plus an obstructed recommission return action.
 
 ## Visual review
 
@@ -62,9 +65,9 @@ Inspected:
 
 Observed:
 
-- Ultron reads as Steward/Orchestrator in the construction bay.
-- The mission is primary; working contract is secondary.
-- Visual style and world template do not appear on the opening step.
+- Fresh install opens on the Agentarium title threshold with no setup questions or Ultron presentation.
+- Orchestrator identity, appearance, personality, working style, atmosphere/effects, restore, and intelligence providers share one persistent setup shell.
+- The full crew, visual style, and world template do not appear on the opening setup surface.
 - Desktop uses the full viewport without page overflow.
 - Narrow preserves the hierarchy through intentional vertical scrolling and fixed progression controls.
 - The commissioned world remains the primary full-viewport interface on desktop and narrow.

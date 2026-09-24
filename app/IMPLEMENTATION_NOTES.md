@@ -13,7 +13,9 @@
 
 ## Commissioning
 
-Fresh startup renders `CommissioningGuide` as Ultron / the Steward in a construction bay. The nine-step order is owner-to-steward articulation, operating mode, editable agent manifests, editable Forge/business definitions, editable operations/governance, visual presentation, world template, complete blueprint review, then truthful local build and final presentation. Step 1 is presented as an owner↔Ultron mission exchange: mission is primary, the working contract is secondary, and the mission field receives initial focus. A meaningful mission is required before continuing. Standard is the default. Custom Visual Style and Custom Theme require a description plus explicit interpretation confirmation.
+Fresh startup now uses a minimal `AgentariumTitleScreen`: product name, `Gamified AI Agent Harness`, and `Press any key to begin`; it asks no setup questions and does not introduce Ultron. The next full-viewport `OrchestratorSetup` keeps identity and provider selection inside one persistent commissioning shell. The identity tab offers eight bundled appearance archetypes, an optional name, Professional / Empathetic-Friendly / Direct-Blunt / Witty-Funny / Technical-Scientific / Bold personality choices, and Supervised / Trusted / Custom working styles with Supervised recommended. Atmosphere swatches, independently toggled CRT/effects controls, and Restore Agentarium remain available throughout setup.
+
+The embedded intelligence tab catalogs hosted, API-key, local, and OpenAI-compatible provider boundaries with recognizable provider marks and provider-specific explanatory states. This browser prototype does not collect secrets, start OAuth, or mark any provider connected. Standard is the clean default; `Explore Demo World` is a secondary setup action rather than a standalone mode page. Continuing without a provider moves into the still-existing Forge, governance, presentation, world-template, blueprint, bounded-build, and final-presentation steps. The removed opening mission/mode/full-roster screens are no longer shown; starter-crew activation is the next onboarding design slice.
 
 The world-template step uses ten distinct representative 640×360 concept thumbnails plus a larger selected-theme preview showing topology, movement, command-area terminology, and materials. It explicitly states that each commissioned world is custom and unique: previews communicate direction and do not lock or clone the final generated world. Modern Corporate Office remains first/default; Spaceship + Pixel Art remains the bundled-art path.
 
@@ -75,12 +77,12 @@ npm run visual:check
 
 `visual:check` captures first-run and completed-world screenshots at 1440×900 and 390×844, reports viewport/document dimensions, and writes ignored evidence under `app/visual-evidence/`.
 
-Verified on 2026-08-30 after the Ultron-first visual refinement:
+Verified on 2026-09-23 after the Orchestrator-first setup-shell refinement:
 
-- unit: 54/54 passed across four files
+- unit: 57/57 passed across five files
 - lint: clean
 - production build: clean
-- Playwright: 41 passed, one intentional desktop skip for the narrow-only chooser
+- Playwright: 54 passed, two intentional desktop skips for narrow-only contracts
 - visual capture: desktop and narrow documents matched their viewports
 - Impeccable detector: `[]`
 

@@ -50,6 +50,9 @@ export type AgentDefinition = {
   idleBehavior: string
   budget: string
   successMeasures: string[]
+  avatarId?: string
+  personality?: 'Professional' | 'Empathetic / Friendly' | 'Direct / Blunt' | 'Witty / Funny' | 'Technical / Scientific' | 'Bold'
+  workingStyle?: 'Supervised' | 'Trusted' | 'Custom'
 }
 
 export type BusinessDefinition = {
@@ -269,6 +272,7 @@ function makeAgents(mode: InstallationMode): AgentDefinition[] {
     memoryScope: 'room-scoped approved memory', autonomy: mode === 'demo' ? 'demo_only' : 'supervised',
     approvalTriggers: ['external write','spend','publish','destructive action'], expectedInputs: ['approved task input'], expectedOutputs: ['provenanced result or explicit error'],
     subagents: [], idleBehavior: 'May visit Ten Forward when unassigned', budget: 'No spend configured', successMeasures: ['accepted output','complete provenance','no gate bypass'],
+    ...(id === 'ultron' ? { avatarId: 'ultron', personality: 'Professional' as const, workingStyle: 'Supervised' as const } : {}),
   }))
 }
 

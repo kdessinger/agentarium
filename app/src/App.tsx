@@ -25,6 +25,7 @@ import { exportDraft, importDraft, loadWorkspace, restartWithBackup, saveWorkspa
 import { getAgentPortraitPath, getAgentWorkItems, getRoomWorkItems, type RoomWorkItem } from './lib/presentation'
 import { deriveFeedbackLoop } from './lib/feedbackLoop'
 import { FeedbackLoopPanel } from './components/FeedbackLoopPanel'
+import { AgentariumTitleScreen, OrchestratorSetup } from './components/OnboardingSetup'
 
 const DRAFT_MODE_KEY = 'agentarium:commissioning-current-mode'
 const draftKeyFor = (mode: InstallationMode) => `agentarium:${mode}:commissioning:v2`
@@ -51,6 +52,7 @@ function normalizeActive(record: ActiveRecord): ActiveRecord {
 }
 
 function App() {
+  const [introEntered, setIntroEntered] = useState(false)
   const [active, setActive] = useState<ActiveRecord | null>(() => {
     const preferred = localStorage.getItem('agentarium:current-mode') === 'demo' ? 'demo' : 'standard'
     return loadWorkspace(localStorage, preferred).record ?? loadWorkspace(localStorage, preferred === 'demo' ? 'standard' : 'demo').record
@@ -99,7 +101,8 @@ function App() {
   }
 
   if (commissioning) {
-    if (recoveryPending) return <DraftRecovery onResume={() => setRecoveryPending(false)} onRestart={() => setRecoveryPending(false)} />
+    if (recoveryPending) return <DraftRecovery onResume={() => { setIntroEntered(true); setRecoveryPending(false) }} onRestart={() => { setIntroEntered(true); setRecoveryPending(false) }} />
+    if (!active && !introEntered) return <AgentariumTitleScreen onEnter={() => setIntroEntered(true)} />
     return <CommissioningFlow active={active} onCancel={() => setCommissioning(false)} onComplete={finishCommissioning} />
   }
   if (!active) return null
@@ -181,11 +184,29 @@ function CommissioningFlow({ active, onCancel, onComplete }: { active: ActiveRec
       worldName: draft.worldName,
     })
     next.articulation = structuredClone(draft.articulation)
+    next.agents = draft.agents.map((agent) => ({ ...agent, autonomy: installationMode === 'demo' ? 'demo_only' : agent.autonomy === 'demo_only' ? 'supervised' : agent.autonomy }))
     saveDraft(next)
     setJobsState([])
     localStorage.removeItem(jobsKeyFor(installationMode))
   }
   const chooseWorld = (worldTemplateId: WorldTemplateId) => saveDraft(changeWorldTemplate(draft, worldTemplateId))
+
+  if (step === 0) return <OrchestratorSetup
+    draft={draft}
+    activeWorldName={active?.worldName}
+    onCancel={active ? onCancel : undefined}
+    onAgents={(agents) => saveDraft({ ...draft, agents })}
+    onMode={chooseMode}
+    onContinue={() => setStep(3)}
+    onRestore={async (file) => {
+      const imported = importDraft(await file.text())
+      localStorage.setItem(DRAFT_MODE_KEY, imported.installationMode)
+      localStorage.setItem(draftKeyFor(imported.installationMode), exportDraft(imported))
+      localStorage.removeItem(jobsKeyFor(imported.installationMode))
+      setDraftState(imported)
+      setStepState(0)
+    }}
+  />
 
   const approve = () => {
     const buildPlan = createBuildPlan(draft)

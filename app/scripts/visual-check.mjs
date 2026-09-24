@@ -2,14 +2,14 @@ import { chromium } from '@playwright/test'
 import { mkdir } from 'node:fs/promises'
 import { spawn } from 'node:child_process'
 
-const baseURL = process.env.AGENTARIUM_URL ?? 'http://127.0.0.1:4173/'
+const baseURL = process.env.AGENTARIUM_URL ?? 'http://127.0.0.1:4174/'
 await mkdir('visual-evidence', { recursive: true })
 let localServer
 try {
   const response = await fetch(baseURL)
   if (!response.ok) throw new Error(`HTTP ${response.status}`)
 } catch {
-  localServer = spawn(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['run', 'dev', '--', '--host', '127.0.0.1', '--port', '4173'], { stdio: 'ignore' })
+  localServer = spawn(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['run', 'dev', '--', '--host', '127.0.0.1', '--port', '4174', '--strictPort'], { stdio: 'ignore' })
   for (let attempt = 0; attempt < 40; attempt += 1) {
     try { if ((await fetch(baseURL)).ok) break } catch { /* server is still starting */ }
     await new Promise((resolve) => setTimeout(resolve, 250))
@@ -19,11 +19,9 @@ try {
 const browser = await chromium.launch({ headless: true })
 
 async function commission(page) {
-  await page.getByLabel('What should this operation help you accomplish?').fill('Build a visible, governed AI operation for visual verification.')
-  await page.getByRole('button', { name: 'Continue' }).click()
-  await page.getByRole('button', { name: /Standard mode/ }).click()
-  await page.getByRole('button', { name: 'Continue' }).click()
-  await page.getByRole('button', { name: 'Continue to Forges' }).click()
+  await page.getByRole('button', { name: /Press any key to begin/i }).click()
+  await page.getByRole('tab', { name: '02 Connect Intelligence' }).click()
+  await page.getByRole('button', { name: 'Continue without connection' }).click()
   await page.getByRole('button', { name: 'Continue to Governance' }).click()
   await page.getByRole('button', { name: 'Continue to Visual Style' }).click()
   await page.getByRole('button', { name: 'Pixel Art' }).click()
