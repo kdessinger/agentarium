@@ -1116,6 +1116,8 @@ interface ArticulationAnswers {
 
 ## 12.5.2 Animated installer guide
 
+> **Supersession notice:** D-012 replaces the historical purpose-first opening below with the title threshold and embedded Orchestrator/intelligence commissioning shell. D-013 and `docs/COMMAND_SHELL_AND_CREW_SPEC.md` govern the post-wake command environment, Captain terminology, Crew Roster, Agent Profile, world choice, context meter, Cinematic Mode, recruitment, memory, growth, and import. Retain the material below only as rationale where it does not conflict.
+
 The first screen should not be a conventional setup wizard card. **Ultron / the Steward** appears inside a neutral unfinished construction environment and begins with the owner's purpose, desired outcomes, operating boundaries, and preferred working relationship. Ultron is the conversational commissioning guide because the product begins with the founder-to-orchestrator relationship; Builder workers appear only after the owner approves the blueprint. Before a visual style is selected, use a clean style-neutral steward presentation. After the operating model is understood and a style is selected, the environment may preview/adopt that style. `CommissioningGuide` may remain the internal component name, but the displayed role is the commissioned steward (default `Ultron`).
 
 Behavior:

@@ -22,6 +22,10 @@ This must use controlled local/read-only or explicitly approved adapters. It mus
 
 ## Ordered work
 
+### Approved presentation track — sequence after Work/Build/System review
+
+`COMMAND_SHELL_AND_CREW_SPEC.md` now locks the post-wake shell, Captain terminology, Crew Roster, Agent Profile, context meter, Cinematic Mode, Recruitment Bay, memory/reflection, growth, and Hermes/OpenClaw import direction. Do not begin a broad shell rewrite until the Work, Build, and System walkthroughs establish their contents. Then implement the specification as tested vertical slices, not one dashboard replacement.
+
 ### N-001 - Freeze the runtime command/event contract
 
 - Define validated commands, events, IDs, provenance, data class, actor, run, task, approval, artifact, and error envelopes.

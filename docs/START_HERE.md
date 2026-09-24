@@ -46,6 +46,7 @@ See `../qa/STATUS.md` for evidence and exact scope. Never convert a lane-level P
 8. `../qa/STATUS.md` - current gate verdicts and real command output.
 9. `../CONTEXT.md`, `../PRODUCT_BLUEPRINT.md`, and `../ARCHITECTURE.md` - deeper product context and target architecture.
 10. `prompts/agentarium-master-build-prompt.md` - detailed build contract.
+11. `COMMAND_SHELL_AND_CREW_SPEC.md` - approved post-wake command shell and Crew system.
 
 `INDEX.md` classifies every other document as living authority, supporting specification, plan, evidence, runbook, reference, or archive.
 

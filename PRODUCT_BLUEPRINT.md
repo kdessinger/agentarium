@@ -130,6 +130,8 @@ The console should show:
 
 ### 4.5 Self-building commissioning experience
 
+> **Current authority note:** The detailed historical flow below records the original self-building concept. First-run ordering is superseded by `docs/DECISIONS.md` D-012, and the approved post-wake workspace is specified in `docs/COMMAND_SHELL_AND_CREW_SPEC.md` under D-013.
+
 Agentarium should install as a generic core runtime and **commission itself into the owner's ship** on first startup.
 
 The first-run experience is part of the world, not a normal setup wizard:
@@ -177,6 +179,14 @@ whole-ship cross-section background
 ```
 
 The bundled concept art provides an offline commissioning path; users can later regenerate or replace individual rooms without rebuilding the entire ship.
+
+### 4.6 Persistent command environment and Crew system
+
+After activation, Agentarium becomes a persistent command environment rather than a sequence of disconnected dashboards. The Captain operates through a stable shell: global status and instruments above, Crew/Project/Session navigation at left, the truthful living world at center, agent communication and approvals at right, and Crew/Work/Build/System navigation plus scoped context capacity below.
+
+The Crew area is organized as **Crew Roster**, **Recruitment Bay**, and **Captain**. Each crew member has an **Agent Profile** covering Overview, Growth, Work Record, Memory, and Settings. Growth is evidence-backed gamification and never expands authority. Recruitment offers categorized templates, custom creation, and reviewable Hermes/OpenClaw import. Captain context, work folders, memory proposals, and while-away permissions remain inspectable, scoped, reversible, and auditable.
+
+Agentarium's differentiator is world choice: Spaceship, Space Station, Underground Bunker, Skyscraper, Cruise Ship, Research Complex, Fantasy Citadel, or Custom World can express the same stable operational contracts through different spatial metaphors. See `docs/COMMAND_SHELL_AND_CREW_SPEC.md` for the approved requirements and implementation order.
 
 ### 5. Event log and replay
 

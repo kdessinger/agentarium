@@ -101,3 +101,13 @@ Nova observes attributable market evidence, creates structured opportunity packe
 **Identity:** Caspian is the named finance and unit-economics agent assigned to the Treasury room. “Treasury” remains the legible room/function label; `treasury` remains the stable Hermes profile handle.
 
 A revenue Forge is not a one-way content conveyor belt. Its legible operating loop is: attributable market signal → original visual/product hypothesis → supervised listing/product experiment → marketing demand test → Treasury unit-economics guardrail → governance approval → fulfillment/customer outcome → archived evidence and feedback → improved next research question. The system must show the current stage, blocked prerequisite, and the learning return upstream. Revenue, orders, costs, ROI, and profit remain absent/unconfigured until actual evidence is recorded; Demo examples are visibly synthetic and never influence Standard decisions.
+
+## D-013 - The post-wake product is a persistent command environment
+
+**Status:** locked
+
+After commissioning, Agentarium uses a persistent operating shell with global status/instruments, a left operational rail, the living world at center, communications at right, and Crew/Work/Build/System navigation with a visible scoped context meter. The world remains the primary operational interface; surrounding panels expose precise controls, evidence, approvals, and records rather than replacing it with a generic dashboard.
+
+The human role is **Captain**. The central coordinating role is **Orchestrator**. Crew management uses **Crew Roster**, **Recruitment Bay**, and **Agent Profile**. Agent level records verified experience and never grants authority. Cinematic Mode may hide management chrome but never critical safety, approval, cost, failure, or emergency-pause state.
+
+The approved detailed contract is `COMMAND_SHELL_AND_CREW_SPEC.md`. Work, Build, and System contents remain open until their dedicated review; implementation must not guess them prematurely.
