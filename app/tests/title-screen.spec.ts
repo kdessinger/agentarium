@@ -16,6 +16,47 @@ test('fresh install opens with the locked synthwave title screen', async ({ page
   await expect(page.getByRole('textbox')).toHaveCount(0)
 })
 
+test('title-screen typography loads deliberately and keeps the descriptor readable', async ({ page }) => {
+  await expect.poll(async () => page.evaluate(() => document.fonts.status)).toBe('loaded')
+  await expect(page.locator('link[href*="fonts.googleapis.com"], link[href*="fonts.gstatic.com"]')).toHaveCount(0)
+  await expect.poll(async () => page.evaluate(() => document.fonts.check('12px Orbitron') && document.fonts.check('12px "Press Start 2P"'))).toBe(true)
+
+  const typography = await page.locator('.title-screen__eyebrow').evaluate((element) => {
+    const style = getComputedStyle(element)
+    const text = element.querySelector('.title-screen__eyebrow-copy') as HTMLElement
+    const textStyle = getComputedStyle(text)
+    const bounds = text.getBoundingClientRect()
+    return {
+      fontFamily: style.fontFamily,
+      fontSize: Number.parseFloat(style.fontSize),
+      textWidth: bounds.width,
+      textHeight: bounds.height,
+      textWhiteSpace: textStyle.whiteSpace,
+      viewportWidth: window.innerWidth,
+    }
+  })
+
+  expect(typography.fontFamily).toContain('Orbitron')
+  if (typography.viewportWidth > 480) {
+    expect(typography.fontSize).toBeGreaterThanOrEqual(12)
+    expect(typography.textWidth).toBeGreaterThan(300)
+    expect(typography.textWhiteSpace).toBe('nowrap')
+    expect(typography.textHeight).toBeLessThan(30)
+  } else {
+    expect(typography.fontSize).toBeGreaterThanOrEqual(9)
+    expect(typography.textWidth).toBeGreaterThan(200)
+    expect(typography.textWhiteSpace).toBe('normal')
+    expect(typography.textHeight).toBeLessThan(50)
+  }
+
+  const footer = await page.locator('.title-screen__footer').evaluate((element) => {
+    const style = getComputedStyle(element)
+    return { fontSize: Number.parseFloat(style.fontSize), color: style.color }
+  })
+  expect(footer.fontSize).toBeGreaterThanOrEqual(9)
+  expect(footer.color).not.toBe('rgb(118, 109, 160)')
+})
+
 test('title screen side telemetry is decorative fiction and not exposed as live metrics', async ({ page }) => {
   await expect(page.getByRole('progressbar')).toHaveCount(0)
   await expect(page.getByRole('meter')).toHaveCount(0)

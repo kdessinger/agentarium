@@ -1,6 +1,6 @@
 # Agentarium Title Screen Specification
 
-**Status:** locked product direction; implementation pending  
+**Status:** locked product direction; implemented
 **Scope:** Fresh-install introduction screen only  
 **Authority:** Read with `DECISIONS.md`. This specification locks the design language for the title screen and is referenced from the broader `COMMAND_SHELL_AND_CREW_SPEC.md`.
 
@@ -52,7 +52,7 @@ This is the only approved place in Agentarium where purely fictional numbers app
 The title screen must visibly include exactly:
 
 - `AGENTARIUM` wordmark.
-- A short, single-line product descriptor.
+- A readable product descriptor: one line at desktop widths; a deliberate, compact wrap only at narrow mobile widths. It must never collapse into a word-by-word stack.
 - A short slogan positioned beneath the sun.
 - A single `Begin` control with a clearly stated action.
 - The optional decorative telemetry panels and footer text described above.
@@ -93,21 +93,23 @@ Requirements:
 - The composition respects `env(safe-area-inset-top)` and `env(safe-area-inset-bottom)`.
 - Vertical spacing uses `100dvh` rather than `100vh`.
 - Status rail and footer text remain legible at small widths.
+- Load the selected typefaces deliberately from bundled local assets rather than relying on a system fallback or a remote font request. The title screen uses `Orbitron` for the display/interface face and `Press Start 2P` only for pixel-terminal accents.
+- Footer/status copy must use a readable size and contrast at 100% browser zoom; it must not rely on sub-8px type.
 
 ## 7. Implementation notes
 
 Implementation:
 
-- Lives in `app/src/components/TitleScreen.tsx`.
+- Lives in `app/src/components/AgentariumTitleScreen.tsx`.
 - Styles live in `app/src/title-screen.css` and are imported from `app/src/main.tsx`.
 - Component renders only decorative content in the left/right terminals (no measurable state).
 - Accessibility tree uses `aria-hidden="true"` on all decorative layers.
 - The component receives only an `onEnter` callback and has no other props.
-- The React app's existing `AgentariumTitleScreen` export is replaced by `TitleScreen` so the `OnboardingSetup` import surface stays consistent.
+- The component is rendered by the app title gate and transitions to `OnboardingSetup` only after its `Begin` action.
 
 Tests:
 
-- Title screen tests must assert the new copy, layout landmarks, and the `Begin` button contract.
+- Title screen tests must assert the new copy, layout landmarks, deliberate font loading, readable descriptor sizing/wrapping, footer legibility, and the `Begin` button contract.
 - Tests must not assert against fictional telemetry values.
 
 ## 8. Future hooks

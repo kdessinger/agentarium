@@ -59,7 +59,11 @@ export function AgentariumTitleScreen({ onEnter }: { onEnter: () => void }) {
       <section className="title-screen__hero">
         <div className="title-screen__lockup">
           <h1 data-text="AGENTARIUM">AGENTARIUM</h1>
-          <div className="title-screen__eyebrow"><span /><span>GAMIFIED AI AGENT COMMAND SYSTEM</span><span /></div>
+          <div className="title-screen__eyebrow">
+            <span className="title-screen__eyebrow-rule" aria-hidden="true" />
+            <span className="title-screen__eyebrow-copy">GAMIFIED AI AGENT COMMAND SYSTEM</span>
+            <span className="title-screen__eyebrow-rule" aria-hidden="true" />
+          </div>
         </div>
         <p className="title-screen__tagline">COMMAND THE UNKNOWN</p>
         <div className="title-screen__command-panel">
