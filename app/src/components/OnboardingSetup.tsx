@@ -49,6 +49,8 @@ const APPEARANCES = [
   { id: 'vibes', label: 'Maestro', src: '/concept-art/agents/portraits/vibes.png' },
 ]
 
+const APPEARANCES_PER_PAGE = 4
+
 const ATMOSPHERES = [
   { id: 'cyan', label: 'Cyan', color: '#55d9e8' },
   { id: 'emerald', label: 'Emerald', color: '#74d39c' },
@@ -83,6 +85,7 @@ export function OrchestratorSetup({ draft, activeWorldName, onCancel, onAgents, 
   const [atmosphere, setAtmosphere] = useState('cyan')
   const [scanlines, setScanlines] = useState(true)
   const [effects, setEffects] = useState(true)
+  const [appearancePage, setAppearancePage] = useState(() => Math.floor(APPEARANCES.findIndex((item) => item.id === (draft.agents.find((agent) => agent.id === 'ultron') ?? draft.agents[0])?.avatarId) / APPEARANCES_PER_PAGE) || 0)
   const [restoreError, setRestoreError] = useState('')
   const restoreRef = useRef<HTMLInputElement>(null)
   const orchestrator = draft.agents.find((agent) => agent.id === 'ultron') ?? draft.agents[0]
@@ -90,6 +93,8 @@ export function OrchestratorSetup({ draft, activeWorldName, onCancel, onAgents, 
   const workingStyle = (orchestrator.workingStyle as OrchestratorWorkingStyle | undefined) ?? 'Supervised'
   const appearanceId = orchestrator.avatarId ?? 'ultron'
   const appearance = APPEARANCES.find((item) => item.id === appearanceId) ?? APPEARANCES[0]
+  const appearancePageCount = Math.ceil(APPEARANCES.length / APPEARANCES_PER_PAGE)
+  const visibleAppearances = APPEARANCES.slice(appearancePage * APPEARANCES_PER_PAGE, (appearancePage + 1) * APPEARANCES_PER_PAGE)
   const accent = ATMOSPHERES.find((item) => item.id === atmosphere)?.color ?? ATMOSPHERES[0].color
 
   const updateOrchestrator = (patch: Partial<AgentDefinition>) => {
@@ -129,8 +134,12 @@ export function OrchestratorSetup({ draft, activeWorldName, onCancel, onAgents, 
         <h2>{orchestrator.name || 'Ultron'}</h2>
         <p>{personality} · {workingStyle}</p>
         <blockquote>“{PERSONALITY_LINES[personality]}”</blockquote>
-        <div className="appearance-heading"><strong>Appearance</strong><span>{APPEARANCES.length} included</span></div>
-        <div className="appearance-grid">{APPEARANCES.map((item) => <button type="button" key={item.id} aria-label={`${item.label} appearance`} aria-pressed={appearanceId === item.id} onClick={() => updateOrchestrator({ avatarId: item.id })}><img src={resolvePublicAsset(item.src)} alt="" /><span>{item.label}</span></button>)}</div>
+        <div className="appearance-heading"><strong>Appearance</strong><span>{APPEARANCES.length} included · {appearancePage + 1} / {appearancePageCount}</span></div>
+        <div className="appearance-carousel" role="group" aria-label="Orchestrator appearance selector">
+          <button type="button" className="appearance-page-control" aria-label="Previous appearance page" disabled={appearancePage === 0} onClick={() => setAppearancePage((page) => Math.max(0, page - 1))}>←</button>
+          <div className="appearance-grid">{visibleAppearances.map((item) => <button type="button" key={item.id} aria-label={`${item.label} appearance`} aria-pressed={appearanceId === item.id} onClick={() => updateOrchestrator({ avatarId: item.id })}><img src={resolvePublicAsset(item.src)} alt="" /><span>{item.label}</span></button>)}</div>
+          <button type="button" className="appearance-page-control" aria-label="Next appearance page" disabled={appearancePage >= appearancePageCount - 1} onClick={() => setAppearancePage((page) => Math.min(appearancePageCount - 1, page + 1))}>→</button>
+        </div>
       </aside>
 
       <div className="setup-panel">

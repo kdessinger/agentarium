@@ -37,11 +37,34 @@ test('Orchestrator appearance portraits render instead of blank cards', async ({
     const portrait = image as HTMLImageElement
     return portrait.complete && portrait.naturalWidth > 0 && portrait.naturalHeight > 0
   })).toBe(true)
-  await expect(page.locator('.appearance-grid img')).toHaveCount(8)
+  await expect(page.locator('.appearance-grid img')).toHaveCount(4)
   await expect.poll(() => page.locator('.appearance-grid img').evaluateAll((images) => images.every((image) => {
     const portrait = image as HTMLImageElement
     return portrait.complete && portrait.naturalWidth > 0 && portrait.naturalHeight > 0
   }))).toBe(true)
+  await page.getByRole('button', { name: 'Next appearance page' }).click()
+  await expect(page.locator('.appearance-grid img')).toHaveCount(4)
+  await expect.poll(() => page.locator('.appearance-grid img').evaluateAll((images) => images.every((image) => {
+    const portrait = image as HTMLImageElement
+    return portrait.complete && portrait.naturalWidth > 0 && portrait.naturalHeight > 0
+  }))).toBe(true)
+})
+
+test('Orchestrator appearance selector pages through avatars without a vertical chooser scrollbar', async ({ page }) => {
+  await page.keyboard.press('Enter')
+  const chooser = page.getByRole('group', { name: 'Orchestrator appearance selector' })
+  await expect(chooser).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Navigator appearance' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Diplomat appearance' })).toHaveCount(0)
+  await expect(page.getByRole('button', { name: 'Previous appearance page' })).toBeDisabled()
+
+  await page.getByRole('button', { name: 'Next appearance page' }).click()
+  await expect(page.getByRole('button', { name: 'Diplomat appearance' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Navigator appearance' })).toHaveCount(0)
+  await expect(page.getByRole('button', { name: 'Next appearance page' })).toBeDisabled()
+
+  await expect(await chooser.evaluate((element) => element.scrollHeight <= element.clientHeight)).toBe(true)
+  await expect(await page.locator('.orchestrator-preview').evaluate((element) => element.scrollHeight <= element.clientHeight)).toBe(true)
 })
 
 test('Orchestrator setup offers approved personality working-style and atmosphere choices', async ({ page }) => {
