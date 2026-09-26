@@ -22,7 +22,7 @@ import { appendApprovalRecord, appendAuditRecord, createDemoPartition, createSta
 import { WorldScene } from './components/WorldScene'
 import { RoomDiorama } from './components/RoomDiorama'
 import { exportDraft, importDraft, loadWorkspace, restartWithBackup, saveWorkspace } from './lib/persistence'
-import { getAgentPortraitPath, getAgentWorkItems, getRoomWorkItems, type RoomWorkItem } from './lib/presentation'
+import { getAgentPortraitPath, getAgentWorkItems, getRoomWorkItems, resolvePublicAsset, type RoomWorkItem } from './lib/presentation'
 import { deriveFeedbackLoop } from './lib/feedbackLoop'
 import { FeedbackLoopPanel } from './components/FeedbackLoopPanel'
 import { AgentariumTitleScreen } from './components/AgentariumTitleScreen'
@@ -311,12 +311,12 @@ function WorldChooser({ selected, onSelect, worldName, onName }: { selected: Wor
     <div className="world-gallery-column">
       <div className="world-uniqueness-note"><span aria-hidden="true">✦</span><p><strong>Each commissioned world is custom and unique.</strong> These thumbnails show a possible direction—not the exact world that will be created for you.</p></div>
       <div className="world-grid">{WORLD_TEMPLATES.map((item) => <button key={item.id} className={`world-card ${selected === item.id ? 'selected' : ''}`} onClick={() => onSelect(item.id)}>
-        <span className="world-thumbnail"><img src={item.previewPath} alt={item.previewAlt} /></span>
+        <span className="world-thumbnail"><img src={resolvePublicAsset(item.previewPath)} alt={item.previewAlt} /></span>
         <span className="world-card-copy"><strong>{item.label}</strong><small>{item.topology}</small><em>{item.movement}</em></span>
       </button>)}</div>
     </div>
     <aside className="selected-world-preview" aria-live="polite">
-      <img src={selectedTemplate.previewPath} alt={`${selectedTemplate.label} selected concept preview`} />
+      <img src={resolvePublicAsset(selectedTemplate.previewPath)} alt={`${selectedTemplate.label} selected concept preview`} />
       <div><span className="eyebrow">Selected world direction</span><h3>{selectedTemplate.label}</h3><p>{selectedTemplate.topology}</p><dl><dt>Movement</dt><dd>{selectedTemplate.movement}</dd><dt>Command area</dt><dd>{selectedTemplate.commandName}</dd><dt>Materials</dt><dd>{selectedTemplate.materials}</dd></dl><small>{selectedTemplate.previewNote}</small></div>
       <label className="world-name">World name<input value={worldName} onChange={(event) => onName(event.target.value)} /></label>
     </aside>
@@ -457,7 +457,7 @@ function CommissionedWorld({ active, onRecommission, onLeaveDemo }: { active: Ac
 
 function AgentView({ agent, room, workItems, bundled, onBack }: { agent: AgentDefinition; room: RoomProfile; workItems: RoomWorkItem[]; bundled: boolean; onBack: () => void }) {
   const portraitPath = bundled ? getAgentPortraitPath(agent.id) : null
-  return <section className={`agent-view ${bundled ? '' : 'placeholder-scene'}`} style={bundled ? { backgroundImage: `linear-gradient(90deg, rgba(3,9,16,.22), rgba(3,9,16,.92)), url(${room.assetPath})` } : undefined}>
+  return <section className={`agent-view ${bundled ? '' : 'placeholder-scene'}`} style={bundled ? { backgroundImage: `linear-gradient(90deg, rgba(3,9,16,.22), rgba(3,9,16,.92)), url(${resolvePublicAsset(room.assetPath)})` } : undefined}>
     {!bundled && <div className="placeholder-copy"><strong>Matching agent scene not rendered</strong><p>No bundled spaceship art is reused for this commissioned style/world.</p></div>}
     <button className="back-control" onClick={onBack}>← Return to {room.name}</button>
     <div className="character-card">

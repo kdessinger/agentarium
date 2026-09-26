@@ -29,6 +29,21 @@ test('entering setup keeps Orchestrator and Intelligence in one persistent shell
   await expect(page.getByRole('heading', { name: 'Choose an intelligence provider' })).toBeVisible()
 })
 
+test('Orchestrator appearance portraits render instead of blank cards', async ({ page }) => {
+  await page.keyboard.press('Enter')
+  const preview = page.getByAltText('Navigator Orchestrator appearance')
+  await expect(preview).toBeVisible()
+  await expect.poll(() => preview.evaluate((image) => {
+    const portrait = image as HTMLImageElement
+    return portrait.complete && portrait.naturalWidth > 0 && portrait.naturalHeight > 0
+  })).toBe(true)
+  await expect(page.locator('.appearance-grid img')).toHaveCount(8)
+  await expect.poll(() => page.locator('.appearance-grid img').evaluateAll((images) => images.every((image) => {
+    const portrait = image as HTMLImageElement
+    return portrait.complete && portrait.naturalWidth > 0 && portrait.naturalHeight > 0
+  }))).toBe(true)
+})
+
 test('Orchestrator setup offers approved personality working-style and atmosphere choices', async ({ page }) => {
   await page.keyboard.press('Enter')
   for (const personality of ['Professional', 'Empathetic / Friendly', 'Direct / Blunt', 'Witty / Funny', 'Technical / Scientific', 'Bold']) {

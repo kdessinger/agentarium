@@ -1,9 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { createBuildPlan, createCommissioningDraft } from './commissioning'
-import { getAgentConceptPath, getAgentPortraitPath, getHotspotBounds, getRoomWorkItems } from './presentation'
+import { getAgentConceptPath, getAgentPortraitPath, getHotspotBounds, getRoomWorkItems, resolvePublicAsset } from './presentation'
 import { createDemoPartition, createStandardPartition } from './modes'
 
 describe('agent artwork presentation', () => {
+  it('resolves a canonical bundled asset under the deployment base path', () => {
+    expect(resolvePublicAsset('/concept-art/agents/portraits/ultron.png', '/agentarium/')).toBe('/agentarium/concept-art/agents/portraits/ultron.png')
+  })
+
   it('resolves bundled core-agent concept and portrait paths', () => {
     expect(getAgentConceptPath('pixel')).toBe('/concept-art/agents/pixel.png')
     expect(getAgentPortraitPath('pixel')).toBe('/concept-art/agents/portraits/pixel.png')

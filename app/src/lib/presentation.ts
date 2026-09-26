@@ -4,6 +4,15 @@ const CORE_AGENT_IDS = new Set([
   'ultron', 'nova', 'forge', 'pixel', 'vibes', 'developer', 'security', 'cipher', 'governor',
 ])
 
+/**
+ * Converts a canonical bundled-asset path into a URL that works both at the
+ * development server root and under a deployed Vite base such as `/agentarium/`.
+ * Persisted plans keep canonical root paths; only browser rendering is rebased.
+ */
+export function resolvePublicAsset(path: string, base = import.meta.env.BASE_URL): string {
+  return `${base.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`
+}
+
 export type RoomWorkItem = {
   id: string
   kind: 'quest' | 'event' | 'packet' | 'evidence' | 'memory' | 'metric' | 'feedback' | 'approval'
@@ -15,11 +24,11 @@ export type RoomWorkItem = {
 }
 
 export function getAgentConceptPath(agentId: string): string | null {
-  return CORE_AGENT_IDS.has(agentId) ? `/concept-art/agents/${agentId}.png` : null
+  return CORE_AGENT_IDS.has(agentId) ? resolvePublicAsset(`/concept-art/agents/${agentId}.png`) : null
 }
 
 export function getAgentPortraitPath(agentId: string): string | null {
-  return CORE_AGENT_IDS.has(agentId) ? `/concept-art/agents/portraits/${agentId}.png` : null
+  return CORE_AGENT_IDS.has(agentId) ? resolvePublicAsset(`/concept-art/agents/portraits/${agentId}.png`) : null
 }
 
 export function getHotspotBounds(hotspot: Hotspot): { x1: number; y1: number; x2: number; y2: number } {

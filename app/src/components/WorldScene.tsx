@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import './WorldScene.css'
 import type { BuildPlan, AgentDefinition, RoomProfile } from '../lib/commissioning'
-import { getHotspotBounds } from '../lib/presentation'
+import { getHotspotBounds, resolvePublicAsset } from '../lib/presentation'
 import {
   AGENT_SPRITE,
   SPRITE_SIZE,
@@ -281,7 +281,7 @@ export function WorldScene({ plan, onRoom, timeMs: externalTime }: Props) {
           {/* Background ship image */}
           {ship?.path && (
             <image
-              href={ship.path}
+              href={resolvePublicAsset(ship.path)}
               x={0}
               y={0}
               width={w}

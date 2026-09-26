@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './WorldScene.css'
 import type { AgentDefinition, RoomProfile } from '../lib/commissioning'
-import type { RoomWorkItem } from '../lib/presentation'
+import { resolvePublicAsset, type RoomWorkItem } from '../lib/presentation'
 import {
   AGENT_SPRITE,
   SPRITE_SIZE,
@@ -113,7 +113,7 @@ export function RoomDiorama({ room, agents, workItems, assetPath, bundled, onBac
         <svg viewBox={`0 0 ${w} ${h}`} className="room-diorama-svg" preserveAspectRatio="xMidYMid slice">
           {bundled && assetPath && (
             <image
-              href={assetPath}
+              href={resolvePublicAsset(assetPath)}
               x={0}
               y={0}
               width={w}

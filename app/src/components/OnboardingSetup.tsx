@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState, type CSSProperties } from 'react'
+import { resolvePublicAsset } from '../lib/presentation'
 import type { AgentDefinition, CommissioningDraft, InstallationMode } from '../lib/commissioning'
 
 const ORCHESTRATOR_PERSONALITIES = [
@@ -124,12 +125,12 @@ export function OrchestratorSetup({ draft, activeWorldName, onCancel, onAgents, 
     <section className="setup-workspace">
       <aside className="orchestrator-preview">
         <span className="eyebrow">Orchestrator · The Bridge</span>
-        <div className="orchestrator-portrait"><img src={appearance.src} alt={`${appearance.label} Orchestrator appearance`} /></div>
+        <div className="orchestrator-portrait"><img src={resolvePublicAsset(appearance.src)} alt={`${appearance.label} Orchestrator appearance`} /></div>
         <h2>{orchestrator.name || 'Ultron'}</h2>
         <p>{personality} · {workingStyle}</p>
         <blockquote>“{PERSONALITY_LINES[personality]}”</blockquote>
         <div className="appearance-heading"><strong>Appearance</strong><span>{APPEARANCES.length} included</span></div>
-        <div className="appearance-grid">{APPEARANCES.map((item) => <button type="button" key={item.id} aria-label={`${item.label} appearance`} aria-pressed={appearanceId === item.id} onClick={() => updateOrchestrator({ avatarId: item.id })}><img src={item.src} alt="" /><span>{item.label}</span></button>)}</div>
+        <div className="appearance-grid">{APPEARANCES.map((item) => <button type="button" key={item.id} aria-label={`${item.label} appearance`} aria-pressed={appearanceId === item.id} onClick={() => updateOrchestrator({ avatarId: item.id })}><img src={resolvePublicAsset(item.src)} alt="" /><span>{item.label}</span></button>)}</div>
       </aside>
 
       <div className="setup-panel">
