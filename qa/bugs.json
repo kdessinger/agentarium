@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "lastReviewed": "2026-08-30",
+  "scope": "Agentarium active working tree",
+  "statusValues": [
+    "open",
+    "in_progress",
+    "blocked",
+    "fixed_unverified",
+    "closed"
+  ],
+  "severityValues": [
+    "critical",
+    "high",
+    "medium",
+    "low"
+  ],
+  "bugs": []
+}

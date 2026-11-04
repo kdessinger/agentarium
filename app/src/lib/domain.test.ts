@@ -17,6 +17,18 @@ import { createBuildJobs, runNextBuildJob } from './build'
 import { createReplayFrame, startStandardWorkflow } from './world'
 
 describe('commissioning contracts', () => {
+  it('opens with a persisted owner-to-steward articulation contract', () => {
+    const draft = createCommissioningDraft()
+    expect(draft.articulation).toEqual({
+      ownerName: '',
+      stewardName: 'Ultron',
+      vision: '',
+      desiredOutcomes: [],
+      operatingBoundaries: [],
+      workingStyle: 'Propose a blueprint, explain the routing, and ask before consequential actions.',
+    })
+  })
+
   it('starts in Standard mode', () => {
     expect(createCommissioningDraft().installationMode).toBe('standard')
   })
@@ -34,6 +46,7 @@ describe('commissioning contracts', () => {
 
   it('offers all ten required world templates', () => {
     expect(WORLD_TEMPLATES.map((template) => template.label)).toEqual([
+      'Modern Corporate Office',
       'Space Station',
       'Spaceship',
       'Cruise Ship',
@@ -42,9 +55,14 @@ describe('commissioning contracts', () => {
       'Resort',
       'Sky Ship',
       'Battleship',
-      'Modern Corporate Office',
       'Custom Theme',
     ])
+  })
+
+  it('gives every world template a representative preview and uniqueness disclaimer', () => {
+    expect(WORLD_TEMPLATES.every((template) => template.previewPath.startsWith('/concept-art/world-templates/'))).toBe(true)
+    expect(WORLD_TEMPLATES.every((template) => template.previewAlt.length > 20)).toBe(true)
+    expect(WORLD_TEMPLATES.every((template) => template.previewNote.includes('custom and unique'))).toBe(true)
   })
 
   it('keeps visual style independent from every world template', () => {
@@ -64,7 +82,12 @@ describe('commissioning contracts', () => {
   })
 
   it('produces an inspectable plan with agents Forges and governance', () => {
-    const plan = createBuildPlan(createCommissioningDraft())
+    const draft = createCommissioningDraft()
+    draft.articulation.ownerName = 'Kenn'
+    draft.articulation.vision = 'Build a visible system of specialized AI operations labs.'
+    draft.articulation.desiredOutcomes = ['Turn goals into supervised operational workflows']
+    const plan = createBuildPlan(draft)
+    expect(plan.articulation).toEqual(draft.articulation)
     expect(plan.rooms.some((room) => room.type === 'forge')).toBe(true)
     expect(plan.agents[0]).toMatchObject({ provider: 'unconfigured', model: 'unconfigured' })
     expect(plan.governance.approvalRequired).toBe(true)
@@ -124,7 +147,7 @@ describe('truthful jobs and operation', () => {
   })
 
   it('covers every room with an approved asset or honest placeholder and hotspot', () => {
-    const plan = createBuildPlan(createCommissioningDraft())
+    const plan = createBuildPlan(createCommissioningDraft({ worldTemplateId: 'spaceship' }))
     expect(plan.assets).toHaveLength(plan.rooms.length + 1)
     expect(plan.hotspots).toHaveLength(plan.rooms.length)
     expect(plan.hotspots.every((hotspot) => hotspot.polygon.length >= 4)).toBe(true)

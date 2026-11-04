@@ -1,5 +1,7 @@
 # Self-Building Commissioning Implementation Plan
 
+> **Historical plan status (2026-08-30):** The original sequence below is preserved as written, but Task 4 step 4 is superseded. Canonical commissioning is now purpose/orchestration-first: owner↔Ultron articulation → Standard/Demo boundary → agents → Forges → governance → visual presentation → world template → blueprint → build. See `../DECISIONS.md` and the master build prompt. Do not use the visual-first line below as current authority.
+
 > **For Hermes:** Use subagent-driven-development skill to implement this plan task-by-task.
 
 **Goal:** Turn the current Agentarium prototype into a resumable first-run commissioning experience that interviews the installer, independently selects visual style and world template, builds an approved configuration from matching art/placeholders and declarative manifests, and presents the completed world.

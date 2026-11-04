@@ -19,6 +19,21 @@ export const backupKey = (mode: InstallationMode) => `agentarium:${mode}:commiss
 
 type LoadResult = { record: CommissioningDraft | null; error?: string; recoveryJson?: string; migrated?: boolean }
 
+function hydrateCurrentDefaults(value: unknown): unknown {
+  if (!value || typeof value !== 'object' || (value as { schemaVersion?: unknown }).schemaVersion !== SCHEMA_VERSION) return value
+  const record = value as Partial<CommissioningDraft>
+  if (record.articulation) return value
+  const defaults = createCommissioningDraft({
+    installationMode: record.installationMode,
+    visualStyleId: record.visualStyleId,
+    worldTemplateId: record.worldTemplateId,
+    worldName: record.worldName,
+  })
+  const hydrated = { ...record, articulation: defaults.articulation, buildPlan: undefined } as CommissioningDraft
+  if (hydrated.status === 'complete') hydrated.buildPlan = createBuildPlan(hydrated)
+  return hydrated
+}
+
 function parseJson(raw: string): unknown {
   try { return JSON.parse(raw) as unknown } catch { throw new Error('Invalid commissioning JSON') }
 }
@@ -48,11 +63,12 @@ export function loadWorkspace(storage: StorageLike, mode: InstallationMode): Loa
   let parsed: unknown
   try { parsed = parseJson(raw) } catch (error) { return { record: null, error: (error as Error).message, recoveryJson: raw } }
   const migrated = migrateV1(parsed)
-  const checked = validateCommissioningDraft(migrated ?? parsed)
+  const hydrated = hydrateCurrentDefaults(migrated ?? parsed)
+  const checked = validateCommissioningDraft(hydrated)
   if (!checked.ok) return { record: null, error: checked.errors.join('; '), recoveryJson: raw }
   if (checked.value.installationMode !== mode || checked.value.namespace !== mode) return { record: null, error: `Stored record does not belong to ${mode}`, recoveryJson: raw }
-  if (migrated) storage.setItem(workspaceKey(mode), JSON.stringify(migrated))
-  return { record: checked.value, migrated: Boolean(migrated) }
+  if (migrated || hydrated !== parsed) storage.setItem(workspaceKey(mode), JSON.stringify(checked.value))
+  return { record: checked.value, migrated: Boolean(migrated || hydrated !== parsed) }
 }
 
 export function loadDraft(storage: StorageLike, mode: InstallationMode): LoadResult {
@@ -60,7 +76,7 @@ export function loadDraft(storage: StorageLike, mode: InstallationMode): LoadRes
   if (!raw) return { record: null }
   try {
     const parsed = parseJson(raw)
-    const checked = validateCommissioningDraft(parsed)
+    const checked = validateCommissioningDraft(hydrateCurrentDefaults(parsed))
     if (!checked.ok) return { record: null, error: checked.errors.join('; '), recoveryJson: raw }
     if (checked.value.installationMode !== mode) return { record: null, error: 'Draft mode mismatch', recoveryJson: raw }
     return { record: checked.value }
@@ -99,7 +115,7 @@ export function exportDraft(draft: CommissioningDraft): string {
 export function importDraft(raw: string): CommissioningDraft {
   const parsed = parseJson(raw)
   const migrated = migrateV1(parsed)
-  const checked = validateCommissioningDraft(migrated ?? parsed)
+  const checked = validateCommissioningDraft(hydrateCurrentDefaults(migrated ?? parsed))
   if (!checked.ok) throw new Error(`Invalid commissioning record: ${checked.errors.join('; ')}`)
   return checked.value
 }

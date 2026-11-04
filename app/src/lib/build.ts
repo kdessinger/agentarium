@@ -83,8 +83,8 @@ function validateJob(jobId: string, plan: BuildPlan): { result: Record<string, u
       checks: ['Plan components are present', 'No operational fixture generated'],
     },
     qa: {
-      result: { roomAssetCoverage: plan.rooms.every((room) => plan.assets.some((asset) => asset.ownerId === room.id)), hotspotCoverage: plan.rooms.every((room) => plan.hotspots.some((hotspot) => hotspot.targetId === room.id)) },
-      checks: ['Room asset coverage passed', 'Hotspot target coverage passed', 'Navigation hierarchy available'],
+      result: { roomAssetCoverage: plan.rooms.every((room) => plan.assets.some((asset) => asset.ownerId === room.id)), hotspotCoverage: plan.hotspots.every((hotspot) => roomIds.has(hotspot.targetId)) },
+      checks: ['Room asset coverage passed', 'Hotspot targets valid', 'Navigation hierarchy available'],
     },
     presentation: {
       result: { worldName: plan.worldName, modeBoundaries: ['standard', 'demo'], unresolved: plan.openQuestions },
@@ -95,7 +95,10 @@ function validateJob(jobId: string, plan: BuildPlan): { result: Record<string, u
   if (!output) throw new Error(`No local handler for ${jobId}`)
 
   if (jobId === 'topology') {
-    if (plan.hotspots.length !== plan.rooms.length || plan.hotspots.some((hotspot) => !roomIds.has(hotspot.targetId) || hotspot.polygon.length < 4)) throw new Error('Topology validation failed')
+    const bundled = plan.style === 'pixel_art' && plan.worldTemplate === 'spaceship'
+    if (bundled) {
+      if (plan.hotspots.length !== plan.rooms.length || plan.hotspots.some((hotspot) => !roomIds.has(hotspot.targetId) || hotspot.polygon.length < 4)) throw new Error('Topology validation failed')
+    }
     if (plan.adjacency.some((edge) => !roomIds.has(edge.from) || !roomIds.has(edge.to))) throw new Error('Adjacency validation failed')
   }
   if (jobId === 'art') {

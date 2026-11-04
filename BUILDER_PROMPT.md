@@ -8,6 +8,8 @@ The authoritative build instruction is:
 docs/prompts/agentarium-master-build-prompt.md
 ```
 
+It now requires every revenue Forge to be rendered as an inspectable closed feedback loop: attributable market signal → product hypothesis → demand test → Treasury guardrails → approval → fulfillment/customer outcome → Archives/Feedback → improved next research question. Standard mode must show honest blockers until real evidence exists.
+
 The implementation plan is:
 
 ```text

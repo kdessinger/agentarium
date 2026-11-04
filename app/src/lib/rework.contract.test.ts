@@ -110,6 +110,20 @@ describe('validated persistence boundaries', () => {
 })
 
 describe('complete structured interview and blueprint', () => {
+  it('carries the owner mission into the build plan before presentation choices', () => {
+    const draft = createCommissioningDraft()
+    draft.articulation = {
+      ...draft.articulation,
+      ownerName: 'Kenn',
+      vision: 'Create an AI operations world that can turn goals into visible, governed work.',
+      desiredOutcomes: ['Route work through specialized labs', 'Keep approvals inspectable'],
+      operatingBoundaries: ['No external action without approval'],
+    }
+    const plan = createBuildPlan(draft)
+    expect(plan.articulation).toEqual(draft.articulation)
+    expect(plan.articulation.vision).toContain('visible, governed work')
+  })
+
   it('captures agent, Forge, governance, and custom interpretation fields', () => {
     const draft = createCommissioningDraft()
     const agent = draft.agents[0]
@@ -130,6 +144,16 @@ describe('complete structured interview and blueprint', () => {
     expect(custom.theme.customThemeDescription).toBeDefined()
     expect(custom.presentation.interpretationConfirmed).toBe(false)
     expect(custom.theme.interpretationConfirmed).toBe(false)
+  })
+
+  it('assigns Caspian to the Treasury room as the unit-economics specialist', () => {
+    const draft = createCommissioningDraft()
+    expect(draft.agents.find((agent) => agent.id === 'caspian')).toMatchObject({
+      name: 'Caspian',
+      role: 'Treasury & Unit Economics',
+      roomId: 'treasury',
+    })
+    expect(draft.rooms.find((room) => room.id === 'treasury')?.agentIds).toContain('caspian')
   })
 
   it('build plan exposes topology, permissions, businesses, gates, costs, assumptions and non-goals', () => {
@@ -164,7 +188,7 @@ describe('complete structured interview and blueprint', () => {
   })
 
   it('uses authored valid polygons for bundled ship compartments', () => {
-    const plan = createBuildPlan(createCommissioningDraft())
+    const plan = createBuildPlan(createCommissioningDraft({ worldTemplateId: 'spaceship' }))
     const ids = new Set(plan.rooms.map((room) => room.id))
     expect(plan.hotspots).toHaveLength(plan.rooms.length)
     for (const hotspot of plan.hotspots) {

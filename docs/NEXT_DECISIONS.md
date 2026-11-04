@@ -1,6 +1,8 @@
 # Next Decisions
 
-These are the choices to make before implementation starts.
+> **Archived decision snapshot.** Implementation has started and the choices below are historical context, not the active queue. Current work and unresolved decisions live in `NEXT.md`; locked decisions live in `DECISIONS.md`.
+
+These were the choices recorded before implementation started.
 
 ## 1. Name
 

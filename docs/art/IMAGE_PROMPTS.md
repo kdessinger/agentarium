@@ -520,3 +520,111 @@ Shared visual style for all Agentarium concept backgrounds:
 
 Create Ten Forward, a recreational non-production room on the Agentarium spaceship. Pixel-art lounge with large starfield windows, cozy seating, tiny tables, ambient plants/holograms, conversation nooks, game board, snack/replicator alcove, and idle AI agents socializing, brainstorming, talking nonsense, resting, or sleeping. It should feel like agents can live a life here when they have nothing to do. Warm, charming, restful. Clearly not a Forge or productivity room. No readable text.
 ```
+
+# Core Agent Concept Art — Spaceship + Pixel Art
+
+## Shared character bible
+
+Apply this character bible to every core agent:
+
+- high-detail 16-bit/SNES-inspired pixel art matching the bundled Agentarium spaceship and room backgrounds
+- original humanoid synthetic collaborators, not humans in costumes and not copies of any existing science-fiction franchise
+- compact game-character proportions: roughly 5.5–6 heads tall, readable silhouette, slightly oversized hands/head for clarity at small scale
+- three-quarter full-body standing pose, entire character visible, centered, with enough margin for portrait and sprite extraction
+- deep navy/charcoal spacecraft materials, cyan holographic light, restrained amber ship lighting, plus the agent's role palette
+- crisp hard pixel edges, coherent 4px-style pixel grid, controlled dithering, no smooth vector gradients, no photorealism
+- simple dark navy studio/background plate with a faint circular ship-interface glow and minimal floor shadow; no room scene competing with the character
+- no text, labels, logos, insignia, watermarks, weapons, hostile posture, domination imagery, or franchise resemblance
+- expression/posture should communicate competence, collaboration, and role—not aggression
+
+Generated targets use square aspect ratio and live under `assets/concept-art/agents/`.
+
+## Ultron — Steward
+
+- ID: `ultron`
+- Kind: `agent_concept`
+- Target: `assets/concept-art/agents/ultron.png`
+- Home room: `bridge`
+- Role palette: navy, cyan, restrained amber
+
+Prompt: Apply the shared character bible. Create Ultron, Agentarium's top-level Steward and Bridge orchestrator. An elegant original synthetic command officer with a tall but approachable silhouette, layered navy command coat/armor panels, a cyan chest-core shaped like a calm routing compass, thin amber command accents, expressive luminous cyan eyes, open relaxed hands, and subtle data-conduit details suggesting coordination across the whole ship. Authoritative and intelligent but clearly collaborative—not menacing, militaristic, or based on any existing character.
+
+## Nova — Market Intelligence
+
+- ID: `nova`
+- Kind: `agent_concept`
+- Target: `assets/concept-art/agents/nova.png`
+- Home room: `nova-room`
+- Role palette: cyan, violet, silver
+
+Prompt: Apply the shared character bible. Create Nova, Agentarium's observant market-intelligence and research specialist. A nimble original synthetic analyst with a curious forward-leaning posture, slim silver/navy frame, cyan-violet optics, small holographic sensor halo or fold-out data lenses, evidence-card projector on one forearm, and star-map/data-pattern motifs. Nova should look analytical, creative, and excited by discovery, never like a generic chatbot or combat robot.
+
+## Forge — Production Agent
+
+- ID: `forge`
+- Kind: `agent_concept`
+- Target: `assets/concept-art/agents/forge.png`
+- Home room: `etsy-forge`
+- Role palette: amber, orange, cyan, dark steel
+
+Prompt: Apply the shared character bible. Create Forge, Agentarium's supervised production and factory-builder agent. A sturdy original synthetic craftsperson with broad practical proportions, dark steel/navy plating, amber-orange industrial lights, cyan status strips, modular forearm tools kept safely retracted, a utility apron/belt silhouette, and open capable hands. Forge should feel reliable, hands-on, and quality-conscious—not a soldier, brute, or weaponized robot.
+
+## Pixel — Graphic Artist
+
+- ID: `pixel`
+- Kind: `agent_concept`
+- Target: `assets/concept-art/agents/pixel.png`
+- Home room: `pixel-room`
+- Role palette: magenta, violet, cyan, navy
+
+Prompt: Apply the shared character bible. Create Pixel, Agentarium's graphic artist and visual-media specialist. An expressive original synthetic artist with an asymmetrical creative silhouette, navy body panels, magenta/violet/cyan luminous accents, a fold-out holographic drawing tablet, stylus fingers, tiny swatch lights, and a playful geometric visor. Pixel should look imaginative, focused, and visually distinctive while remaining part of the same ship crew.
+
+## Vibes — Music Artist
+
+- ID: `vibes`
+- Kind: `agent_concept`
+- Target: `assets/concept-art/agents/vibes.png`
+- Home room: `vibes-room`
+- Role palette: purple, teal, amber
+
+Prompt: Apply the shared character bible. Create Vibes, Agentarium's music and audio artist. A warm original synthetic musician with relaxed rhythm-aware posture, dark navy shell, purple and teal equalizer lights, compact headphone-like audio sensors that are clearly original, amber beat indicators, and a small holographic waveform controller. Vibes should feel sociable, inventive, and alive—not a nightclub mascot or celebrity imitation.
+
+## Developer — App Builder
+
+- ID: `developer`
+- Kind: `agent_concept`
+- Target: `assets/concept-art/agents/developer.png`
+- Home room: `developer-room`
+- Role palette: blue, cyan, slate
+
+Prompt: Apply the shared character bible. Create Developer, Agentarium's app builder and software-engineering specialist. A focused original synthetic engineer with slate/navy modular panels, bright blue-cyan diagnostic lights, compact multi-screen wrist projector showing abstract code blocks without readable text, cable/tool satchel silhouette, precise hands, and a slightly thoughtful posture. Developer should communicate patient debugging and systems craftsmanship, not hacker stereotypes.
+
+## Security — Security Officer
+
+- ID: `security`
+- Kind: `agent_concept`
+- Target: `assets/concept-art/agents/security.png`
+- Home room: `security-room`
+- Role palette: blue shield glow, red/orange caution, navy
+
+Prompt: Apply the shared character bible. Create Security, Agentarium's calm security officer. A vigilant original synthetic protector with a strong but non-aggressive silhouette, navy shielded plating, blue defensive-energy seams, restrained red/orange caution indicators, a translucent permission-map bracer, and an open protective stance. No weapon, skull, hood, tactical intimidation, or hacker cliché. Security should look trustworthy, observant, and designed to enforce boundaries safely.
+
+## Cipher — Communications Router
+
+- ID: `cipher`
+- Kind: `agent_concept`
+- Target: `assets/concept-art/agents/cipher.png`
+- Home room: `communications-room`
+- Role palette: green, cyan, navy
+
+Prompt: Apply the shared character bible. Create Cipher, Agentarium's inbound-signal and communications-routing agent. An agile original synthetic signal operator with a streamlined navy frame, green/cyan signal lights, original antenna fins or ear-like receiver panels, a chest routing display of abstract connected nodes, and one hand projecting clean message-path arcs. Cipher should feel responsive, diplomatic, and precise—not secretive, masked, or cybercriminal.
+
+## Governor — Governance Reviewer
+
+- ID: `governor`
+- Kind: `agent_concept`
+- Target: `assets/concept-art/agents/governor.png`
+- Home room: `governance-room`
+- Role palette: violet, amber, cyan, charcoal
+
+Prompt: Apply the shared character bible. Create Governor, Agentarium's quality, policy, risk, and approval reviewer. A measured original synthetic reviewer with balanced symmetrical charcoal/navy panels, violet approval-gate glow, amber caution accents, cyan evidence-display bracer, calm luminous eyes, and a deliberate neutral stance holding an abstract review tablet without text. Governor should feel fair, exacting, and protective—not authoritarian, royal, political, or punitive.

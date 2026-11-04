@@ -184,6 +184,298 @@
       "target": "assets/concept-art/rooms/ten-forward.png",
       "aspect": "landscape",
       "prompt": "Shared visual style for all Agentarium concept backgrounds:\n- animated-pixel-art-ready static background, 16-bit / SNES-inspired pixel art, high-detail isometric or 2.5D game background\n- spaceship flying through deep space theme, visible stars/nebula glow through windows where appropriate\n- warm sci-fi command atmosphere: deep navy hull, cyan holograms, amber console lights, violet status glows, small green operational LEDs\n- room backgrounds should be clean enough to become clickable game scenes; avoid tiny unreadable text, avoid photorealism, avoid corporate dashboard look\n- leave natural empty/quiet space where UI overlays and sprites can be layered later\n- no real brand logos, no copyrighted franchise marks, no Star Trek insignia, no readable fake company names\n- show tiny generic AI agent sprite silhouettes or placeholder character positions only when useful; final animated sprites will be layered later\n\nCreate Ten Forward, a recreational non-production room on the Agentarium spaceship. Pixel-art lounge with large starfield windows, cozy seating, tiny tables, ambient plants/holograms, conversation nooks, game board, snack/replicator alcove, and idle AI agents socializing, brainstorming, talking nonsense, resting, or sleeping. It should feel like agents can live a life here when they have nothing to do. Warm, charming, restful. Clearly not a Forge or productivity room. No readable text."
+    },
+    {
+      "id": "ultron",
+      "kind": "agent_concept",
+      "title": "Ultron",
+      "target": "assets/concept-art/agents/ultron.png",
+      "portraitTarget": "assets/concept-art/agents/portraits/ultron.png",
+      "aspect": "square",
+      "role": "Steward",
+      "homeRoom": "bridge",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "needs_review",
+      "prompt": "Original collaborative Bridge steward; navy/cyan/amber command design.",
+      "referenceAssets": [
+        "assets/concept-art/ship/ship-overview-cross-section.png",
+        "assets/concept-art/rooms/bridge.png"
+      ]
+    },
+    {
+      "id": "nova",
+      "kind": "agent_concept",
+      "title": "Nova",
+      "target": "assets/concept-art/agents/nova.png",
+      "portraitTarget": "assets/concept-art/agents/portraits/nova.png",
+      "aspect": "square",
+      "role": "Market Intelligence",
+      "homeRoom": "nova-room",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "needs_review",
+      "prompt": "Curious evidence-driven research analyst; cyan/violet/silver design.",
+      "referenceAssets": [
+        "assets/concept-art/ship/ship-overview-cross-section.png",
+        "assets/concept-art/rooms/nova-room.png"
+      ]
+    },
+    {
+      "id": "forge",
+      "kind": "agent_concept",
+      "title": "Forge",
+      "target": "assets/concept-art/agents/forge.png",
+      "portraitTarget": "assets/concept-art/agents/portraits/forge.png",
+      "aspect": "square",
+      "role": "Production",
+      "homeRoom": "etsy-forge",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "needs_review",
+      "prompt": "Reliable supervised craftsperson; dark steel, amber/orange, cyan design.",
+      "referenceAssets": [
+        "assets/concept-art/ship/ship-overview-cross-section.png",
+        "assets/concept-art/rooms/etsy-forge.png"
+      ]
+    },
+    {
+      "id": "pixel",
+      "kind": "agent_concept",
+      "title": "Pixel",
+      "target": "assets/concept-art/agents/pixel.png",
+      "portraitTarget": "assets/concept-art/agents/portraits/pixel.png",
+      "aspect": "square",
+      "role": "Graphic Artist",
+      "homeRoom": "pixel-room",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "needs_review",
+      "prompt": "Expressive visual creator; navy, magenta, violet, cyan design.",
+      "referenceAssets": [
+        "assets/concept-art/ship/ship-overview-cross-section.png",
+        "assets/concept-art/rooms/pixel-room.png"
+      ]
+    },
+    {
+      "id": "vibes",
+      "kind": "agent_concept",
+      "title": "Vibes",
+      "target": "assets/concept-art/agents/vibes.png",
+      "portraitTarget": "assets/concept-art/agents/portraits/vibes.png",
+      "aspect": "square",
+      "role": "Music Artist",
+      "homeRoom": "vibes-room",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "needs_review",
+      "prompt": "Warm rhythm-aware music specialist; purple, teal, amber design.",
+      "referenceAssets": [
+        "assets/concept-art/ship/ship-overview-cross-section.png",
+        "assets/concept-art/rooms/vibes-room.png"
+      ]
+    },
+    {
+      "id": "developer",
+      "kind": "agent_concept",
+      "title": "Developer",
+      "target": "assets/concept-art/agents/developer.png",
+      "portraitTarget": "assets/concept-art/agents/portraits/developer.png",
+      "aspect": "square",
+      "role": "App Builder",
+      "homeRoom": "developer-room",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "needs_review",
+      "prompt": "Patient software engineer; slate, navy, blue, cyan design.",
+      "referenceAssets": [
+        "assets/concept-art/ship/ship-overview-cross-section.png",
+        "assets/concept-art/rooms/developer-room.png"
+      ]
+    },
+    {
+      "id": "security",
+      "kind": "agent_concept",
+      "title": "Security",
+      "target": "assets/concept-art/agents/security.png",
+      "portraitTarget": "assets/concept-art/agents/portraits/security.png",
+      "aspect": "square",
+      "role": "Security Officer",
+      "homeRoom": "security-room",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "needs_review",
+      "prompt": "Calm non-aggressive protector; navy, blue shield, caution accents.",
+      "referenceAssets": [
+        "assets/concept-art/ship/ship-overview-cross-section.png",
+        "assets/concept-art/rooms/security-room.png"
+      ]
+    },
+    {
+      "id": "cipher",
+      "kind": "agent_concept",
+      "title": "Cipher",
+      "target": "assets/concept-art/agents/cipher.png",
+      "portraitTarget": "assets/concept-art/agents/portraits/cipher.png",
+      "aspect": "square",
+      "role": "Communications",
+      "homeRoom": "communications-room",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "needs_review",
+      "prompt": "Diplomatic signal-routing specialist; navy, green, cyan design.",
+      "referenceAssets": [
+        "assets/concept-art/ship/ship-overview-cross-section.png",
+        "assets/concept-art/rooms/communications-room.png"
+      ]
+    },
+    {
+      "id": "governor",
+      "kind": "agent_concept",
+      "title": "Governor",
+      "target": "assets/concept-art/agents/governor.png",
+      "portraitTarget": "assets/concept-art/agents/portraits/governor.png",
+      "aspect": "square",
+      "role": "Reviewer",
+      "homeRoom": "governance-room",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "needs_review",
+      "prompt": "Fair quality and policy reviewer; charcoal, violet, amber, cyan design.",
+      "referenceAssets": [
+        "assets/concept-art/ship/ship-overview-cross-section.png",
+        "assets/concept-art/rooms/governance-room.png"
+      ]
+    },
+    {
+      "id": "world-template-preview:modern-corporate-office",
+      "kind": "world_template_preview",
+      "title": "Modern Corporate Office Representative Preview",
+      "target": "assets/concept-art/world-templates/modern-corporate-office.png",
+      "aspect": "landscape",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "approved_preview",
+      "disclaimer": "Representative concept only; each commissioned rendering is custom and unique."
+    },
+    {
+      "id": "world-template-preview:space-station",
+      "kind": "world_template_preview",
+      "title": "Space Station Representative Preview",
+      "target": "assets/concept-art/world-templates/space-station.png",
+      "aspect": "landscape",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "approved_preview",
+      "disclaimer": "Representative concept only; each commissioned rendering is custom and unique."
+    },
+    {
+      "id": "world-template-preview:spaceship",
+      "kind": "world_template_preview",
+      "title": "Spaceship Representative Preview",
+      "target": "assets/concept-art/world-templates/spaceship.png",
+      "aspect": "landscape",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "approved_preview",
+      "disclaimer": "Representative concept only; each commissioned rendering is custom and unique."
+    },
+    {
+      "id": "world-template-preview:cruise-ship",
+      "kind": "world_template_preview",
+      "title": "Cruise Ship Representative Preview",
+      "target": "assets/concept-art/world-templates/cruise-ship.png",
+      "aspect": "landscape",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "approved_preview",
+      "disclaimer": "Representative concept only; each commissioned rendering is custom and unique."
+    },
+    {
+      "id": "world-template-preview:underground-bunker",
+      "kind": "world_template_preview",
+      "title": "Underground Bunker Representative Preview",
+      "target": "assets/concept-art/world-templates/underground-bunker.png",
+      "aspect": "landscape",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "approved_preview",
+      "disclaimer": "Representative concept only; each commissioned rendering is custom and unique."
+    },
+    {
+      "id": "world-template-preview:skyscraper",
+      "kind": "world_template_preview",
+      "title": "Skyscraper Representative Preview",
+      "target": "assets/concept-art/world-templates/skyscraper.png",
+      "aspect": "landscape",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "approved_preview",
+      "disclaimer": "Representative concept only; each commissioned rendering is custom and unique."
+    },
+    {
+      "id": "world-template-preview:resort",
+      "kind": "world_template_preview",
+      "title": "Resort Representative Preview",
+      "target": "assets/concept-art/world-templates/resort.png",
+      "aspect": "landscape",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "approved_preview",
+      "disclaimer": "Representative concept only; each commissioned rendering is custom and unique."
+    },
+    {
+      "id": "world-template-preview:sky-ship",
+      "kind": "world_template_preview",
+      "title": "Sky Ship Representative Preview",
+      "target": "assets/concept-art/world-templates/sky-ship.png",
+      "aspect": "landscape",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "approved_preview",
+      "disclaimer": "Representative concept only; each commissioned rendering is custom and unique."
+    },
+    {
+      "id": "world-template-preview:battleship",
+      "kind": "world_template_preview",
+      "title": "Battleship Representative Preview",
+      "target": "assets/concept-art/world-templates/battleship.png",
+      "aspect": "landscape",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "approved_preview",
+      "disclaimer": "Representative concept only; each commissioned rendering is custom and unique."
+    },
+    {
+      "id": "world-template-preview:custom-theme",
+      "kind": "world_template_preview",
+      "title": "Custom Theme Representative Preview",
+      "target": "assets/concept-art/world-templates/custom-theme.png",
+      "aspect": "landscape",
+      "source": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2-medium",
+      "status": "approved_preview",
+      "disclaimer": "Representative concept only; each commissioned rendering is custom and unique."
     }
-  ]
+  ],
+  "agentCharacterBible": "High-detail 16-bit/SNES-inspired original synthetic collaborators; compact readable proportions; crisp hard pixels; deep navy ship materials; cyan/amber shared lighting; role-specific accent palette; full-body three-quarter pose; no text, logos, weapons, hostile posture, or franchise resemblance."
 }

@@ -130,28 +130,38 @@ The console should show:
 
 ### 4.5 Self-building commissioning experience
 
+> **Current authority note:** The detailed historical flow below records the original self-building concept. First-run ordering is superseded by `docs/DECISIONS.md` D-012, and the approved post-wake workspace is specified in `docs/COMMAND_SHELL_AND_CREW_SPEC.md` under D-013.
+
 Agentarium should install as a generic core runtime and **commission itself into the owner's ship** on first startup.
 
 The first-run experience is part of the world, not a normal setup wizard:
 
 ```text
 Install
-  → animated Builder Agent appears in an unfinished construction bay
-  → conversational interview
+  → Ultron / the Steward appears in an unfinished construction bay
+  → owner-to-steward articulation (mission, outcomes, boundaries, working style)
+  → operating mode (Standard or isolated Demo)
+  → editable agent manifests
+  → editable Forge/business definitions
+  → editable operations/governance
+  → visual presentation
+  → world template and world name
   → inspectable ship/agent/business blueprint
   → explicit build approval
-  → bounded builder agents visibly assemble art, rooms, agents, and workflows
+  → bounded builder agents visibly assemble art, rooms, agents, and workflows (only after blueprint approval)
   → QA and final review
   → completed ship is presented to the owner
 ```
 
-Interview areas:
+Interview areas, in canonical order:
 
-1. **Visual presentation** — ask first whether the user wants Pixel Art, Illustrated 2D, Isometric 3D, Cinematic/Realistic, Clean Vector/Graphic, or a Custom Visual Style. Pixel Art is optional and can be applied to every world template; it is not tied to Spaceship.
-2. **Theme/world** — then show the world-template chooser: Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, Modern Corporate Office, or Custom Theme. The selection drives topology, movement, terminology, materials, exterior setting, and art prompts; then ask the world name, rooms, and bundled-vs-generated art.
+1. **Owner-to-steward articulation** — owner/call sign, steward name, mission, desired outcomes, operating boundaries, and preferred working relationship. A meaningful mission is required before continuing.
+2. **Operating mode** — explicitly choose Standard or the isolated Demo world.
 3. **Agents** — name, purpose, room, provider, model/fallback, tools, permissions, memory, autonomy level, subagents, budget, and success measures.
 4. **Businesses/Forges** — customer, sellable output, inputs/outputs, production and QA agents, external integration intent, approvals, metrics, and risks.
 5. **Operations/governance** — storage, backup, privacy, audit/replay, deployment intent, notification channels, spend limits, credential handling, retries, and approval policy.
+6. **Visual presentation** — after the operation is defined, ask whether the user wants Pixel Art, Illustrated 2D, Isometric 3D, Cinematic/Realistic, Clean Vector/Graphic, or a Custom Visual Style. Pixel Art is optional for every world template; it is not tied to Spaceship.
+7. **Theme/world** — show the world-template chooser: Space Station, Spaceship, Cruise Ship, Underground Bunker, Skyscraper, Resort, Sky Ship, Battleship, Modern Corporate Office, or Custom Theme. The selection drives topology, movement, terminology, materials, exterior setting, and art prompts; then ask the world name, rooms, and bundled-vs-generated art.
 
 Self-building means **configuration and asset generation**, not uncontrolled source-code self-modification. Builder agents create versioned manifests, room topology, hotspot maps, art backgrounds, agent definitions, workflows, and local project state. Real credentials, paid generation, external writes, deployment, and spending remain approval-gated.
 
@@ -169,6 +179,14 @@ whole-ship cross-section background
 ```
 
 The bundled concept art provides an offline commissioning path; users can later regenerate or replace individual rooms without rebuilding the entire ship.
+
+### 4.6 Persistent command environment and Crew system
+
+After activation, Agentarium becomes a persistent command environment rather than a sequence of disconnected dashboards. The Captain operates through a stable shell: global status and instruments above, Crew/Project/Session navigation at left, the truthful living world at center, agent communication and approvals at right, and Crew/Work/Build/System navigation plus scoped context capacity below.
+
+The Crew area is organized as **Crew Roster**, **Recruitment Bay**, and **Captain**. Each crew member has an **Agent Profile** covering Overview, Growth, Work Record, Memory, and Settings. Growth is evidence-backed gamification and never expands authority. Recruitment offers categorized templates, custom creation, and reviewable Hermes/OpenClaw import. Captain context, work folders, memory proposals, and while-away permissions remain inspectable, scoped, reversible, and auditable.
+
+Agentarium's differentiator is world choice: Spaceship, Space Station, Underground Bunker, Skyscraper, Cruise Ship, Research Complex, Fantasy Citadel, or Custom World can express the same stable operational contracts through different spatial metaphors. See `docs/COMMAND_SHELL_AND_CREW_SPEC.md` for the approved requirements and implementation order.
 
 ### 5. Event log and replay
 
@@ -310,18 +328,24 @@ Suggested maturity states:
 
 ## MVP vertical slice
 
-The first build should prove one loop:
+The first operational vertical slice must prove a closed, supervised feedback loop—not just a forward pipeline:
 
 ```text
-Human creates quest
-  → Orchestrator decomposes it
-  → Researcher gathers attributable findings from configured sources
-  → Builder creates output through configured tools
-  → Reviewer checks it
-  → Approval gate appears if needed
-  → Quest completes
-  → World replay shows what happened
+Owner defines a measurable product hypothesis
+  → Ultron decomposes and routes it
+  → Nova gathers attributable market evidence
+  → Pixel prepares an original, product-format-aware visual candidate
+  → Forge prepares a supervised product/listing experiment
+  → Jared defines a bounded demand test
+  → Treasury checks contribution margin, spend guardrails, and cash exposure
+  → Governor checks quality, policy, IP/trademark, and approval requirements
+  → human approval gate pauses consequential action
+  → configured fulfillment/customer outcome records actual result
+  → Archives + Feedback preserve outcome evidence
+  → Nova receives the learning return for the next opportunity packet
 ```
+
+The UI must make the loop explicit: current stage, completed evidence, the next blocked prerequisite, Treasury guardrails, and the return path from results to the next research decision. Standard mode must never invent a sale, cost, order, return, or profit merely to animate the loop.
 
 ## Core station/agent set
 
@@ -370,6 +394,14 @@ Reference name from AndrooAGI: Cipher.
 Role: monitors/responds to emails, comments, social messages, support channels, and notifies the human/steward about important inbound signals.
 
 MVP behavior: simulates an inbound customer/comment signal and routes it into the appropriate lab.
+
+### Treasury Agent / Treasury Room
+
+Reference name: Caspian.
+
+Role: protects cash and decision quality for Revenue Forges by reconciling approved financial evidence, calculating unit economics, and setting clear budget, contribution-margin, CAC, stop, iterate, and scale guardrails. Caspian does not move money, connect accounts, spend, or give professional financial/tax/legal advice.
+
+Initial behavior: returns an evidence-labeled Finance Guardrail Packet to the human/steward. Without approved and reconciled source data, Caspian shows `unconfigured`, `estimate`, or `hold` rather than inventing a balance, cost, revenue, or profit.
 
 ### Reviewer / Governance Station
 
@@ -456,3 +488,16 @@ Mitigation: build a simple scene first; keep a 2D inspector for details.
 - agent personality/role evolution
 - world mods/themes
 - VR/AR command room later
+
+## Product completion and proof discipline
+
+Agentarium uses separate verdicts so prototype polish cannot masquerade as product completion:
+
+1. **Prototype phase complete** — the browser experience and its local contracts are coherent and verified.
+2. **Operational vertical slice complete** — one real supervised owner→Ultron→evidence→artifact→review→approval→delivery→replay flow runs through backend authority.
+3. **Feature complete** — the committed release scope is implemented with no open release-blocking gaps.
+4. **Release candidate** — security, privacy, migrations, diagnostics, release checks, and candidate evidence pass.
+5. **Installed product proven** — clean installation, launch, upgrade, rollback, export/restore, and recovery are exercised against packaged artifacts.
+6. **Product claims proven** — every active claim in `docs/PRODUCT_CLAIMS.md` has current evidence and no contradictory open bug.
+
+The current app can satisfy browser-prototype claims without satisfying later gates. Authoritative verdicts live in `qa/STATUS.md`; lane-level tests must never be reported as product-wide completion.

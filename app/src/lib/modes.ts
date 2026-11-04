@@ -18,14 +18,46 @@ const demoProvenance = {
 
 export function createDemoPartition(): OperationalPartition {
   const partition = emptyOperational()
-  partition.quests.push({ id: 'demo:quest:orientation', title: 'Orientation walkthrough', provenance: demoProvenance })
-  partition.events.push({ id: 'demo:event:commissioned', type: 'demo.commissioned', provenance: demoProvenance })
-  partition.packets.push({ id: 'demo:packet:opportunity', type: 'opportunity_packet', provenance: demoProvenance })
-  partition.evidence.push({ id: 'demo:evidence:market', type: 'synthetic_market_example', provenance: demoProvenance })
-  partition.memories.push({ id: 'demo:memory:tour', type: 'tour_note', provenance: demoProvenance })
-  partition.metrics.push({ id: 'demo:metric:tour', type: 'orientation_only', provenance: demoProvenance })
-  partition.feedback.push({ id: 'demo:feedback:example', type: 'synthetic_feedback', provenance: demoProvenance })
-  partition.approvals.push({ id: 'demo:approval:publish', type: 'external_action_blocked', provenance: demoProvenance })
+  partition.quests.push({
+    id: 'demo:quest:orientation', type: 'demo_workflow', title: 'Launch an original celestial keepsake concept',
+    summary: 'Nova → Forge → Pixel → Governance supervised product walkthrough.', status: 'needs_approval',
+    roomIds: ['bridge', 'nova-room', 'etsy-forge', 'pixel-room', 'governance-room', 'archives'], agentIds: ['ultron', 'nova', 'forge', 'pixel', 'governor'], provenance: demoProvenance,
+  })
+  partition.evidence.push({
+    id: 'demo:evidence:market', type: 'synthetic_market_example', title: 'Celestial keepsake demand signal',
+    summary: 'Synthetic orientation evidence suggests interest in personalized constellation keepsakes.', status: 'reviewed',
+    roomId: 'nova-room', agentId: 'nova', provenance: demoProvenance,
+  })
+  partition.packets.push(
+    {
+      id: 'demo:packet:opportunity', type: 'opportunity_packet', title: 'Constellation keepsake opportunity',
+      summary: 'Original celestial keepsake concept derived from synthetic orientation evidence.', status: 'handed_off',
+      roomId: 'nova-room', producedByAgentId: 'nova', handoffTargetAgentId: 'forge', provenance: demoProvenance,
+    },
+    {
+      id: 'demo:packet:listing-draft', type: 'product_listing_packet', title: 'Personalized star-map keepsake draft',
+      summary: 'Synthetic title, materials, keywords, and fulfillment questions prepared for review.', status: 'ready_for_visuals',
+      roomId: 'etsy-forge', producedByAgentId: 'forge', provenance: demoProvenance,
+    },
+    {
+      id: 'demo:packet:visual-candidate', type: 'visual_candidate_packet', title: 'Celestial keepsake visual candidate',
+      summary: 'Pixel prepared a synthetic product-media composition for human review.', status: 'ready_for_review',
+      roomId: 'pixel-room', producedByAgentId: 'pixel', provenance: demoProvenance,
+    },
+  )
+  partition.approvals.push({
+    id: 'demo:approval:publish', type: 'approval_request', title: 'Review synthetic listing package',
+    summary: 'Approve, deny, or revise the Demo packet. No external action will occur.', status: 'pending',
+    roomId: 'governance-room', requestedByAgentId: 'governor', riskLevel: 'review', provenance: demoProvenance,
+  })
+  partition.events.push(
+    { id: 'demo:event:commissioned', type: 'demo.commissioned', title: 'Demo world commissioned', summary: 'The isolated synthetic walkthrough was loaded.', status: 'recorded', roomId: 'bridge', actorId: 'ultron', sequence: 1, provenance: demoProvenance },
+    { id: 'demo:event:nova-handoff', type: 'packet.handed_off', title: 'Nova handed research to Forge', summary: 'Opportunity Packet routed through the supervised workflow.', status: 'recorded', roomIds: ['nova-room', 'etsy-forge'], actorId: 'nova', sequence: 2, provenance: demoProvenance },
+    { id: 'demo:event:pixel-review', type: 'approval.requested', title: 'Pixel candidate entered Governance', summary: 'The run paused at the human approval gate.', status: 'recorded', roomIds: ['pixel-room', 'governance-room'], actorId: 'governor', sequence: 3, provenance: demoProvenance },
+  )
+  partition.memories.push({ id: 'demo:memory:tour', type: 'tour_note', title: 'Demo workflow memory', summary: 'Synthetic provenance and handoffs are isolated from Standard.', status: 'available', roomId: 'archives', provenance: demoProvenance })
+  partition.metrics.push({ id: 'demo:metric:tour', type: 'orientation_only', title: 'Demo progress', summary: 'Three synthetic handoffs recorded; excluded from Standard analytics.', status: 'demo_only', roomId: 'bridge', provenance: demoProvenance })
+  partition.feedback.push({ id: 'demo:feedback:example', type: 'synthetic_feedback', title: 'Awaiting human verdict', summary: 'Approve, deny, or request revision on the visual candidate.', status: 'pending', roomId: 'feedback-console', agentIds: ['pixel', 'governor'], provenance: demoProvenance })
   return partition
 }
 

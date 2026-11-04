@@ -50,6 +50,9 @@ export type AgentDefinition = {
   idleBehavior: string
   budget: string
   successMeasures: string[]
+  avatarId?: string
+  personality?: 'Professional' | 'Empathetic / Friendly' | 'Direct / Blunt' | 'Witty / Funny' | 'Technical / Scientific' | 'Bold'
+  workingStyle?: 'Supervised' | 'Trusted' | 'Custom'
 }
 
 export type BusinessDefinition = {
@@ -89,6 +92,15 @@ export type GovernanceAnswers = {
   assetReview: 'individual' | 'batch'
 }
 
+export type ArticulationAnswers = {
+  ownerName: string
+  stewardName: string
+  vision: string
+  desiredOutcomes: string[]
+  operatingBoundaries: string[]
+  workingStyle: string
+}
+
 export type Hotspot = { id: string; targetId: string; label: string; polygon: Array<{ x: number; y: number }> }
 export type GeneratedAsset = {
   id: string
@@ -107,6 +119,7 @@ export type CommissioningDraft = {
   id: string
   namespace: InstallationMode
   status: 'interviewing' | 'awaiting_blueprint_approval' | 'building' | 'awaiting_final_review' | 'complete' | 'failed'
+  articulation: ArticulationAnswers
   installationMode: InstallationMode
   visualStyleId: VisualStyleId
   worldTemplateId: WorldTemplateId
@@ -128,6 +141,7 @@ export type CommissioningDraft = {
 
 export type BuildPlan = {
   id: string
+  articulation: ArticulationAnswers
   style: VisualStyleId
   worldTemplate: WorldTemplateId
   worldName: string
@@ -169,18 +183,23 @@ export const VISUAL_STYLES: Array<{ id: VisualStyleId; label: string; descriptio
   { id: 'custom', label: 'Custom Visual Style', description: 'Describe an original art direction and confirm the interpretation.' },
 ]
 
-type Template = { id: WorldTemplateId; label: string; movement: string; topology: string; materials: string; commandName: string; routeOrder: string[] }
+export type Template = { id: WorldTemplateId; label: string; movement: string; topology: string; materials: string; commandName: string; routeOrder: string[]; previewPath: string; previewAlt: string; previewNote: string }
+const templatePreview = (file: string, alt: string) => ({
+  previewPath: `/concept-art/world-templates/${file}.png`,
+  previewAlt: alt,
+  previewNote: 'Representative concept only — each commissioned rendering is custom and unique.',
+})
 export const WORLD_TEMPLATES: Template[] = [
-  { id: 'space_station', label: 'Space Station', movement: 'docking corridors', topology: 'orbital rings and spokes', materials: 'alloy rings, observation glass, docking trusses', commandName: 'Command Hub', routeOrder: ['bridge','war-room','archives','nova-room','communications-room','etsy-forge','pixel-room','governance-room'] },
-  { id: 'spaceship', label: 'Spaceship', movement: 'decks and corridors', topology: 'longitudinal vessel decks', materials: 'navy hull plating, amber consoles, cyan conduits', commandName: 'The Bridge', routeOrder: ['bridge','war-room','articulation-console','nova-room','etsy-forge','pixel-room','governance-room','archives'] },
-  { id: 'cruise_ship', label: 'Cruise Ship', movement: 'decks and lifts', topology: 'ocean-going stacked decks', materials: 'teak, glass atriums, marine steel', commandName: 'Navigation Bridge', routeOrder: ['bridge','war-room','communications-room','ten-forward','pixel-room','etsy-forge','treasury','archives'] },
-  { id: 'underground_bunker', label: 'Underground Bunker', movement: 'hardened tunnels', topology: 'secure subterranean levels', materials: 'reinforced concrete, blast doors, utility conduits', commandName: 'Command Center', routeOrder: ['bridge','security-room','war-room','archives','developer-room','nova-room','governance-room','communications-room'] },
-  { id: 'skyscraper', label: 'Skyscraper', movement: 'elevators', topology: 'vertical department floors', materials: 'glass, steel, stone, city light', commandName: 'Executive Command Floor', routeOrder: ['ten-forward','etsy-forge','pixel-room','nova-room','developer-room','governance-room','war-room','bridge'] },
-  { id: 'resort', label: 'Resort', movement: 'landscaped paths', topology: 'connected campus buildings', materials: 'timber, stone, water, planting', commandName: 'Operations Lodge', routeOrder: ['bridge','war-room','ten-forward','vibes-room','pixel-room','nova-room','etsy-forge','archives'] },
-  { id: 'sky_ship', label: 'Sky Ship', movement: 'decks and aerial docks', topology: 'flying vessel above the clouds', materials: 'brass, canvas, cloud glass, lift machinery', commandName: 'Helm', routeOrder: ['bridge','communications-room','war-room','nova-room','pixel-room','etsy-forge','developer-room','archives'] },
-  { id: 'battleship', label: 'Battleship', movement: 'armored passages', topology: 'compartmentalized ocean vessel', materials: 'armored steel, deck machinery, signal lamps', commandName: 'Combat Bridge', routeOrder: ['bridge','security-room','communications-room','war-room','developer-room','etsy-forge','governance-room','archives'] },
-  { id: 'modern_corporate_office', label: 'Modern Corporate Office', movement: 'elevators and halls', topology: 'contemporary headquarters floors', materials: 'glass partitions, acoustic wood, polished concrete', commandName: 'Executive Command Suite', routeOrder: ['bridge','war-room','articulation-console','nova-room','developer-room','pixel-room','communications-room','ten-forward'] },
-  { id: 'custom', label: 'Custom Theme', movement: 'installer-defined movement', topology: 'installer-defined geography', materials: 'installer-defined materials', commandName: 'Central Command', routeOrder: ['bridge','articulation-console','war-room','nova-room','etsy-forge','pixel-room','governance-room','archives'] },
+  { id: 'modern_corporate_office', label: 'Modern Corporate Office', movement: 'elevators and halls', topology: 'contemporary headquarters floors', materials: 'glass partitions, acoustic wood, polished concrete', commandName: 'Executive Command Suite', routeOrder: ['bridge','war-room','articulation-console','nova-room','developer-room','pixel-room','communications-room','ten-forward'], ...templatePreview('modern-corporate-office', 'Modern Corporate Office concept preview with glass departments, command suite, studios, and technical spaces') },
+  { id: 'space_station', label: 'Space Station', movement: 'docking corridors', topology: 'orbital rings and spokes', materials: 'alloy rings, observation glass, docking trusses', commandName: 'Command Hub', routeOrder: ['bridge','war-room','archives','nova-room','communications-room','etsy-forge','pixel-room','governance-room'], ...templatePreview('space-station', 'Space Station concept preview with orbital rings, radial laboratories, and docking structures') },
+  { id: 'spaceship', label: 'Spaceship', movement: 'decks and corridors', topology: 'longitudinal vessel decks', materials: 'navy hull plating, amber consoles, cyan conduits', commandName: 'The Bridge', routeOrder: ['bridge','war-room','articulation-console','nova-room','etsy-forge','pixel-room','governance-room','archives'], ...templatePreview('spaceship', 'Spaceship concept preview with a Bridge, connected decks, specialist rooms, and engineering') },
+  { id: 'cruise_ship', label: 'Cruise Ship', movement: 'decks and lifts', topology: 'ocean-going stacked decks', materials: 'teak, glass atriums, marine steel', commandName: 'Navigation Bridge', routeOrder: ['bridge','war-room','communications-room','ten-forward','pixel-room','etsy-forge','treasury','archives'], ...templatePreview('cruise-ship', 'Cruise Ship concept preview with navigation bridge, atrium, cabins, service decks, and engines') },
+  { id: 'underground_bunker', label: 'Underground Bunker', movement: 'hardened tunnels', topology: 'secure subterranean levels', materials: 'reinforced concrete, blast doors, utility conduits', commandName: 'Command Center', routeOrder: ['bridge','security-room','war-room','archives','developer-room','nova-room','governance-room','communications-room'], ...templatePreview('underground-bunker', 'Underground Bunker concept preview with hardened levels, secure tunnels, command center, and laboratories') },
+  { id: 'skyscraper', label: 'Skyscraper', movement: 'elevators', topology: 'vertical department floors', materials: 'glass, steel, stone, city light', commandName: 'Executive Command Floor', routeOrder: ['ten-forward','etsy-forge','pixel-room','nova-room','developer-room','governance-room','war-room','bridge'], ...templatePreview('skyscraper', 'Skyscraper concept preview with vertical department floors, elevators, executive command, and city views') },
+  { id: 'resort', label: 'Resort', movement: 'landscaped paths', topology: 'connected campus buildings', materials: 'timber, stone, water, planting', commandName: 'Operations Lodge', routeOrder: ['bridge','war-room','ten-forward','vibes-room','pixel-room','nova-room','etsy-forge','archives'], ...templatePreview('resort', 'Resort concept preview with landscaped paths, connected lodges, villas, studios, and shared spaces') },
+  { id: 'sky_ship', label: 'Sky Ship', movement: 'decks and aerial docks', topology: 'flying vessel above the clouds', materials: 'brass, canvas, cloud glass, lift machinery', commandName: 'Helm', routeOrder: ['bridge','communications-room','war-room','nova-room','pixel-room','etsy-forge','developer-room','archives'], ...templatePreview('sky-ship', 'Sky Ship concept preview with cloud decks, aerial docks, a Helm, and lift-engine machinery') },
+  { id: 'battleship', label: 'Battleship', movement: 'armored passages', topology: 'compartmentalized ocean vessel', materials: 'armored steel, deck machinery, signal lamps', commandName: 'Combat Bridge', routeOrder: ['bridge','security-room','communications-room','war-room','developer-room','etsy-forge','governance-room','archives'], ...templatePreview('battleship', 'Battleship concept preview with armored compartments, bridge, operations center, and engineering decks') },
+  { id: 'custom', label: 'Custom Theme', movement: 'installer-defined movement', topology: 'installer-defined geography', materials: 'installer-defined materials', commandName: 'Central Command', routeOrder: ['bridge','articulation-console','war-room','nova-room','etsy-forge','pixel-room','governance-room','archives'], ...templatePreview('custom-theme', 'Custom Theme concept preview showing one imaginative example of a completely original connected world') },
 ]
 
 const roomSeeds: Array<Omit<RoomProfile, 'status' | 'agentIds' | 'assetPath' | 'zone'>> = [
@@ -213,32 +232,33 @@ const agentSeeds: Array<[string,string,string,string,string]> = [
   ['forge','Forge','Production','etsy-forge','Builds supervised product and listing packets.'], ['pixel','Pixel','Graphic Artist','pixel-room','Creates visual candidates through configured renderers.'],
   ['vibes','Vibes','Music Artist','vibes-room','Creates audio only through approved tools.'], ['developer','Developer','App Builder','developer-room','Builds software and adapters within scope.'],
   ['security','Security','Security Officer','security-room','Surfaces actual configured checks and risks.'], ['cipher','Cipher','Communications','communications-room','Routes configured signals and messages.'],
-  ['governor','Governor','Reviewer','governance-room','Enforces evidence, quality, and approval gates.'],
+  ['governor','Governor','Reviewer','governance-room','Enforces evidence, quality, and approval gates.'], ['caspian','Caspian','Treasury & Unit Economics','treasury','Protects cash and sets evidence-based profit guardrails.'],
 ]
 
 const hotspotCoordinates: Record<string, Array<{ x: number; y: number }>> = {
-  bridge: [{x:.43,y:.035},{x:.58,y:.035},{x:.61,y:.16},{x:.42,y:.17}],
-  'war-room': [{x:.26,y:.12},{x:.41,y:.12},{x:.41,y:.25},{x:.24,y:.25}],
-  'articulation-console': [{x:.59,y:.13},{x:.72,y:.13},{x:.74,y:.25},{x:.58,y:.25}],
-  'nova-room': [{x:.08,y:.27},{x:.23,y:.27},{x:.23,y:.41},{x:.07,y:.41}],
-  'etsy-forge': [{x:.24,y:.28},{x:.40,y:.28},{x:.40,y:.43},{x:.24,y:.43}],
-  'fiverr-forge': [{x:.41,y:.29},{x:.55,y:.29},{x:.55,y:.43},{x:.41,y:.43}],
-  'print-on-demand-forge': [{x:.56,y:.28},{x:.72,y:.28},{x:.72,y:.43},{x:.56,y:.43}],
-  'supplements-forge': [{x:.73,y:.27},{x:.90,y:.27},{x:.91,y:.41},{x:.73,y:.41}],
-  'photo-restoration-forge': [{x:.06,y:.45},{x:.22,y:.45},{x:.22,y:.59},{x:.06,y:.59}],
-  'affiliate-forge': [{x:.23,y:.45},{x:.38,y:.45},{x:.38,y:.59},{x:.23,y:.59}],
-  'pixel-room': [{x:.39,y:.45},{x:.54,y:.45},{x:.54,y:.59},{x:.39,y:.59}],
-  'vibes-room': [{x:.55,y:.45},{x:.70,y:.45},{x:.70,y:.59},{x:.55,y:.59}],
-  'developer-room': [{x:.71,y:.45},{x:.88,y:.45},{x:.89,y:.59},{x:.71,y:.59}],
-  'security-room': [{x:.08,y:.62},{x:.22,y:.62},{x:.22,y:.75},{x:.07,y:.75}],
-  'communications-room': [{x:.23,y:.62},{x:.37,y:.62},{x:.37,y:.75},{x:.23,y:.75}],
-  'governance-room': [{x:.38,y:.62},{x:.52,y:.62},{x:.52,y:.76},{x:.38,y:.76}],
-  archives: [{x:.53,y:.62},{x:.67,y:.62},{x:.67,y:.76},{x:.53,y:.76}],
-  'feedback-console': [{x:.68,y:.62},{x:.82,y:.62},{x:.83,y:.76},{x:.68,y:.76}],
-  'skill-armory': [{x:.10,y:.78},{x:.24,y:.78},{x:.24,y:.91},{x:.09,y:.91}],
-  treasury: [{x:.25,y:.78},{x:.39,y:.78},{x:.39,y:.91},{x:.25,y:.91}],
-  'media-bay': [{x:.61,y:.78},{x:.75,y:.78},{x:.75,y:.91},{x:.61,y:.91}],
-  'ten-forward': [{x:.76,y:.78},{x:.90,y:.78},{x:.91,y:.91},{x:.76,y:.91}],
+  // Authored against ship-overview-cross-section.png (1672×941). Polygons follow visible compartment walls.
+  bridge: [{x:.565,y:.095},{x:.855,y:.105},{x:.885,y:.245},{x:.845,y:.315},{x:.555,y:.305},{x:.535,y:.185}],
+  'war-room': [{x:.385,y:.165},{x:.565,y:.165},{x:.595,y:.245},{x:.555,y:.315},{x:.385,y:.305},{x:.365,y:.225}],
+  'articulation-console': [{x:.275,y:.125},{x:.385,y:.125},{x:.385,y:.305},{x:.275,y:.305}],
+  'nova-room': [{x:.145,y:.255},{x:.255,y:.255},{x:.255,y:.425},{x:.145,y:.425}],
+  'etsy-forge': [{x:.145,y:.735},{x:.275,y:.735},{x:.275,y:.895},{x:.145,y:.895}],
+  'fiverr-forge': [{x:.275,y:.735},{x:.415,y:.735},{x:.415,y:.895},{x:.275,y:.895}],
+  'print-on-demand-forge': [{x:.420,y:.725},{x:.555,y:.725},{x:.555,y:.900},{x:.420,y:.900}],
+  'supplements-forge': [{x:.690,y:.710},{x:.855,y:.710},{x:.855,y:.895},{x:.690,y:.895}],
+  'photo-restoration-forge': [{x:.135,y:.430},{x:.250,y:.430},{x:.250,y:.585},{x:.135,y:.585}],
+  'affiliate-forge': [{x:.250,y:.430},{x:.355,y:.430},{x:.355,y:.585},{x:.250,y:.585}],
+  'pixel-room': [{x:.255,y:.255},{x:.365,y:.255},{x:.365,y:.425},{x:.255,y:.425}],
+  'vibes-room': [{x:.855,y:.355},{x:.970,y:.370},{x:.970,y:.515},{x:.855,y:.525}],
+  'developer-room': [{x:.575,y:.335},{x:.755,y:.335},{x:.755,y:.500},{x:.575,y:.500}],
+  'security-room': [{x:.665,y:.515},{x:.785,y:.515},{x:.785,y:.690},{x:.665,y:.690}],
+  'communications-room': [{x:.020,y:.340},{x:.140,y:.320},{x:.140,y:.505},{x:.020,y:.485}],
+  'governance-room': [{x:.555,y:.515},{x:.665,y:.515},{x:.665,y:.690},{x:.555,y:.690}],
+  archives: [{x:.355,y:.315},{x:.555,y:.315},{x:.555,y:.620},{x:.355,y:.620}],
+  'feedback-console': [{x:.145,y:.255},{x:.205,y:.255},{x:.205,y:.425},{x:.145,y:.425}],
+  'skill-armory': [{x:.170,y:.135},{x:.270,y:.135},{x:.270,y:.255},{x:.170,y:.255}],
+  treasury: [{x:.145,y:.600},{x:.255,y:.600},{x:.255,y:.730},{x:.145,y:.730}],
+  'media-bay': [{x:.255,y:.600},{x:.375,y:.600},{x:.375,y:.730},{x:.255,y:.730}],
+  'ten-forward': [{x:.755,y:.355},{x:.855,y:.355},{x:.855,y:.525},{x:.755,y:.525}],
 }
 
 export function emptyOperational(): OperationalPartition {
@@ -252,6 +272,7 @@ function makeAgents(mode: InstallationMode): AgentDefinition[] {
     memoryScope: 'room-scoped approved memory', autonomy: mode === 'demo' ? 'demo_only' : 'supervised',
     approvalTriggers: ['external write','spend','publish','destructive action'], expectedInputs: ['approved task input'], expectedOutputs: ['provenanced result or explicit error'],
     subagents: [], idleBehavior: 'May visit Ten Forward when unassigned', budget: 'No spend configured', successMeasures: ['accepted output','complete provenance','no gate bypass'],
+    ...(id === 'ultron' ? { avatarId: 'ultron', personality: 'Professional' as const, workingStyle: 'Supervised' as const } : {}),
   }))
 }
 
@@ -278,18 +299,26 @@ function themedRooms(template: Template, mode: InstallationMode, agents: AgentDe
 export function createCommissioningDraft(overrides: Partial<Pick<CommissioningDraft, 'installationMode' | 'visualStyleId' | 'worldTemplateId' | 'worldName'>> = {}): CommissioningDraft {
   const installationMode = overrides.installationMode ?? 'standard'
   const visualStyleId = overrides.visualStyleId ?? 'pixel_art'
-  const worldTemplateId = overrides.worldTemplateId ?? 'spaceship'
+  const worldTemplateId = overrides.worldTemplateId ?? 'modern_corporate_office'
   const template = WORLD_TEMPLATES.find((item) => item.id === worldTemplateId)!
   const agents = makeAgents(installationMode)
   const rooms = themedRooms(template, installationMode, agents)
   return {
     schemaVersion: SCHEMA_VERSION, id: `${installationMode}:commissioning:local`, namespace: installationMode, status: 'interviewing', installationMode,
+    articulation: {
+      ownerName: '',
+      stewardName: 'Ultron',
+      vision: '',
+      desiredOutcomes: [],
+      operatingBoundaries: [],
+      workingStyle: 'Propose a blueprint, explain the routing, and ask before consequential actions.',
+    },
     visualStyleId, worldTemplateId, worldName: overrides.worldName ?? 'Agentarium One',
     presentation: { customStyleDescription: visualStyleId === 'custom' ? 'Describe the desired visual language.' : undefined, interpretationConfirmed: visualStyleId !== 'custom', palette: ['navy','amber','cyan'], mood: ['warm','legible','operational'], animationLevel: 'subtle', pixelArtEnabled: visualStyleId === 'pixel_art' },
     theme: { customThemeDescription: worldTemplateId === 'custom' ? 'Describe geography, command area, movement, materials, mood, and landmarks.' : undefined, interpretationConfirmed: worldTemplateId !== 'custom', movementMetaphor: template.movement, materials: template.materials, layoutLogic: template.topology },
     rooms, adjacency: topology(template, rooms.map((room) => room.id)), agents,
-    workflows: ['Command → Nova → Forge → Pixel → Governance → Archives'],
-    businesses: [{ id: 'business:etsy-forge', name: 'Etsy Forge', kind: 'forge', purpose: 'Supervised product and listing production', customer: 'To be defined by owner', inputs: ['approved opportunity packet'], outputs: ['draft product/listing packet'], deliveryDestination: 'Unconfigured', productionAgentIds: ['forge'], qaAgentIds: ['governor'], evidenceIntent: 'Configured attributable sources only', approvalPoints: ['before external publishing','before spend'], integrationIntents: ['Etsy and fulfillment remain unconfigured'], metrics: ['accepted drafts','cost when telemetry exists'], risks: ['IP','trademark','privacy','platform policy'], maturity: installationMode === 'demo' ? 'demo_only' : 'supervised' }],
+    workflows: ['Nova evidence → Pixel visual concept → Forge product test → Jared demand test → Treasury unit economics → Governance gate → fulfillment result → Archives/Feedback → Nova learning return'],
+    businesses: [{ id: 'business:etsy-forge', name: 'Etsy Forge', kind: 'forge', purpose: 'Supervised evidence-to-profit product experiments with a measured learning return.', customer: 'To be defined by owner', inputs: ['approved opportunity packet','approved visual candidate','Treasury guardrails'], outputs: ['draft product/listing packet','measured experiment result'], deliveryDestination: 'Unconfigured', productionAgentIds: ['forge'], qaAgentIds: ['governor'], evidenceIntent: 'Configured attributable sources only', approvalPoints: ['before external publishing','before spend','before fulfillment changes'], integrationIntents: ['Etsy, fulfillment, marketing, and financial systems remain unconfigured'], metrics: ['contribution margin','customer acquisition cost','conversion rate','refund rate','verified profit','learning return'], risks: ['IP','trademark','privacy','platform policy','unprofitable unit economics'], maturity: installationMode === 'demo' ? 'demo_only' : 'supervised' }],
     governance: { approvalRequired: true, externalWrites: 'gated', credentialStorage: 'not_configured', auditReplay: true, deploymentIntent: 'local_only', userIntent: 'single_owner', dataSensitivity: 'No secrets in browser storage', retention: 'Owner-controlled local retention', backupExport: 'Versioned JSON export/import', spendLimit: 'No spend enabled', notificationChannels: [], failureRetry: 'Pause and require explicit retry', maintenanceWindow: 'Owner scheduled', telemetryPrivacy: 'Local only; no telemetry', assetReview: 'individual' },
     operational: emptyOperational(), assumptions: ['Providers and integrations begin unconfigured','No external generation is approved'], openQuestions: ['Which evidence sources should Nova use?','Which integrations should be configured later?'],
   }
@@ -312,7 +341,7 @@ export function createBuildPlan(draft: CommissioningDraft): BuildPlan {
   const assets: GeneratedAsset[] = [{ id: 'asset:ship', kind: 'ship_background', source: bundled ? 'bundled' : 'placeholder', path: bundled ? '/concept-art/ship/ship-overview-cross-section.png' : '', prompt: `${style.label}; ${template.label}; ${template.topology}; ${template.materials}; whole-world overview`, status: bundled ? 'approved' : 'needs_review' }, ...draft.rooms.map((room) => ({ id: `asset:${room.id}`, kind: 'room_background' as const, ownerId: room.id, source: bundled ? 'bundled' as const : 'placeholder' as const, path: bundled ? room.assetPath : '', prompt: `${style.label}; ${template.label}; ${template.materials}; ${room.zone}; ${room.name}: ${room.description}`, status: bundled ? 'approved' as const : 'needs_review' as const }))]
   const hotspots = bundled ? draft.rooms.map((room) => ({ id: `hotspot:${room.id}`, targetId: room.id, label: room.name, polygon: hotspotCoordinates[room.id] })) : []
   return {
-    id: `plan:${draft.worldTemplateId}:${draft.visualStyleId}`, style: draft.visualStyleId, worldTemplate: draft.worldTemplateId, worldName: draft.worldName,
+    id: `plan:${draft.worldTemplateId}:${draft.visualStyleId}`, articulation: structuredClone(draft.articulation), style: draft.visualStyleId, worldTemplate: draft.worldTemplateId, worldName: draft.worldName,
     movementMetaphor: draft.theme.movementMetaphor, artDirection: `${style.label}; ${template.materials}; ${draft.presentation.mood.join(', ')}`,
     rooms: draft.rooms, adjacency: draft.adjacency, agents: draft.agents, businesses: draft.businesses, governance: draft.governance, workflows: draft.workflows,
     approvalGates: ['Blueprint approval before local build','Final presentation approval before replacing active world','Explicit approval before any future external action'],
@@ -336,6 +365,7 @@ export function validateCommissioningDraft(value: unknown): { ok: true; value: C
   const mode = value.installationMode
   if (value.namespace !== mode) errors.push('Namespace does not match installation mode')
   if (typeof value.id !== 'string' || !value.id.startsWith(`${String(mode)}:`)) errors.push('Commissioning ID does not match mode namespace')
+  if (!isRecord(value.articulation) || typeof value.articulation.ownerName !== 'string' || typeof value.articulation.stewardName !== 'string' || !value.articulation.stewardName.trim() || typeof value.articulation.vision !== 'string' || !Array.isArray(value.articulation.desiredOutcomes) || !Array.isArray(value.articulation.operatingBoundaries) || typeof value.articulation.workingStyle !== 'string') errors.push('Invalid articulation answers')
   if (!isRecord(value.presentation) || typeof value.presentation.interpretationConfirmed !== 'boolean' || !Array.isArray(value.presentation.palette) || !Array.isArray(value.presentation.mood)) errors.push('Invalid presentation answers')
   if (value.visualStyleId === 'custom' && (!isRecord(value.presentation) || typeof value.presentation.customStyleDescription !== 'string' || !value.presentation.customStyleDescription.trim() || (value.status !== 'interviewing' && value.presentation.interpretationConfirmed !== true))) errors.push('Custom visual style requires a confirmed description before building')
   if (!isRecord(value.theme) || typeof value.theme.movementMetaphor !== 'string' || typeof value.theme.materials !== 'string' || typeof value.theme.layoutLogic !== 'string') errors.push('Invalid theme answers')
@@ -365,7 +395,7 @@ export function validateCommissioningDraft(value: unknown): { ok: true; value: C
   } else errors.push('Missing operational partition')
   if (isRecord(value.buildPlan)) {
     const plan = value.buildPlan
-    if (!Array.isArray(plan.rooms) || !Array.isArray(plan.adjacency) || !Array.isArray(plan.agents) || !Array.isArray(plan.businesses) || !Array.isArray(plan.assets) || !Array.isArray(plan.hotspots) || !Array.isArray(plan.approvalGates) || !isRecord(plan.externalEstimate)) errors.push('Invalid build plan structure')
+    if (!isRecord(plan.articulation) || JSON.stringify(plan.articulation) !== JSON.stringify(value.articulation) || !Array.isArray(plan.rooms) || !Array.isArray(plan.adjacency) || !Array.isArray(plan.agents) || !Array.isArray(plan.businesses) || !Array.isArray(plan.assets) || !Array.isArray(plan.hotspots) || !Array.isArray(plan.approvalGates) || !isRecord(plan.externalEstimate)) errors.push('Invalid build plan structure')
     else {
       const roomIds = new Set(plan.rooms.filter(isRecord).map((room) => room.id))
       const bundled = plan.style === 'pixel_art' && plan.worldTemplate === 'spaceship'
