@@ -31,3 +31,6 @@ __pycache__/
 
 # preserved local prototypes (not active source)
 legacy/
+
+# nested upstream clone (androoAGI/starnet), not part of this repo
+starnet/
